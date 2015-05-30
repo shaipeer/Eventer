@@ -1,0 +1,56 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="Site" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+
+    <title> Eventer </title>
+</head>
+<body>
+	<form id="form1" runat="server">
+	<div id="page">
+		<div id="header">
+			<div>
+				<a href="index.html" id="logo"><img src="images/logo.png" alt="LOGO"></a>
+				<ul id="navigation">
+					<li class="selected">
+						<a href="index.html">home</a>
+					</li>
+					<li>
+						<a href="about.html">about</a>
+					</li>
+					<li>
+						<a href="schedules.html">class schedules</a>
+					</li>
+					<li>
+						<a href="performance.html">performances</a>
+					</li>
+					<li>
+						<a href="blog.html">blog</a>
+					</li>
+				</ul>
+			</div>
+			<span class="shadow"></span>
+		</div>
+		<div id="contents">
+			<div class="body">
+			</div>
+			<div class="body">
+				<asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+			</div>
+		</div>
+		<div id="footer">
+			<span class="shadow" style="left: 0; top: 530px"></span>
+			<div>
+				<div class="section">
+				</div>
+			</div>
+		</div>
+	</div>
+    </form>
+</body>
+</html>
