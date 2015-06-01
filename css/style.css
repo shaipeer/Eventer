@@ -102,13 +102,12 @@ img {
 	display: inline-block;
 	width: 100%;
 	padding-top: 42px;
-    height: 100%;
-
-
+  
 }
 #contents > div.body {
-	width: 950px;
+	width: 1200px;
 	padding-left: 10px;
+    height: 300px;
 }
 #contents h2, #contents h3 {
 	color: #000;
@@ -134,7 +133,6 @@ img {
 #featured {
 	float: left;
 	background-position: right 0;
-	height: 500px;
 	width: 608px;
 	margin: 0 20px 30px 0;
 	padding: 0 10px 0 0;
@@ -204,18 +202,13 @@ img {
 	font-size: 11px;
 	line-height: 24px;
 	width: 100%;
-	position: absolute;
+	
 	left: 0;
+    
+    position: fixed; 
+    bottom: 0
 }
-#footer span.shadow {
-	background-position: 0 0px;
-	display: block;
-	height: 8px;
-	width: 100%;
-	position: absolute;
-	left: 0;
-	top: -8px;
-}
+
 #footer h5 {
 	font-size: 11px;
 	font-weight: normal;
@@ -246,7 +239,7 @@ img {
 #footer div.section {
 	float: left;
 	background-position: 0 -498px;
-	min-height: 180px;
+	min-height: 100px;
 	width: 200px;
 	margin-left: 20px;
 	padding: 16px 0 16px 26px;
@@ -295,84 +288,4 @@ img {
 	border-left: 0;
 	padding: 0;
  *margin-left: -1px; /** Needed for Ie7 **/
-}
-/**--- the block of code under this comment is used on the blog page only. ---**/
-#footer div#links {
-	background: #303030 url(../images/divider.png) repeat-x left bottom;
-	height: 331px;
-	width: 100%;
-	margin: 0;
-	padding: 0;
-}
-#links > div {
-	width: 940px;
-	margin: 0 auto;
-	padding: 0 10px;
-}
-#links > div:after {
-	clear:both;
-	content:"";
-	display:block;
-	height:0;
-	line-height:0;
-	visibility:hidden;
-}
-#links h3 {
-	color: #8c8c8c;
-	font-family: 'NixieOne';
-	font-size: 18px;
-	font-weight: normal;
-	line-height: 24px;
-	margin: 0 0 12px;
-}
-#links > div > div {
-	float: left;
-	min-height: 282px;
-	width: 272px;
-	border-left: 1px solid #585858;
-	margin-right: 20px;
-	padding: 24px 0 24px 19px;
-}
-#links > div > div:first-child {
-	border: 0;
-	padding-left: 20px;
-}
-#footer div#links li {
-	margin: 0 0 18px;
-}
-#footer div#links div.archives li {
-	float: left;
-	width: 136px;
-}
-#footer div#links a {
-	color: #8c8c8c;
-	font-family: "Muli-Light";
-	font-size: 13px;
-}
-#footer div#links a:hover {
-	color: #fff;
-}
-#searchbar {
-	display: inline-block;
-}
-#searchbar h3 {
-	color: #606060;
-}
-#searchbar input {
-	float: left;
-	color: #606060;
-	font-family: "Muli-Light";
-	font-size: 13px;
-	height: 24px;
-	line-height: 24px;
-	width: 193px;
-}
-#searchbar input.btn {
-	background-position: left bottom;
-	cursor: pointer;
-	height: 30px;
-	width: 26px;
-	border: 0;
-	margin: 0 0 0 6px;
-	padding: 0;
 }
