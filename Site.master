@@ -13,34 +13,40 @@
 	<form id="form1" runat="server">
 	<div id="page">
 		<div id="header">
-			<div>
-				<a href="index.html" id="logo"><img src="images/logo.png" alt="LOGO"></a>
+           
+            <div>
+				<a href="MainPage.aspx" id="logo"><img src="images/logo.png" alt="LOGO"></a>
 				<ul id="navigation">
-					<li class="selected">
-						<a href="index.html">home</a>
+					<li>
+						<a href="MainPage.aspx">Home</a>
 					</li>
 					<li>
-						<a href="about.html">about</a>
+						<a href="EventList.aspx">Event List</a>
 					</li>
 					<li>
-						<a href="schedules.html">class schedules</a>
+						<a href="GuestList.aspx">Guest List</a>
 					</li>
 					<li>
-						<a href="performance.html">performances</a>
+						<a href="Groups.aspx">Groups</a>
 					</li>
 					<li>
-						<a href="blog.html">blog</a>
+						<a href="RSVPs.aspx">RSVPs</a>
+					</li>
+                    <li>
+						<a href="Gifts.aspx">Gifts</a>
 					</li>
 				</ul>
 			</div>
 			<span class="shadow"></span>
 		</div>
+
 		<div id="contents">
 			<div class="body">
 				<asp:ContentPlaceHolder ID="MainContent" runat="server">
                 </asp:ContentPlaceHolder>
 			</div>
 		</div>
+
 		<div id="footer">
 			<span class="shadow" style="left: 0; top: 530px"></span>
 			<div>

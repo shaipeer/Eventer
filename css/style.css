@@ -26,9 +26,11 @@ body {
 	background-color: #f6f6f6;
 	font-family: 'Muli-Light';
 	margin: 0;
+    height: 100%; /**    **/
+    overflow:hidden;
 }
 #page {
-	width: 1200px;
+	width: 100%;
 	margin: 0 auto;
 	padding: 96px 0 0;
 }
@@ -47,9 +49,9 @@ img {
 	top: 0;
 }
 #header > div {
-	height: 96px;
+	height: 0px;
 	width: 1200px;
-	margin: 0 auto;
+	margin: 5px auto;
 	padding: 0 10px;
 }
 #header span.shadow {
@@ -71,7 +73,7 @@ img {
 #logo > img {
 	height: 80px;
 	margin-bottom: 30px;
-	padding: 0 10px;
+	padding: 0 0px;
 }
 
 /** Navigation **/
@@ -80,7 +82,7 @@ img {
 	list-style: none;
 	width: 480px;
 	margin: 30px 0 0;
-	padding: 0;
+	padding-top: 20px;
 }
 #navigation li {
 	float: left;
@@ -94,9 +96,15 @@ img {
 	padding: 0;
 	text-decoration: none;
 }
-#navigation li a:hover, #navigation li.selected a {
+#navigation li a:hover{
 	color: #fff;
 }
+#navigation li a:active{
+    color: #fff;
+}
+
+
+
 /*================================ CONTENTS ================================*/
 #contents > div {
 	display: inline-block;
@@ -105,9 +113,9 @@ img {
   
 }
 #contents > div.body {
-	width: 1200px;
-	padding-left: 10px;
-    height: 300px;
+	width: 100%;
+    min-height: 100%;
+	margin: 0 auto -70px; /* the bottom margin is the negative value of the footer's height */
 }
 #contents h2, #contents h3 {
 	color: #000;
@@ -130,64 +138,131 @@ img {
 #contents p a:hover {
 	color: #000;
 }
-#featured {
-	float: left;
-	background-position: right 0;
-	width: 608px;
-	margin: 0 20px 30px 0;
-	padding: 0 10px 0 0;
+
+/**=======  Main Page  ======== **/
+#main_page{
+    width: 100%;
+    height: 600px;
+    text-align: center;
+    align-content: center;
+    /**background-color: #0174CD;**/
+    background-image: url(../images/main_image.jpg);
+    background-size: auto 680px;
+    background-repeat: no-repeat;
+
+    padding-top:50px;
+    /*padding-bottom:400px;*/
 }
-#featured ul {
-	display: inline-block;
-	list-style: none;
-	margin: 0;
-	padding: 0;
+
+#main_page h2{
+    /*text-shadow:20px 5px 2px #8c8c8c;*/
+    font-size:60px; 
+    font-weight: bolder;
 }
-#featured li {
-	float: left;
-	width: 304px;
-	margin-bottom: 18px;
-	position: relative;
+
+#main_page p{
+    /*text-shadow:20px 5px 2px #8c8c8c;*/
+    font-size:30px; 
 }
-#featured li p {
-	color: #000;
-	font-family: "Muli";
-	padding-bottom: 0;
-	text-transform: uppercase;
+
+#main_page button {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
 }
-#featured li p span {
-	color: #606060;
-	display: block;
-	padding-right: 20px;
+
+
+/**===========  Register  ============ **/
+#registration_form{
+    text-align: center;
+    align-content: center;
 }
-#schedule ul {
-	color: #606060;
-	list-style: none;
-	margin: 0;
-	padding: 0;
+#registration_form table{
+    text-align: right;
+    border: groove 1px #666;
+    padding-right: 90px;
+    padding-left: 70px;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
-#schedule li {
-	font-size: 13px;
-	line-height: 24px;
-	margin-bottom: 26px;
+
+
+/**=======  Add Event  ======== **/
+#event_list #nav {
+    line-height:30px;
+    background-color:#eeeeee;
+    height:600px;
+    width:23%;
+    float:left;
+    padding:5px; 
 }
-#schedule li a {
-	color: #606060;
-	text-decoration: none;
+#event_list #nav h2 {
+    text-align: center;
 }
-#schedule li a:hover {
-	text-decoration: underline;
+
+#event_list #nav table {
+        padding-left: 20px;
 }
-#schedule li span.time {
-	display: inline-block;
-	float: left;
-	font-family: "Muli";
-	font-size: 13px;
-	line-height: 24px;
-	width: 72px;
-	margin-bottom: 6px;
-	margin-right: 10px;
+#event_list #section {
+    width:60%;
+    float:left;
+    padding:10px; 
 }
+#event_list #section h2 {
+    text-align: center;
+}
+
+/** GRID **/
+.mGrid { 
+    width: 75%; 
+    background-color: #fff; 
+    margin: 5px 0 10px 0; 
+    border: solid 2px #525252; 
+    border-collapse:collapse; 
+}
+.mGrid td {         /** grid frame **/
+    padding: 2px;
+    border: solid 1px #c1c1c1;
+    color: #717171; 
+}
+.mGrid tr:hover {   /** grid line **/
+    color: #fff;
+    background-color: #8ac0fb;
+}
+.mGrid th {         /** grid header **/
+    padding: 4px 2px; 
+    color: #fff; 
+    background: #0174CD url(../images/header_blue.png) repeat-x top; 
+    border-left: solid 1px #525252; 
+    font-size: 0.9em; 
+}
+.mGrid .alt {
+    background-color: #ecebf2;
+}
+.mGrid .pgr {
+ 
+}
+.mGrid .pgr table { 
+    margin: 5px 0; 
+}
+.mGrid .pgr td { 
+    border-width: 0; 
+    padding: 0 6px; 
+    border-left: solid 1px #666; 
+    font-weight: bold; 
+    color: #fff; 
+    line-height: 12px; 
+}
+.mGrid .pgr a {
+    color: #666; 
+    text-decoration: none; 
+}
+
+
+
 
 /** Hover States **/
 #schedules a.btn:hover, #performances #sidebar span.more:hover, #contact input.btn:hover {
@@ -202,11 +277,9 @@ img {
 	font-size: 11px;
 	line-height: 24px;
 	width: 100%;
-	
 	left: 0;
-    
     position: fixed; 
-    bottom: 0
+    bottom: 0;
 }
 
 #footer h5 {
@@ -239,7 +312,7 @@ img {
 #footer div.section {
 	float: left;
 	background-position: 0 -498px;
-	min-height: 100px;
+	min-height: 70px;
 	width: 200px;
 	margin-left: 20px;
 	padding: 16px 0 16px 26px;
@@ -262,30 +335,4 @@ img {
 #footer .navigation li, #footer .connect li {
 	float: left;
 	width: 100px;
-}
-#newsletter {
-	display: inline-block;
-	width: 200px;
-}
-#newsletter input {
-	float: left;
-	border: 1px solid #b3b3b3;
-}
-#newsletter input.txtfield {
-	color: #606060;
-	font-family: Arial, Helvetica, sans-serif;
-	height: 25px;
-	line-height: 25px;
-	width: 158px;
-	border-right: 0;
-	padding: 0 0 0 5px;
-}
-#newsletter input.btn {
-	background-position: -2px -64px;
-	cursor: pointer;
-	height: 27px;
-	width: 36px;
-	border-left: 0;
-	padding: 0;
- *margin-left: -1px; /** Needed for Ie7 **/
 }
