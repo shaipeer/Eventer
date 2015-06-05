@@ -26,7 +26,10 @@ public class EventerBL
         dal.addEvent(newEvent);
     }
 
-
+    public void deleteEvent(int userId, int eventId)
+    {
+        dal.deleteEvent(newEvent);
+    }
 
 
 }
