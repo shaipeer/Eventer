@@ -43,4 +43,41 @@ public class EventerDAL
     }
 
 
+
+    public LinkedList<Event> getEventList()
+    {
+        LinkedList<Event> eventList = new LinkedList<Event>();
+
+
+
+
+
+        return eventList;
+    }
+
+    public void addEvent(Event newEvent)
+    {
+
+    }
+
+    public void deleteEvent(int userId, int eventId)
+    {
+
+    }
+
+    public void updateEvent(Event eventToUpdate)
+    {
+
+    }
+
+
+
+
+
+
+
+
+
+
+
 }

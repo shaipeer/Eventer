@@ -28,8 +28,12 @@ public class EventerBL
 
     public void deleteEvent(int userId, int eventId)
     {
-        dal.deleteEvent(newEvent);
+        dal.deleteEvent(userId, eventId);
     }
 
+    public void updateEvent(Event eventToUpdate)
+    {
+        dal.deleteEvent(eventToUpdate);
+    }
 
 }
