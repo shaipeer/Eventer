@@ -16,7 +16,9 @@ public class EventerBL
 	}
 
 
-    public LinkedList<Event> getEventList()
+    //=======================================  EVENT  =====================================================
+
+    public List<Event> getEventList()
     {
         return dal.getEventList();
     }
@@ -33,7 +35,39 @@ public class EventerBL
 
     public void updateEvent(Event eventToUpdate)
     {
-        dal.deleteEvent(eventToUpdate);
+        dal.updateEvent(eventToUpdate);
     }
+
+
+    //=======================================  GUEST  =====================================================
+
+    public List<Guest> getGuestList()
+    {
+        return dal.getGuestList();
+    }
+
+    public void addGuest(Guest newGuest)
+    {
+        dal.addGuest(newGuest);
+    }
+
+    public void deleteGuest(int userId, int guestId)
+    {
+        dal.deleteGuest(userId, guestId);
+    }
+
+    public void updateGuest(Guest guestToUpdate)
+    {
+        dal.updateGuest(guestToUpdate);
+    }
+
+    //=======================================  USER   =====================================================
+
+    //=======================================  GROUP  =====================================================
+
+    //=======================================  GIFT   =====================================================
+
+
+
 
 }

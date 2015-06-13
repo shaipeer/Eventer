@@ -55,84 +55,26 @@
             <br />
             <div>
                 <div id="grid_div">
-                    <asp:GridView ID="Event_list_GridView" runat="server" AutoGenerateColumns="False" 
-                        DataKeyNames="user_id,event_id" 
-                        DataSourceID="Eventer"  
-                        Width="1000px" 
-                        OnSelectedIndexChanged="Event_list_GridView_SelectedIndexChanged"
-                        GridLines="None"
-                        AllowPaging="true"
-                        CssClass="mGrid"
-                        PagerStyle-CssClass="pgr"
-                        AlternatingRowStyle-CssClass="alt" OnRowDataBound="Event_list_GridView_RowDataBound">
-
-                        <PagerStyle CssClass="pgr"></PagerStyle>
-
-                        <RowStyle HorizontalAlign="center" />
-                        <AlternatingRowStyle HorizontalAlign="Center" />
-                        
+                    <asp:GridView ID="Event_list_GridView" HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White"
+                            runat="server" AutoGenerateColumns="false" ShowHeaderWhenEmpty="True">
+                            <RowStyle HorizontalAlign="center" />
                             <Columns>
-                                <asp:TemplateField HeaderText="Event Name" SortExpression="event_name">
-                                    <EditItemTemplate>
-                                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("event_name") %>'></asp:TextBox>
-                                    </EditItemTemplate>
-                                    <ItemTemplate>
-                                        <asp:Label ID="EventName_Event_List_Label" runat="server" Text='<%# Bind("event_name") %>'></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Type" SortExpression="type">
-                                    <EditItemTemplate>
-                                        <asp:DropDownList ID="Type_Event_List_Grid_DropDownList" runat="server">
-                                            <asp:ListItem>Select Event Type</asp:ListItem>
-                                            <asp:ListItem>Wedding</asp:ListItem>
-                                            <asp:ListItem>Civil Wedding</asp:ListItem>
-                                            <asp:ListItem>Silver wedding</asp:ListItem>
-                                            <asp:ListItem>Golden wedding</asp:ListItem>
-                                            <asp:ListItem>Bar Mitzvah</asp:ListItem>
-                                            <asp:ListItem>Henna</asp:ListItem>
-                                            <asp:ListItem>Brit</asp:ListItem>
-                                        </asp:DropDownList>
-                                    </EditItemTemplate>
-                                    <ItemTemplate>
-                                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("type") %>'></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Number Of Guests" SortExpression="number_of_guests">
-                                    <EditItemTemplate>
-                                        <asp:TextBox ID="Num_Of_Guests_Event_List_TextBox" runat="server" Text='<%# Bind("number_of_guests") %>'></asp:TextBox>
-                                    </EditItemTemplate>
-                                    <ItemTemplate>
-                                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("number_of_guests") %>'></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Date" SortExpression="date">
-                                    <EditItemTemplate>
-                                        <asp:TextBox ID="Date_Event_List_extBox" runat="server" Text='<%# Bind("date") %>'></asp:TextBox>
-                                    </EditItemTemplate>
-                                    <ItemTemplate>
-                                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("date") %>'></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Location" SortExpression="location">
-                                    <EditItemTemplate>
-                                        <asp:TextBox ID="Location_Event_List_TextBox" runat="server" Text='<%# Bind("location") %>'></asp:TextBox>
-                                    </EditItemTemplate>
-                                    <ItemTemplate>
-                                        <asp:Label ID="Label4" runat="server" Text='<%# Bind("location") %>'></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
+                                <asp:BoundField DataField="id"                  HeaderText="Id"                 ItemStyle-Width="30" />
+                                <asp:BoundField DataField="event_name"          HeaderText="Event Name"         ItemStyle-Width="250" />
+                                <asp:BoundField DataField="event_type"          HeaderText="Event Type"         ItemStyle-Width="200" />
+                                <asp:BoundField DataField="event_date"          HeaderText="Event Date"         ItemStyle-Width="100" />
+                                <asp:BoundField DataField="number_of_guests"    HeaderText="Number Of Guests"   ItemStyle-Width="150" />
+                                <asp:BoundField DataField="event_location"      HeaderText="Event Location"     ItemStyle-Width="150" />
                             </Columns>
-                        </asp:GridView>
-
-
-                        <asp:SqlDataSource ID="Eventer" runat="server" ConnectionString="<%$ ConnectionStrings:EventerConnectionString %>" SelectCommand="SELECT * FROM [Event]"></asp:SqlDataSource>
-                
-
-
+                    </asp:GridView>
                     
+                    <asp:SqlDataSource ID="Eventer" runat="server" ConnectionString="<%$ ConnectionStrings:EventerConnectionString %>" SelectCommand="SELECT * FROM [Event]"></asp:SqlDataSource>
+                
                 </div>
                 <div>
-                    <asp:Label ID="Test_LBL" runat="server" Text="Label"></asp:Label>
+                    <br />
+                    <asp:Label ID="No_Events_LBL" runat="server" Text=""></asp:Label>
+                    <br />
                     <br />
                     <asp:Button ID="Choose_Event_CMD" runat="server" Text="Choose Event" />
                 </div>

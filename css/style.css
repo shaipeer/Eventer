@@ -190,7 +190,7 @@ img {
 }
 
 
-/**=======  Add Event  ======== **/
+/**=======  Event  ======== **/
 #event_list #nav {
     line-height:30px;
     background-color:#eeeeee;
@@ -214,6 +214,120 @@ img {
 #event_list #section h2 {
     text-align: center;
 }
+
+
+/**=======  Guests  ======== **/
+#guests_list #nav {
+    line-height:30px;
+    background-color:#eeeeee;
+    height:600px;
+    width:23%;
+    float:left;
+    padding:5px; 
+}
+#guests_list #nav h2 {
+    text-align: center;
+}
+
+#guests_list #nav table {
+        padding-left: 20px;
+}
+#guests_list #section {
+    width:60%;
+    float:left;
+    padding:10px; 
+}
+#guests_list #section h2 {
+    text-align: center;
+}
+
+
+/**=======  Groups  ======== **/
+#groups_list #nav {
+    line-height:30px;
+    background-color:#eeeeee;
+    height:600px;
+    width:23%;
+    float:left;
+    padding:5px; 
+}
+#groups_list #nav h2 {
+    text-align: center;
+}
+
+#groups_list #nav table {
+        padding-left: 20px;
+}
+#groups_list #groups {
+    width:30%;
+    float:none;
+    padding:10px; 
+}
+#groups_list #groups h2 {
+    text-align: center;
+}
+#groups_list #groups {
+    width:30%;
+    float:none;
+    padding:10px; 
+}
+#groups_list #guests h2 {
+    text-align: center;
+}
+
+/**=======  RSVPs  ======== **/
+#rsvps_list #nav {
+    line-height:30px;
+    background-color:#eeeeee;
+    height:600px;
+    width:23%;
+    float:left;
+    padding:5px; 
+}
+#rsvps_list #nav h2 {
+    text-align: center;
+}
+
+#rsvps_list #nav table {
+        padding-left: 20px;
+}
+#rsvps_list #section {
+    width:60%;
+    float:left;
+    padding:10px; 
+}
+#rsvps_list #section h2 {
+    text-align: center;
+}
+
+
+/**=======  Gifts  ======== **/
+#gifts_list #nav {
+    line-height:30px;
+    background-color:#eeeeee;
+    height:600px;
+    width:23%;
+    float:left;
+    padding:5px; 
+}
+#gifts_list #nav h2 {
+    text-align: center;
+}
+
+#gifts_list #nav table {
+        padding-left: 20px;
+}
+#gifts_list #section {
+    width:60%;
+    float:left;
+    padding:10px; 
+}
+#gifts_list #section h2 {
+    text-align: center;
+}
+
+
+
 
 /** GRID **/
 .mGrid { 

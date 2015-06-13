@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
@@ -8,17 +9,39 @@ using System.Web;
 /// </summary>
 public class EventerDAL
 {
+
+    private SqlConnection sqlCon;
+
 	public EventerDAL()
 	{
-		//
-		// TODO: Add constructor logic here
-		//
-	}
+
+        string conectionString = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=\"D";
+        conectionString = conectionString.Remove(conectionString.Length - 1);
+        conectionString += AppDomain.CurrentDomain.BaseDirectory;
+        conectionString += "\\";
+        conectionString = conectionString.Remove(conectionString.Length - 1);
+        conectionString += "Eventer.mdf\";Integrated Security=True;Connect Timeout=30";
+
+        sqlCon = new SqlConnection(conectionString);
+        try
+        {
+            sqlCon.Open();
+        }
+        catch (SqlException)
+        {
+            
+        }
+    
+    }
 
 
-    public LinkedList<Event> getEventList()
+
+
+    //=======================================  EVENT  =====================================================
+
+    public List<Event> getEventList()
     {
-        LinkedList<Event> eventList = new LinkedList<Event>();
+        List<Event> eventList = new List<Event>();
 
 
 
@@ -44,34 +67,68 @@ public class EventerDAL
 
 
 
-    public LinkedList<Event> getEventList()
+    //=======================================  GUEST  =====================================================
+
+
+    public List<Guest> getGuestList()
     {
-        LinkedList<Event> eventList = new LinkedList<Event>();
+        List<Guest> guestList = new List<Guest>();
 
 
 
 
 
-        return eventList;
+        return guestList;
     }
 
-    public void addEvent(Event newEvent)
-    {
-
-    }
-
-    public void deleteEvent(int userId, int eventId)
+    public void addGuest(Guest newGuest)
     {
 
     }
 
-    public void updateEvent(Event eventToUpdate)
+    public void deleteGuest(int userId, int guestId)
+    {
+
+    }
+
+    public void updateGuest(Guest guestToUpdate)
     {
 
     }
 
 
 
+    //=======================================  USER  =====================================================
+
+    public List<User> getUserList()
+    {
+        List<User> UserList = new List<User>();
+
+
+
+
+
+        return UserList;
+    }
+
+    public void addUser(User newUser)
+    {
+
+    }
+
+    public void deleteUser(int userId, int UserId)
+    {
+
+    }
+
+    public void updateUser(User UserToUpdate)
+    {
+
+    }
+
+    //=======================================  GROUP  =====================================================
+
+    //=======================================  GIFT   =====================================================
 
 
 
