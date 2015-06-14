@@ -8,34 +8,39 @@
         <br />
         <div >
 
-        <table id="registration_table" align="center" style="margin-top: 0px">
+        <table id="registration_table" align="center" style="margin-top: 0px; width: 314px; background-color: #CCCCCC; background-image: url('images/main_image.jpg'); height: 116px;">
             <tr>
-                <td>user name:</td>
+                <td style="width: 161px">user name:</td>
                 <td>
-                        <asp:TextBox ID="User_Name_TextBox" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="User_Name_TextBox" runat="server" Width="148px"></asp:TextBox>
                     </td>
-                <td></td>
+                <td style="width: 55px"></td>
             </tr>
             <tr>
-                <td style="height: 20px">Password:</td>
-                <td style="height: 20px">
-                        <asp:TextBox ID="Password_TextBox" TextMode="password" runat="server"></asp:TextBox>
+                <td style="height: 17px; width: 161px;">Password:&nbsp;&nbsp; </td>
+                <td style="height: 17px">
+                        <asp:TextBox ID="Password_TextBox" TextMode="password" runat="server" Width="149px"></asp:TextBox>
                     </td>
-                <td style="height: 20px"></td>
+                <td style="height: 17px; width: 55px;"></td>
             </tr>
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td style="height: 18px; width: 161px"></td>
+                <td style="height: 18px"></td>
+                <td style="height: 18px; width: 55px"></td>
             </tr>
             <tr>
-                <td></td>
+                <td style="width: 161px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
                 <td>
                         <asp:Button ID="LogIn_CMD" runat="server" Text="Log-In"/>
                     </td>
-                <td></td>
+                <td style="width: 55px"></td>
             </tr>
         </table>
+        <br />
+        <link rel="stylesheet" type="text/css" href="Registration.aspx">
+            <asp:LinkButton ID="LinkButton1" runat="server" Font-Size="Small" PostBackUrl="~/Registration.aspx">not registered?</asp:LinkButton>
+        <br />
+
 
         </div>
     </div>
