@@ -28,7 +28,7 @@
             <div>
                 <div id="grid_div">
                     <asp:GridView ID="Groups_GridView" HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White"
-                        runat="server" AutoGenerateColumns="false" ShowHeaderWhenEmpty="True">
+                        runat="server" AutoGenerateColumns="false" ShowHeaderWhenEmpty="True" BackImageUrl="~/images/main_image.jpg">
                         <Columns>
                             <asp:BoundField DataField="Id" HeaderText="Id" ItemStyle-Width="30" />
                             <asp:BoundField DataField="Name" HeaderText="Name" ItemStyle-Width="150" />
