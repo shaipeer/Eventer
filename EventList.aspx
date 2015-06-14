@@ -8,6 +8,10 @@
             <h2>Add Event</h2>
             <table style="width: 100%">
            
+                <caption>
+                    <asp:Label ID="Event_Nav_Eror_Label" runat="server" Text="" ForeColor="Red"></asp:Label>
+                </caption>
+           
                 <tr>
                     <td>Event Name:<br />
                     </td>

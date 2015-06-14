@@ -93,8 +93,24 @@ public class EventerDAL
 
     public Boolean updateEvent(Event eventToUpdate)
     {
+        String commandString = "UPDATE Event SET event_name='"       + eventToUpdate.Name        + "', " +
+                                                "type='"             + eventToUpdate.Type        + "', " +
+                                                "number_of_guests='" + eventToUpdate.NumOfGuests + "', " +
+                                                "date='"             + eventToUpdate.Date        + "', " +
+                                                "location='"         + eventToUpdate.Location    + "' " +
+                                                "WHERE event_id='"   + eventToUpdate.EventId     + "';";
 
-        return false;
+        try
+        {
+            SqlCommand cmd = new SqlCommand(commandString, sqlCon);
+            cmd.ExecuteNonQuery();
+        }
+        catch (System.Data.SqlClient.SqlException)
+        {
+            return false;
+        }
+
+        return true;
     }
 
 
@@ -106,7 +122,7 @@ public class EventerDAL
         List<Guest> guestList = new List<Guest>();
         Guest guest;
 
-        string commandString = "SELECT * FROM Guest";
+        String commandString = "SELECT * FROM Guest";
         SqlCommand command = new SqlCommand(commandString, sqlCon);
         SqlDataReader reader = command.ExecuteReader();
 
@@ -157,8 +173,19 @@ public class EventerDAL
 
     public Boolean updateGuest(Guest guestToUpdate)
     {
+        String commandString = "UPDATE Guest SET first_name='', last_name='', phone='', group_id='', side='', status='', arriving='' WHERE user_id='1111';";
+        
+        try
+        {
+            SqlCommand cmd = new SqlCommand(commandString, sqlCon);
+            cmd.ExecuteNonQuery();
+        }
+        catch (System.Data.SqlClient.SqlException)
+        {
+            return false;
+        }
 
-        return false;
+        return true;
     }
 
 

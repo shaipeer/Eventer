@@ -23,19 +23,19 @@ public class EventerBL
         return dal.getEventList();
     }
 
-    public void addEvent(Event newEvent)
+    public Boolean addEvent(Event newEvent)
     {
-        dal.addEvent(newEvent);
+        return dal.addEvent(newEvent);
     }
 
-    public void deleteEvent(int userId, int eventId)
+    public Boolean deleteEvent(int userId, int eventId)
     {
-        dal.deleteEvent(userId, eventId);
+        return dal.deleteEvent(userId, eventId);
     }
 
-    public void updateEvent(Event eventToUpdate)
+    public Boolean updateEvent(Event eventToUpdate)
     {
-        dal.updateEvent(eventToUpdate);
+        return dal.updateEvent(eventToUpdate);
     }
 
 
@@ -46,19 +46,19 @@ public class EventerBL
         return dal.getGuestList();
     }
 
-    public void addGuest(Guest newGuest)
+    public Boolean addGuest(Guest newGuest)
     {
-        dal.addGuest(newGuest);
+        return dal.addGuest(newGuest);
     }
 
-    public void deleteGuest(int userId, int guestId)
+    public Boolean deleteGuest(int userId, int guestId)
     {
-        dal.deleteGuest(userId, guestId);
+        return dal.deleteGuest(userId, guestId);
     }
 
-    public void updateGuest(Guest guestToUpdate)
+    public Boolean updateGuest(Guest guestToUpdate)
     {
-        dal.updateGuest(guestToUpdate);
+        return dal.updateGuest(guestToUpdate);
     }
 
     //=======================================  USER   =====================================================
