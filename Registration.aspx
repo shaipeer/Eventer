@@ -8,7 +8,7 @@
         <br />
         <div >
 
-        <table id="registration_table" align="center" style="margin-top: 0px">
+        <table id="registration_table" align="center" style="margin-top: 0px; background-image: url('images/main_image.jpg')">
             <tr>
                 <td>id:</td>
                 <td>
@@ -71,6 +71,10 @@
                 <td></td>
             </tr>
         </table>
+             <br />
+        <link rel="stylesheet" type="text/css" href="Login.aspx">
+            <asp:LinkButton ID="LinkButton1" runat="server" Font-Size="Small" PostBackUrl="~/Login.aspx">already registered?</asp:LinkButton>
+        <br />
 
         </div>
     </div>
