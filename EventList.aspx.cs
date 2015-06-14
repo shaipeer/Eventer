@@ -99,6 +99,7 @@ public partial class AddEvent : System.Web.UI.Page
        Number_Of_Guests_TextBox.Text    = eventList[selectedIndex].NumOfGuests;
        Date_TextBox.Text                = eventList[selectedIndex].Date;
        Location_TextBox.Text            = eventList[selectedIndex].Location;
+
        Event_Nav_CMD.Text               = "Save";
        
     }
