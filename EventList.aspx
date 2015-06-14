@@ -12,7 +12,7 @@
                     <td>Event Name:<br />
                     </td>
                     <td>
-                        <asp:TextBox ID="Event_Name_TextBox" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="Event_Name_TextBox" runat="server" Height="22px"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
@@ -42,7 +42,7 @@
                 <tr>
                     <td></td>
                     <td>
-                        <asp:Button ID="Add_Event_CMD" runat="server" Text="Add Event"/>    
+                        <asp:Button ID="Event_Nav_CMD" runat="server" Text="Add Event" OnClick="Event_Nav_CMD_Click"/>    
                     </td>
                 </tr>
 
@@ -56,16 +56,32 @@
             <div>
                 <div id="grid_div">
                     <asp:GridView ID="Event_list_GridView" HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White"
-                            runat="server" AutoGenerateColumns="false" ShowHeaderWhenEmpty="True">
+                            runat="server" AutoGenerateColumns="false" ShowHeaderWhenEmpty="True" AutoGenerateSelectButton="True" OnSelectedIndexChanged="Event_list_GridView_SelectedIndexChanged">
+
+<HeaderStyle BackColor="#3AC0F2" ForeColor="White"></HeaderStyle>
+
                             <RowStyle HorizontalAlign="center" />
                             <Columns>
-                                <asp:BoundField DataField="id"                  HeaderText="Id"                 ItemStyle-Width="30" />
-                                <asp:BoundField DataField="event_name"          HeaderText="Event Name"         ItemStyle-Width="250" />
-                                <asp:BoundField DataField="event_type"          HeaderText="Event Type"         ItemStyle-Width="200" />
-                                <asp:BoundField DataField="event_date"          HeaderText="Event Date"         ItemStyle-Width="100" />
-                                <asp:BoundField DataField="number_of_guests"    HeaderText="Number Of Guests"   ItemStyle-Width="150" />
-                                <asp:BoundField DataField="event_location"      HeaderText="Event Location"     ItemStyle-Width="150" />
+                                <asp:BoundField DataField="id"                  HeaderText="Id"                 ItemStyle-Width="30" >
+<ItemStyle Width="30px"></ItemStyle>
+                                </asp:BoundField>
+                                <asp:BoundField DataField="event_name"          HeaderText="Event Name"         ItemStyle-Width="250" >
+<ItemStyle Width="250px"></ItemStyle>
+                                </asp:BoundField>
+                                <asp:BoundField DataField="event_type"          HeaderText="Event Type"         ItemStyle-Width="200" >
+<ItemStyle Width="200px"></ItemStyle>
+                                </asp:BoundField>
+                                <asp:BoundField DataField="event_date"          HeaderText="Event Date"         ItemStyle-Width="100" >
+<ItemStyle Width="100px"></ItemStyle>
+                                </asp:BoundField>
+                                <asp:BoundField DataField="number_of_guests"    HeaderText="Number Of Guests"   ItemStyle-Width="150" >
+<ItemStyle Width="150px"></ItemStyle>
+                                </asp:BoundField>
+                                <asp:BoundField DataField="event_location"      HeaderText="Event Location"     ItemStyle-Width="150" >
+<ItemStyle Width="150px"></ItemStyle>
+                                </asp:BoundField>
                             </Columns>
+                            <SelectedRowStyle BackColor="#CCFFFF" />
                     </asp:GridView>
                     
                     <asp:SqlDataSource ID="Eventer" runat="server" ConnectionString="<%$ ConnectionStrings:EventerConnectionString %>" SelectCommand="SELECT * FROM [Event]"></asp:SqlDataSource>
@@ -76,7 +92,10 @@
                     <asp:Label ID="No_Events_LBL" runat="server" Text=""></asp:Label>
                     <br />
                     <br />
-                    <asp:Button ID="Choose_Event_CMD" runat="server" Text="Choose Event" />
+                    
+                    <asp:Button ID="Choose_Event_CMD" runat="server" Text="Choose Event" OnClick="Choose_Event_CMD_Click" />
+
+                    <asp:Button ID="Edit_Event_CMD" runat="server" Text="Edit Event" OnClick="Edit_Event_CMD_Click" />
                 </div>
             </div>
         </div>

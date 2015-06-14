@@ -4,9 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
-/// <summary>
-/// Summary description for EventerDAL
-/// </summary>
+
 public class EventerDAL
 {
 
@@ -42,91 +40,135 @@ public class EventerDAL
     public List<Event> getEventList()
     {
         List<Event> eventList = new List<Event>();
+        Event ev;
 
+        string commandString = "SELECT * FROM Event";
+        SqlCommand command = new SqlCommand(commandString, sqlCon);
+        SqlDataReader reader = command.ExecuteReader();
 
+        while(reader.Read())
+        {
+            ev = new Event();
 
+            ev.UserId       = Convert.ToInt32(reader[0].ToString());
+            ev.EventId      = Convert.ToInt32(reader[1].ToString());
+            ev.Name         = reader[2].ToString();
+            ev.Type         = reader[3].ToString();
+            ev.NumOfGuests  = reader[4].ToString();
+            ev.Date         = reader[5].ToString();
+            ev.Location     = reader[6].ToString();
+            
+            eventList.Add(ev);
+        }
+       
+        reader.Close();
 
-
+        
         return eventList;
     }
 
-    public void addEvent(Event newEvent)
+    public Boolean addEvent(Event newEvent)
     {
-        
+        string commandString = "INSERT INTO Event (user_id, event_id, event_name, type, number_of_guests, date, location) " +
+                               "VALUES ('" + newEvent.UserId + "', '" + newEvent.EventId + "', '" + newEvent.Name + "', '" + newEvent.Type + "', '" + newEvent.NumOfGuests + "', '" + newEvent.Date + "', '" + newEvent.Location + "')";
+
+        try
+        {
+            SqlCommand cmd = new SqlCommand(commandString, sqlCon);
+            cmd.ExecuteNonQuery();
+        }
+        catch (System.Data.SqlClient.SqlException)
+        {
+            return false;
+        }
+
+        return true;
     }
 
-    public void deleteEvent(int userId, int eventId)
+    public Boolean deleteEvent(int userId, int eventId)
     {
-        
+
+        return false;
     }
 
-    public void updateEvent(Event eventToUpdate)
+    public Boolean updateEvent(Event eventToUpdate)
     {
-        
+
+        return false;
     }
 
 
 
     //=======================================  GUEST  =====================================================
 
-
     public List<Guest> getGuestList()
     {
         List<Guest> guestList = new List<Guest>();
+        Guest guest;
 
+        string commandString = "SELECT * FROM Guest";
+        SqlCommand command = new SqlCommand(commandString, sqlCon);
+        SqlDataReader reader = command.ExecuteReader();
 
+        while (reader.Read())
+        {
+            guest = new Guest();
 
+           /* ev.UserId = Convert.ToInt32(reader[0].ToString());
+            ev.EventId = Convert.ToInt32(reader[1].ToString());
+            ev.Name = reader[2].ToString();
+            ev.Type = reader[3].ToString();
+            ev.NumOfGuests = reader[4].ToString();
+            ev.Date = reader[5].ToString();
+            ev.Location = reader[6].ToString();
+            */
+            guestList.Add(guest);
+        }
+
+        reader.Close();
 
 
         return guestList;
     }
 
-    public void addGuest(Guest newGuest)
+    public Boolean addGuest(Guest newGuest)
     {
+      //  string commandString = "INSERT INTO Event (user_id, event_id, event_name, type, number_of_guests, date, location) " +
+        //                       "VALUES ('" + newEvent.UserId + "', '" + newEvent.EventId + "', '" + newEvent.Name + "', '" + newEvent.Type + "', '" + newEvent.NumOfGuests + "', '" + newEvent.Date + "', '" + newEvent.Location + "')";
 
+        try
+        {
+          //  SqlCommand cmd = new SqlCommand(commandString, sqlCon);
+          //  cmd.ExecuteNonQuery();
+        }
+        catch (System.Data.SqlClient.SqlException)
+        {
+            return false;
+        }
+
+        return true;
     }
 
-    public void deleteGuest(int userId, int guestId)
+    public Boolean deleteGuest(int userId, int guestId)
     {
 
+        return false;
     }
 
-    public void updateGuest(Guest guestToUpdate)
+    public Boolean updateGuest(Guest guestToUpdate)
     {
 
+        return false;
     }
-
 
 
     //=======================================  USER  =====================================================
 
-    public List<User> getUserList()
-    {
-        List<User> UserList = new List<User>();
-
-
-
-
-
-        return UserList;
-    }
-
-    public void addUser(User newUser)
-    {
-
-    }
-
-    public void deleteUser(int userId, int UserId)
-    {
-
-    }
-
-    public void updateUser(User UserToUpdate)
-    {
-
-    }
+    
 
     //=======================================  GROUP  =====================================================
+
+
 
     //=======================================  GIFT   =====================================================
 

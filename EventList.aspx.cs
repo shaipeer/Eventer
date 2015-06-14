@@ -10,11 +10,13 @@ public partial class AddEvent : System.Web.UI.Page
 {
     private int selectedRow;
     private EventerBL bl;
+    private int selectedIndex;
+    List<Event> eventList;
 
     protected void Page_Load(object sender, EventArgs e)
     {
         bl = new EventerBL();
-        List<Event> eventList =  bl.getEventList();
+        eventList =  bl.getEventList();
 
 
 
@@ -85,4 +87,43 @@ public partial class AddEvent : System.Web.UI.Page
                                  Event_list_GridView.SelectedRow.Cells[4].Text + ", " ;
     }
     */
+    protected void Choose_Event_CMD_Click(object sender, EventArgs e)
+    {
+       
+    }
+    
+    protected void Edit_Event_CMD_Click(object sender, EventArgs e)
+    {
+       Event_Name_TextBox.Text          = eventList[selectedIndex].Name;
+       Type_TextBox.Text                = eventList[selectedIndex].Type;
+       Number_Of_Guests_TextBox.Text    = eventList[selectedIndex].NumOfGuests;
+       Date_TextBox.Text                = eventList[selectedIndex].Date;
+       Location_TextBox.Text            = eventList[selectedIndex].Location;
+       Event_Nav_CMD.Text               = "Save";
+       
+    }
+
+    protected void Event_list_GridView_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        selectedIndex = Convert.ToInt32(Event_list_GridView.SelectedRow.Cells[1].Text);
+        //Event_Name_TextBox.Text = selectedIndex + "";
+    }
+
+    protected void Event_Nav_CMD_Click(object sender, EventArgs e)
+    {
+        if(Event_Nav_CMD.Text.Equals("Save"))
+        {
+
+            Event_Name_TextBox.Text = "";
+            Type_TextBox.Text = "";
+            Number_Of_Guests_TextBox.Text = "";
+            Date_TextBox.Text = "";
+            Location_TextBox.Text = "";
+            Event_Nav_CMD.Text = "Add Event";
+        }
+        else if (Event_Nav_CMD.Text.Equals("Add Event"))
+        {
+
+        }
+    }
 }
