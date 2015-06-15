@@ -217,7 +217,7 @@ img {
 
 
 /**=======  Guests  ======== **/
-#guests_list #nav {
+#guest_list #nav {
     line-height:30px;
     background-color:#eeeeee;
     height:600px;
@@ -225,19 +225,19 @@ img {
     float:left;
     padding:5px; 
 }
-#guests_list #nav h2 {
+#guest_list #nav h2 {
     text-align: center;
 }
 
-#guests_list #nav table {
+#guest_list #nav table {
         padding-left: 20px;
 }
-#guests_list #section {
+#guest_list #section {
     width:60%;
     float:left;
     padding:10px; 
 }
-#guests_list #section h2 {
+#guest_list #section h2 {
     text-align: center;
 }
 

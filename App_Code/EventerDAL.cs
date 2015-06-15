@@ -34,8 +34,9 @@ public class EventerDAL
 
 
 
-
-    //=======================================  EVENT  =====================================================
+    //=====================================================================================================
+    //                                           EVENT
+    //=====================================================================================================
 
     public List<Event> getEventList()
     {
@@ -88,7 +89,19 @@ public class EventerDAL
     public Boolean deleteEvent(int userId, int eventId)
     {
 
-        return false;
+        String commandString = "DELETE FROM Event WHERE user_id='" + userId + "' AND event_id='" + eventId + "';";
+
+        try
+        {
+            SqlCommand cmd = new SqlCommand(commandString, sqlCon);
+            cmd.ExecuteNonQuery();
+        }
+        catch (System.Data.SqlClient.SqlException)
+        {
+            return false;
+        }
+
+        return true;
     }
 
     public Boolean updateEvent(Event eventToUpdate)
@@ -114,15 +127,15 @@ public class EventerDAL
     }
 
 
-
-    //=======================================  GUEST  =====================================================
-
+    //=====================================================================================================
+    //                                         GUEST
+    //=====================================================================================================
     public List<Guest> getGuestList()
     {
         List<Guest> guestList = new List<Guest>();
         Guest guest;
 
-        String commandString = "SELECT * FROM Guest";
+        string commandString = "SELECT * FROM Guest";
         SqlCommand command = new SqlCommand(commandString, sqlCon);
         SqlDataReader reader = command.ExecuteReader();
 
@@ -130,14 +143,16 @@ public class EventerDAL
         {
             guest = new Guest();
 
-           /* ev.UserId = Convert.ToInt32(reader[0].ToString());
-            ev.EventId = Convert.ToInt32(reader[1].ToString());
-            ev.Name = reader[2].ToString();
-            ev.Type = reader[3].ToString();
-            ev.NumOfGuests = reader[4].ToString();
-            ev.Date = reader[5].ToString();
-            ev.Location = reader[6].ToString();
-            */
+            guest.UserId    = Convert.ToInt32(reader[0].ToString());
+            guest.GuestId   = Convert.ToInt32(reader[1].ToString());
+            guest.FirstName = reader[2].ToString();
+            guest.LastName  = reader[3].ToString();
+            guest.Phone     = reader[4].ToString();
+            guest.GroupId   = reader[5].ToString();
+            guest.Side      = reader[6].ToString();
+            guest.Status    = reader[7].ToString();
+            guest.Arriving  = reader[8].ToString();
+
             guestList.Add(guest);
         }
 
@@ -149,32 +164,17 @@ public class EventerDAL
 
     public Boolean addGuest(Guest newGuest)
     {
-      //  string commandString = "INSERT INTO Event (user_id, event_id, event_name, type, number_of_guests, date, location) " +
-        //                       "VALUES ('" + newEvent.UserId + "', '" + newEvent.EventId + "', '" + newEvent.Name + "', '" + newEvent.Type + "', '" + newEvent.NumOfGuests + "', '" + newEvent.Date + "', '" + newEvent.Location + "')";
+        string commandString = "INSERT INTO Event (user_id, event_id, event_name, type, number_of_guests, date, location) " +
+                                 "VALUES ('" + newGuest.UserId      + "', '" + 
+                                               newGuest.GuestId     + "', '" + 
+                                               newGuest.FirstName   + "', '" + 
+                                               newGuest.LastName    + "', '" + 
+                                               newGuest.Phone       + "', '" + 
+                                               newGuest.GroupId     + "', '" +
+                                               newGuest.Side        + "', '" +
+                                               newGuest.Status      + "', '" +
+                                               newGuest.Arriving    + "')";
 
-        try
-        {
-          //  SqlCommand cmd = new SqlCommand(commandString, sqlCon);
-          //  cmd.ExecuteNonQuery();
-        }
-        catch (System.Data.SqlClient.SqlException)
-        {
-            return false;
-        }
-
-        return true;
-    }
-
-    public Boolean deleteGuest(int userId, int guestId)
-    {
-
-        return false;
-    }
-
-    public Boolean updateGuest(Guest guestToUpdate)
-    {
-        String commandString = "UPDATE Guest SET first_name='', last_name='', phone='', group_id='', side='', status='', arriving='' WHERE user_id='1111';";
-        
         try
         {
             SqlCommand cmd = new SqlCommand(commandString, sqlCon);
@@ -188,17 +188,61 @@ public class EventerDAL
         return true;
     }
 
+    public Boolean deleteGuest(int userId, int guestId)
+    {
+        String commandString = "DELETE FROM Guest WHERE user_id='" + userId + "' AND guest_id='" + guestId + "';";
 
-    //=======================================  USER  =====================================================
+        try
+        {
+            SqlCommand cmd = new SqlCommand(commandString, sqlCon);
+            cmd.ExecuteNonQuery();
+        }
+        catch (System.Data.SqlClient.SqlException)
+        {
+            return false;
+        }
 
-    
+        return true;
+    }
 
-    //=======================================  GROUP  =====================================================
+    public Boolean updateGuest(Guest guestToUpdate)
+    {
+        String commandString = "UPDATE Guest SET first_name='"  + guestToUpdate.FirstName   + "', " +
+                                                "last_name='"   + guestToUpdate.LastName    + "', " +
+                                                "phone='"       + guestToUpdate.Phone       + "', " +
+                                                "group_id='"    + guestToUpdate.GroupId     + "', " +
+                                                "side='"        + guestToUpdate.Side        + "', " +
+                                                "status='"      + guestToUpdate.Status      + "', " +
+                                                "arriving='"    + guestToUpdate.Arriving    + "' "  +
+                                                "WHERE user_id='" + guestToUpdate.UserId    + "' "  +
+                                                "AND guest_id='"  + guestToUpdate.GuestId   + "';"  ;
+
+        try
+        {
+            SqlCommand cmd = new SqlCommand(commandString, sqlCon);
+            cmd.ExecuteNonQuery();
+        }
+        catch (System.Data.SqlClient.SqlException)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    //=====================================================================================================
+    //                                           USER 
+    //=====================================================================================================
 
 
+    //=====================================================================================================
+    //                                           GROUP
+    //=====================================================================================================
 
-    //=======================================  GIFT   =====================================================
 
+    //=====================================================================================================
+    //                                           GIFT 
+    //=====================================================================================================
 
 
 

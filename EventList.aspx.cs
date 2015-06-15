@@ -11,7 +11,7 @@ public partial class AddEvent : System.Web.UI.Page
     private int selectedRow;
     private EventerBL bl;
     private int selectedIndex;
-    List<Event> eventList;
+    private List<Event> eventList;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -53,6 +53,11 @@ public partial class AddEvent : System.Web.UI.Page
 
 
     }
+    protected void Event_list_GridView_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        //selectedIndex = Convert.ToInt32(Event_list_GridView.SelectedRow.Cells[1].Text);
+        //Event_Name_TextBox.Text = selectedIndex + "";
+    }
 
     protected void Choose_Event_CMD_Click(object sender, EventArgs e)
     {
@@ -61,7 +66,7 @@ public partial class AddEvent : System.Web.UI.Page
     
     protected void Edit_Event_CMD_Click(object sender, EventArgs e)
     {
-        selectedIndex = Convert.ToInt32(Event_list_GridView.SelectedRow.Cells[1].Text) - 1;
+        setSelectedIndex();
         Event_Nav_Eror_Label.Text = "" + selectedIndex;
         Event_Name_TextBox.Text          = eventList[selectedIndex].Name;
         Type_TextBox.Text                = eventList[selectedIndex].Type;
@@ -73,17 +78,14 @@ public partial class AddEvent : System.Web.UI.Page
        
     }
 
-    protected void Event_list_GridView_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        //selectedIndex = Convert.ToInt32(Event_list_GridView.SelectedRow.Cells[1].Text);
-        //Event_Name_TextBox.Text = selectedIndex + "";
-    }
-
+    
     protected void Event_Nav_CMD_Click(object sender, EventArgs e)
     {
+        setSelectedIndex();
         Event ev = navToEvent();
         ev.UserId  = eventList[selectedIndex].UserId;
         ev.EventId = eventList[selectedIndex].EventId;
+
         if(Event_Nav_CMD.Text.Equals("Save"))
         {
             if(bl.updateEvent(ev))
@@ -105,7 +107,7 @@ public partial class AddEvent : System.Web.UI.Page
         }
         else if (Event_Nav_CMD.Text.Equals("Add Event"))
         {
-
+            bl.addEvent(ev);
         }
     }
 
@@ -122,4 +124,9 @@ public partial class AddEvent : System.Web.UI.Page
         return ev;
     }
 
+
+    private void setSelectedIndex()
+    {
+        selectedIndex = Convert.ToInt32(Event_list_GridView.SelectedRow.Cells[1].Text) - 1;
+    }
 }

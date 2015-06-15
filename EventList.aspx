@@ -16,7 +16,7 @@
                     <td>Event Name:<br />
                     </td>
                     <td>
-                        <asp:TextBox ID="Event_Name_TextBox" runat="server" Height="22px"></asp:TextBox>
+                        <asp:TextBox ID="Event_Name_TextBox" runat="server"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
