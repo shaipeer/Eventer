@@ -67,7 +67,7 @@ public partial class AddEvent : System.Web.UI.Page
     protected void Edit_Event_CMD_Click(object sender, EventArgs e)
     {
         setSelectedIndex();
-        Event_Nav_Eror_Label.Text = "" + selectedIndex;
+
         Event_Name_TextBox.Text          = eventList[selectedIndex].Name;
         Type_TextBox.Text                = eventList[selectedIndex].Type;
         Number_Of_Guests_TextBox.Text    = eventList[selectedIndex].NumOfGuests;
@@ -97,7 +97,10 @@ public partial class AddEvent : System.Web.UI.Page
                 Location_TextBox.Text = "";
                 Event_Nav_CMD.Text = "Add Event";
 
+
                 Page.Response.Redirect(HttpContext.Current.Request.Url.ToString(), true);
+
+                
             }
             else
             {
