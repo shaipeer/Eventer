@@ -100,13 +100,17 @@ public partial class AddEvent : System.Web.UI.Page
                     Location_TextBox.Text = "";
                     Event_Nav_CMD.Text = "Add Event";
 
+
                     Page.Response.Redirect(HttpContext.Current.Request.Url.ToString(), true);
+
+
                 }
                 else
                 {
                     Event_Nav_Eror_Label.Text = "*Error while updating event";
                 }
             }
+            
         }
         else if (Event_Nav_CMD.Text.Equals("Add Event"))
         {
@@ -130,24 +134,28 @@ public partial class AddEvent : System.Web.UI.Page
 
     private void setSelectedIndex()
     {
-            selectedIndex = Convert.ToInt32(Event_list_GridView.SelectedRow.Cells[1].Text) - 1;
+        selectedIndex = Convert.ToInt32(Event_list_GridView.SelectedRow.Cells[1].Text) - 1;
     }
 
-    private bool isValid() 
+    private bool isValid()
     {
-        return !isNumerical(Event_Name_TextBox.Text) || isNumerical(Number_Of_Guests_TextBox.Text) || !isNumerical(Type_TextBox.Text) ||
-                 isValidDate(Date_TextBox.Text) || !isNumerical(Location_TextBox.Text);
+        return !isNumerical(Event_Name_TextBox.Text) && isNumerical(Number_Of_Guests_TextBox.Text) 
+                && !isNumerical(Type_TextBox.Text) && isValidDate(Date_TextBox.Text) && !isNumerical(Location_TextBox.Text);
     }
 
-    private bool isValidDate(String date) 
+    private bool isValidDate(String date)
     {
         DateTime dt;
         var success = DateTime.TryParse(date, out dt);
+        if (!success)
+            Event_Nav_Eror_Label.Text = "Unvalid Date!"; 
         return success;
     }
 
-     private bool isNumerical(string input)
+    private bool isNumerical(string input)
     {
-        return new System.Text.RegularExpressions.Regex(@"^\d$").IsMatch(input);
+        double num;
+        var success = double.TryParse(input, out num);
+        return success;
     }
 }
