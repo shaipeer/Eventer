@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Text.RegularExpressions;
 
 public partial class AddEvent : System.Web.UI.Page
 {
@@ -88,23 +89,26 @@ public partial class AddEvent : System.Web.UI.Page
 
         if(Event_Nav_CMD.Text.Equals("Save"))
         {
-            if(bl.updateEvent(ev))
+            if (isValid())
             {
-                Event_Name_TextBox.Text = "";
-                Type_TextBox.Text = "";
-                Number_Of_Guests_TextBox.Text = "";
-                Date_TextBox.Text = "";
-                Location_TextBox.Text = "";
-                Event_Nav_CMD.Text = "Add Event";
+                if (bl.updateEvent(ev))
+                {
+                    Event_Name_TextBox.Text = "";
+                    Type_TextBox.Text = "";
+                    Number_Of_Guests_TextBox.Text = "";
+                    Date_TextBox.Text = "";
+                    Location_TextBox.Text = "";
+                    Event_Nav_CMD.Text = "Add Event";
 
 
-                Page.Response.Redirect(HttpContext.Current.Request.Url.ToString(), true);
+                    Page.Response.Redirect(HttpContext.Current.Request.Url.ToString(), true);
 
-                
-            }
-            else
-            {
-                Event_Nav_Eror_Label.Text = "*Error while updating event";
+
+                }
+                else
+                {
+                    Event_Nav_Eror_Label.Text = "*Error while updating event";
+                }
             }
             
         }
@@ -131,5 +135,27 @@ public partial class AddEvent : System.Web.UI.Page
     private void setSelectedIndex()
     {
         selectedIndex = Convert.ToInt32(Event_list_GridView.SelectedRow.Cells[1].Text) - 1;
+    }
+
+    private bool isValid()
+    {
+        return !isNumerical(Event_Name_TextBox.Text) && isNumerical(Number_Of_Guests_TextBox.Text) 
+                && !isNumerical(Type_TextBox.Text) && isValidDate(Date_TextBox.Text) && !isNumerical(Location_TextBox.Text);
+    }
+
+    private bool isValidDate(String date)
+    {
+        DateTime dt;
+        var success = DateTime.TryParse(date, out dt);
+        if (!success)
+            Event_Nav_Eror_Label.Text = "Unvalid Date!"; 
+        return success;
+    }
+
+    private bool isNumerical(string input)
+    {
+        double num;
+        var success = double.TryParse(input, out num);
+        return success;
     }
 }
