@@ -141,8 +141,22 @@ public partial class GuestList : System.Web.UI.Page
 
     private bool isValid()
     {
-        return !isNumerical(First_Name_TextBox.Text) && !isNumerical(Last_Name_TextBox.Text) && isPhone(Phone_TextBox.Text);
-        //&& isNumerical(Group_TextBox.Text) && !isNumerical(Side_TextBox.Text) && isNumerical(Arriving_TextBox.Text);
+        if(isNumerical(First_Name_TextBox.Text))
+            Guest_Nav_Eror_Label.Text = "First Name not valid!" ;
+        else if (isNumerical(Last_Name_TextBox.Text))
+            Guest_Nav_Eror_Label.Text = "Last Name not valid!";
+        else if (!isPhone(Phone_TextBox.Text))
+            Guest_Nav_Eror_Label.Text = "please insert a valid Phone number.";
+        else if (isNumerical(Status_TextBox.Text))
+            Guest_Nav_Eror_Label.Text = "Status not valid!";
+        else if (!isNumerical(Arriving_TextBox.Text))
+            Guest_Nav_Eror_Label.Text = "Arriving not valid!";
+        
+        return  !isNumerical(First_Name_TextBox.Text) && 
+                !isNumerical(Last_Name_TextBox.Text) && 
+                isPhone(Phone_TextBox.Text) && 
+                !isNumerical(Status_TextBox.Text) &&
+                isNumerical(Arriving_TextBox.Text);
     }
 
     private bool isNumerical(string input)
