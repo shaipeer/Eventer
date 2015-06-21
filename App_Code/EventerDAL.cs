@@ -36,39 +36,47 @@ public class EventerDAL
     //=====================================================================================================
     //                                           USER 
     //=====================================================================================================
-    public User getUserById(int userId)
+    public User getUser(String userName)
     {
         User user = new User();
 
-        string commandString = "SELECT * FROM User WHERE user_id=" +userId;
+        string commandString = "SELECT * FROM User WHERE user_name=" + userName;
         SqlCommand command = new SqlCommand(commandString, sqlCon);
-        SqlDataReader reader = command.ExecuteReader();
 
-        reader.Read();
-
-        if (reader != null)
+        try
         {
-            user.UserId = Convert.ToInt32(reader[0].ToString());
-            user.FirstName = reader[1].ToString();
-            user.LastName = reader[2].ToString();
-            user.Mail = reader[3].ToString();
-            user.UserName = reader[4].ToString();
-            user.Password = reader[5].ToString();
-        }
-        else
-        {
-            user = null;
-        }
 
-        reader.Close();
+            SqlDataReader reader = command.ExecuteReader();
+
+            reader.Read();
+
+            if (reader != null)
+            {
+                user.FirstName  = reader[0].ToString();
+                user.LastName   = reader[1].ToString();
+                user.Mail       = reader[2].ToString();
+                user.UserName   = reader[3].ToString();
+                user.Password   = reader[4].ToString();
+            }
+            else
+            {
+                user = null;
+            }
+
+            reader.Close();
+        }
+        catch(SqlException e)
+        {
+            return null;
+        }
 
         return user;
     }
 
     public Boolean addUser(User newUser)
     {
-        string commandString = "INSERT INTO User (user_id, first_name, last_name, mail, user_name, password) " +
-                               "VALUES ('" + newUser.UserId + "', '" + newUser.FirstName + "', '" + newUser.LastName + "', '" + newUser.Mail + "', '" + newUser.UserName + "', '" + newUser.Password + "')";
+        string commandString = "INSERT INTO User (first_name, last_name, mail, user_name, password) " +
+                               "VALUES ('" + newUser.FirstName + "', '" + newUser.LastName + "', '" + newUser.Mail + "', '" + newUser.UserName + "', '" + newUser.Password + "')";
 
         try
         {
@@ -82,6 +90,7 @@ public class EventerDAL
 
         return true;
     }
+
 
 
     //=====================================================================================================
@@ -120,8 +129,8 @@ public class EventerDAL
 
     public Boolean addEvent(Event newEvent)
     {
-        string commandString = "INSERT INTO Event (user_id, event_id, event_name, type, number_of_guests, date, location) " +
-                               "VALUES ('" + newEvent.UserId + "', '" + newEvent.EventId + "', '" + newEvent.Name + "', '" + newEvent.Type + "', '" + newEvent.NumOfGuests + "', '" + newEvent.Date + "', '" + newEvent.Location + "')";
+        string commandString = "INSERT INTO Event (event_id, event_name, type, number_of_guests, date, location) " +
+                               "VALUES ('" + newEvent.EventId + "', '" + newEvent.Name + "', '" + newEvent.Type + "', '" + newEvent.NumOfGuests + "', '" + newEvent.Date + "', '" + newEvent.Location + "')";
 
         try
         {
@@ -136,10 +145,10 @@ public class EventerDAL
         return true;
     }
 
-    public Boolean deleteEvent(int userId, int eventId)
+    public Boolean deleteEvent(String userName, int eventId)
     {
 
-        String commandString = "DELETE FROM Event WHERE user_id='" + userId + "' AND event_id='" + eventId + "';";
+        String commandString = "DELETE FROM Event WHERE user_name='" + userName + "' AND event_id='" + eventId + "';";
 
         try
         {
@@ -214,8 +223,8 @@ public class EventerDAL
 
     public Boolean addGuest(Guest newGuest)
     {
-        string commandString = "INSERT INTO Event (user_id, event_id, event_name, type, number_of_guests, date, location) " +
-                                 "VALUES ('" + newGuest.UserId      + "', '" + 
+        string commandString = "INSERT INTO Event (user_name, event_id, event_name, type, number_of_guests, date, location) " +
+                                 "VALUES ('" + newGuest.userName    + "', '" + 
                                                newGuest.GuestId     + "', '" + 
                                                newGuest.FirstName   + "', '" + 
                                                newGuest.LastName    + "', '" + 

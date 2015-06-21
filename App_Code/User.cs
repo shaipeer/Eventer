@@ -8,14 +8,6 @@ using System.Web;
 /// </summary>
 public class User
 {
-    private int userId;
-
-    public int UserId
-    {
-        get { return userId; }
-        set { userId = value; }
-    }
-    
     private String firstName;
 
     public String FirstName

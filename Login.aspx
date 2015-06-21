@@ -5,6 +5,7 @@
     <div id="registration_form">
         <br />
         <h2>Log-In</h2>
+        <asp:Label ID="Login_Error_Lable" runat="server" ForeColor="Red"></asp:Label>
         <br />
         <div >
 
@@ -24,8 +25,8 @@
                 <td style="height: 17px; width: 55px;"></td>
             </tr>
             <tr>
-                <td style="height: 18px; width: 161px"></td>
-                <td style="height: 18px"></td>
+                <td style="height: 18px; width: 161px">&nbsp;</td>
+                <td style="height: 18px">&nbsp;</td>
                 <td style="height: 18px; width: 55px"></td>
             </tr>
             <tr>

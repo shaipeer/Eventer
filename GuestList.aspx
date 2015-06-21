@@ -70,7 +70,7 @@
             <h2>Guest List</h2>
             <br />
             <div>
-                <div id="grid_div">
+                <div id="grid_div" >
                     <asp:GridView ID="Guest_list_GridView" HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White"
                             runat="server" AutoGenerateColumns="false" ShowHeaderWhenEmpty="True" AutoGenerateSelectButton="True" OnSelectedIndexChanged="Guest_list_GridView_SelectedIndexChanged">
 

@@ -6,20 +6,6 @@ using System.Web;
 
 public class Gift
 {
-    int userId;
-
-    public int UserId
-    {
-        get { return userId; }
-        set { userId = value; }
-    }
-    int eventId;
-
-    public int EventId
-    {
-        get { return eventId; }
-        set { eventId = value; }
-    }
     int guestId;
 
     public int GuestId

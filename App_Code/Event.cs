@@ -6,13 +6,6 @@ using System.Web;
 
 public class Event
 {
-    int userId;
-
-    public int UserId
-    {
-        get { return userId; }
-        set { userId = value; }
-    }
     int eventId;
 
     public int EventId

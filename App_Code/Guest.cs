@@ -6,13 +6,6 @@ using System.Web;
 
 public class Guest
 {
-    int userId;
-
-    public int UserId
-    {
-        get { return userId; }
-        set { userId = value; }
-    }
     int guestId;
 
     public int GuestId
