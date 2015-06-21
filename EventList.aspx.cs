@@ -160,7 +160,7 @@ public partial class AddEvent : System.Web.UI.Page
 
     private bool isValid()
     {
-        if (isNumerical(Event_Name_TextBox.Text))               { Event_Nav_Eror_Label.Text = "Event's Name not valid!";     return false; }
+        if      (isNumerical(Event_Name_TextBox.Text))          { Event_Nav_Eror_Label.Text = "Event's Name not valid!";     return false; }
         else if (!isNumerical(Number_Of_Guests_TextBox.Text))   { Event_Nav_Eror_Label.Text = "Number of guests not valid!"; return false; }
         else if (Type_DropDownList.Text.Equals("..."))          { Event_Nav_Eror_Label.Text = "Please pick event's type.";   return false; }
         else if (!isValidDate(Date_TextBox.Text))               { Event_Nav_Eror_Label.Text = "Date not valid!";             return false; }
