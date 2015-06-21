@@ -33,6 +33,56 @@ public class EventerDAL
     }
 
 
+    //=====================================================================================================
+    //                                           USER 
+    //=====================================================================================================
+    public User getUserById(int userId)
+    {
+        User user = new User();
+
+        string commandString = "SELECT * FROM User WHERE user_id=" +userId;
+        SqlCommand command = new SqlCommand(commandString, sqlCon);
+        SqlDataReader reader = command.ExecuteReader();
+
+        reader.Read();
+
+        if (reader != null)
+        {
+            user.UserId = Convert.ToInt32(reader[0].ToString());
+            user.FirstName = reader[1].ToString();
+            user.LastName = reader[2].ToString();
+            user.Mail = reader[3].ToString();
+            user.UserName = reader[4].ToString();
+            user.Password = reader[5].ToString();
+        }
+        else
+        {
+            user = null;
+        }
+
+        reader.Close();
+
+        return user;
+    }
+
+    public Boolean addUser(User newUser)
+    {
+        string commandString = "INSERT INTO User (user_id, first_name, last_name, mail, user_name, password) " +
+                               "VALUES ('" + newUser.UserId + "', '" + newUser.FirstName + "', '" + newUser.LastName + "', '" + newUser.Mail + "', '" + newUser.UserName + "', '" + newUser.Password + "')";
+
+        try
+        {
+            SqlCommand cmd = new SqlCommand(commandString, sqlCon);
+            cmd.ExecuteNonQuery();
+        }
+        catch (System.Data.SqlClient.SqlException)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
 
     //=====================================================================================================
     //                                           EVENT
@@ -230,9 +280,7 @@ public class EventerDAL
         return true;
     }
 
-    //=====================================================================================================
-    //                                           USER 
-    //=====================================================================================================
+    
 
 
     //=====================================================================================================

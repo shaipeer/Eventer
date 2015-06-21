@@ -9,7 +9,6 @@ using System.Text.RegularExpressions;
 
 public partial class AddEvent : System.Web.UI.Page
 {
-    private int selectedRow;
     private EventerBL bl;
     private int selectedIndex;
     private List<Event> eventList;
@@ -18,7 +17,7 @@ public partial class AddEvent : System.Web.UI.Page
     {
         bl = new EventerBL();
         eventList =  bl.getEventList();
-
+        selectedIndex = -1;
 
 
         if (!this.IsPostBack)
@@ -56,8 +55,7 @@ public partial class AddEvent : System.Web.UI.Page
     }
     protected void Event_list_GridView_SelectedIndexChanged(object sender, EventArgs e)
     {
-        //selectedIndex = Convert.ToInt32(Event_list_GridView.SelectedRow.Cells[1].Text);
-        //Event_Name_TextBox.Text = selectedIndex + "";
+        No_Events_LBL.Text = "";
     }
 
     protected void Choose_Event_CMD_Click(object sender, EventArgs e)
@@ -67,16 +65,22 @@ public partial class AddEvent : System.Web.UI.Page
     
     protected void Edit_Event_CMD_Click(object sender, EventArgs e)
     {
-        setSelectedIndex();
+        if (setSelectedIndex())
+        {
+            Event_Name_TextBox.Text = eventList[selectedIndex].Name;
+            //Type_DropDownList.Items.FindByValue(eventList[selectedIndex].Type);
+            Type_DropDownList.SelectedIndex = Type_DropDownList.Items.IndexOf(Type_DropDownList.Items.FindByValue(eventList[selectedIndex].Type)); // If you want to find text by value field.
+            Number_Of_Guests_TextBox.Text = eventList[selectedIndex].NumOfGuests;
+            Date_TextBox.Text = eventList[selectedIndex].Date;
+            Location_TextBox.Text = eventList[selectedIndex].Location;
 
-        Event_Name_TextBox.Text          = eventList[selectedIndex].Name;
-        Type_TextBox.Text                = eventList[selectedIndex].Type;
-        Number_Of_Guests_TextBox.Text    = eventList[selectedIndex].NumOfGuests;
-        Date_TextBox.Text                = eventList[selectedIndex].Date;
-        Location_TextBox.Text            = eventList[selectedIndex].Location;
-
-        Event_Nav_CMD.Text               = "Save";
-       
+            Event_Nav_CMD.Text = "Save";
+            No_Events_LBL.Text = "";
+        }
+        else
+        {
+            No_Events_LBL.Text = "You have to choose event!";
+        }
     }
 
     
@@ -94,7 +98,7 @@ public partial class AddEvent : System.Web.UI.Page
                 if (bl.updateEvent(ev))
                 {
                     Event_Name_TextBox.Text = "";
-                    Type_TextBox.Text = "";
+                    Type_DropDownList.Text = "";
                     Number_Of_Guests_TextBox.Text = "";
                     Date_TextBox.Text = "";
                     Location_TextBox.Text = "";
@@ -123,7 +127,7 @@ public partial class AddEvent : System.Web.UI.Page
         Event ev = new Event();
 
         ev.Name = Event_Name_TextBox.Text;
-        ev.Type = Type_TextBox.Text;
+        ev.Type = Type_DropDownList.Text;
         ev.NumOfGuests = Number_Of_Guests_TextBox.Text;
         ev.Date = Date_TextBox.Text;
         ev.Location = Location_TextBox.Text;
@@ -132,15 +136,24 @@ public partial class AddEvent : System.Web.UI.Page
     }
 
 
-    private void setSelectedIndex()
+    private Boolean setSelectedIndex()
     {
-        selectedIndex = Convert.ToInt32(Event_list_GridView.SelectedRow.Cells[1].Text) - 1;
+        try
+        {
+            selectedIndex = Convert.ToInt32(Event_list_GridView.SelectedRow.Cells[1].Text) - 1;
+            return true;
+        }
+        catch (NullReferenceException e)
+        {
+            return false;
+        }
+        
     }
 
     private bool isValid()
     {
-        return !isNumerical(Event_Name_TextBox.Text) && isNumerical(Number_Of_Guests_TextBox.Text) 
-                && !isNumerical(Type_TextBox.Text) && isValidDate(Date_TextBox.Text) && !isNumerical(Location_TextBox.Text);
+        return !isNumerical(Event_Name_TextBox.Text) && isNumerical(Number_Of_Guests_TextBox.Text)
+                && !isNumerical(Type_DropDownList.Text) && isValidDate(Date_TextBox.Text) && !isNumerical(Location_TextBox.Text);
     }
 
     private bool isValidDate(String date)

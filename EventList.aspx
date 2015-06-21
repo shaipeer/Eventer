@@ -22,7 +22,14 @@
                 <tr>
                     <td>Type:</td>
                     <td>
-                        <asp:TextBox ID="Type_TextBox" runat="server"></asp:TextBox>
+                        <asp:DropDownList ID="Type_DropDownList" runat="server" Width="172px">
+                            <asp:ListItem>Wedding</asp:ListItem>
+                            <asp:ListItem>Silver wedding</asp:ListItem>
+                            <asp:ListItem>Golden wedding</asp:ListItem>
+                            <asp:ListItem>Bar Mitzva</asp:ListItem>
+                            <asp:ListItem>Brit</asp:ListItem>
+                            <asp:ListItem>Hina</asp:ListItem>
+                        </asp:DropDownList>
                     </td>
                 </tr>
                 <tr>

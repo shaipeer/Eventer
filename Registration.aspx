@@ -8,7 +8,7 @@
         <br />
         <div >
 
-        <table id="registration_table" align="center" style="margin-top: 0px; background-image: url('images/main_image.jpg')">
+        <table id="registration_table" align="center" style="margin-top: 0px;">
             <tr>
                 <td>id:</td>
                 <td>

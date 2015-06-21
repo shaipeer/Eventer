@@ -8,7 +8,7 @@
         <br />
         <div >
 
-        <table id="registration_table" align="center" style="margin-top: 0px; width: 314px; background-image: url('images/main_image.jpg'); height: 116px;">
+        <table id="registration_table" align="center" style="margin-top: 0px; width: 314px; height: 116px;">
             <tr>
                 <td style="width: 161px">user name:</td>
                 <td>
@@ -29,16 +29,16 @@
                 <td style="height: 18px; width: 55px"></td>
             </tr>
             <tr>
-                <td style="width: 161px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                <td style="width: 161px">&nbsp;</td>
                 <td>
-                        <asp:Button ID="LogIn_CMD" runat="server" Text="Log-In"/>
+                        <asp:Button ID="LogIn_CMD" runat="server" Text="Log-In" OnClick="LogIn_CMD_Click"/>
                     </td>
                 <td style="width: 55px"></td>
             </tr>
         </table>
         <br />
         <link rel="stylesheet" type="text/css" href="Registration.aspx">
-            <asp:LinkButton ID="LinkButton1" runat="server" Font-Size="Small" PostBackUrl="~/Registration.aspx">not registered?</asp:LinkButton>
+            <asp:LinkButton ID="NotRegisterd_LBL" runat="server" Font-Size="Small" PostBackUrl="~/Registration.aspx" OnClick="NotRegisterd_LBL_Click">not registered?</asp:LinkButton>
         <br />
 
 

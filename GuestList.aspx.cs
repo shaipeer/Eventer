@@ -16,6 +16,9 @@ public partial class GuestList : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["UserId"] == null) Response.Redirect("MainPage.aspx");
+
+
         bl = new EventerBL();
         guestList = bl.getGuestList();
 
@@ -45,7 +48,7 @@ public partial class GuestList : System.Web.UI.Page
             }
             else
             {
-                No_Events_LBL.Text = "No Guests To Show!";
+                No_Guest_LBL.Text = "No Guests To Show!";
             }
             Guest_list_GridView.DataSource = dt;
             Guest_list_GridView.DataBind();
@@ -53,7 +56,7 @@ public partial class GuestList : System.Web.UI.Page
     }
     protected void Guest_list_GridView_SelectedIndexChanged(object sender, EventArgs e)
     {
-
+        No_Guest_LBL.Text = "";
     }
     protected void Choose_Guest_CMD_Click(object sender, EventArgs e)
     {
@@ -61,17 +64,23 @@ public partial class GuestList : System.Web.UI.Page
     }
     protected void Edit_Guest_CMD_Click(object sender, EventArgs e)
     {
-        setSelectedIndex();
-        Guest_Nav_Eror_Label.Text   = "" + selectedIndex;
-        First_Name_TextBox.Text = guestList[selectedIndex].FirstName;
-        Last_Name_TextBox.Text  = guestList[selectedIndex].LastName;
-        Phone_TextBox.Text      = guestList[selectedIndex].Phone;
-        Group_TextBox.Text      = guestList[selectedIndex].GroupId;
-        Side_TextBox.Text       = guestList[selectedIndex].Side;
-        Status_TextBox.Text     = guestList[selectedIndex].Status;
-        Arriving_TextBox.Text   = guestList[selectedIndex].Arriving;
+        if (setSelectedIndex())
+        {
+            First_Name_TextBox.Text = guestList[selectedIndex].FirstName;
+            Last_Name_TextBox.Text = guestList[selectedIndex].LastName;
+            Phone_TextBox.Text = guestList[selectedIndex].Phone;
+            Group_TextBox.Text = guestList[selectedIndex].GroupId;
+            Side_TextBox.Text = guestList[selectedIndex].Side;
+            Status_TextBox.Text = guestList[selectedIndex].Status;
+            Arriving_TextBox.Text = guestList[selectedIndex].Arriving;
 
-        Guest_Nav_CMD.Text = "Save";
+            Guest_Nav_CMD.Text = "Save";
+            No_Guest_LBL.Text = "";
+        }
+        else
+        {
+            No_Guest_LBL.Text = "You have to choose a guest!";
+        }
     }
     protected void Delete_Guest_CMD_Click(object sender, EventArgs e)
     {
@@ -131,9 +140,18 @@ public partial class GuestList : System.Web.UI.Page
         Status_TextBox.Text = "Add Event";
     }
 
-    private void setSelectedIndex()
+    private Boolean setSelectedIndex()
     {
-        selectedIndex = Convert.ToInt32(Guest_list_GridView.SelectedRow.Cells[1].Text) - 1;
+        
+        try
+        {
+            selectedIndex = Convert.ToInt32(Guest_list_GridView.SelectedRow.Cells[1].Text) - 1;
+            return true;
+        }
+        catch (NullReferenceException e)
+        {
+            return false;
+        }
     }
 
 

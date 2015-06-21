@@ -111,7 +111,7 @@
                 </div>
                 <div>
                     <br />
-                    <asp:Label ID="No_Events_LBL" runat="server" Text=""></asp:Label>
+                    <asp:Label ID="No_Guest_LBL" runat="server"></asp:Label>
                     <br />
                     <br />
                     
