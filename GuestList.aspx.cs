@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Text.RegularExpressions;
 
 public partial class GuestList : System.Web.UI.Page
 {
@@ -16,9 +17,6 @@ public partial class GuestList : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["UserId"] == null) Response.Redirect("MainPage.aspx");
-
-
         bl = new EventerBL();
         guestList = bl.getGuestList();
 
@@ -48,7 +46,7 @@ public partial class GuestList : System.Web.UI.Page
             }
             else
             {
-                No_Guest_LBL.Text = "No Guests To Show!";
+                No_Events_LBL.Text = "No Guests To Show!";
             }
             Guest_list_GridView.DataSource = dt;
             Guest_list_GridView.DataBind();
@@ -56,7 +54,7 @@ public partial class GuestList : System.Web.UI.Page
     }
     protected void Guest_list_GridView_SelectedIndexChanged(object sender, EventArgs e)
     {
-        No_Guest_LBL.Text = "";
+
     }
     protected void Choose_Guest_CMD_Click(object sender, EventArgs e)
     {
@@ -64,49 +62,45 @@ public partial class GuestList : System.Web.UI.Page
     }
     protected void Edit_Guest_CMD_Click(object sender, EventArgs e)
     {
-        if (setSelectedIndex())
-        {
-            First_Name_TextBox.Text = guestList[selectedIndex].FirstName;
-            Last_Name_TextBox.Text = guestList[selectedIndex].LastName;
-            Phone_TextBox.Text = guestList[selectedIndex].Phone;
-            Group_TextBox.Text = guestList[selectedIndex].GroupId;
-            Side_TextBox.Text = guestList[selectedIndex].Side;
-            Status_TextBox.Text = guestList[selectedIndex].Status;
-            Arriving_TextBox.Text = guestList[selectedIndex].Arriving;
+        setSelectedIndex();
+        Guest_Nav_Eror_Label.Text = "" + selectedIndex;
+        First_Name_TextBox.Text = guestList[selectedIndex].FirstName;
+        Last_Name_TextBox.Text = guestList[selectedIndex].LastName;
+        Phone_TextBox.Text = guestList[selectedIndex].Phone;
+        Group_TextBox.Text = guestList[selectedIndex].GroupId;
+        Side_TextBox.Text = guestList[selectedIndex].Side;
+        Status_TextBox.Text = guestList[selectedIndex].Status;
+        Arriving_TextBox.Text = guestList[selectedIndex].Arriving;
 
-            Guest_Nav_CMD.Text = "Save";
-            No_Guest_LBL.Text = "";
-        }
-        else
-        {
-            No_Guest_LBL.Text = "You have to choose a guest!";
-        }
+        Guest_Nav_CMD.Text = "Save";
     }
     protected void Delete_Guest_CMD_Click(object sender, EventArgs e)
     {
 
     }
     protected void Guest_Nav_CMD_Click(object sender, EventArgs e)
-    { 
+    {
         Guest guest = navToGuest();
-        
-        if (Guest_Nav_CMD.Text.Equals("Save"))
+        if (isValid())
         {
-            setSelectedIndex();
-            guest.UserId = guestList[selectedIndex].UserId;
-            guest.GuestId = guestList[selectedIndex].GuestId;
-
-            if (bl.updateGuest(guest))
+            if (Guest_Nav_CMD.Text.Equals("Save"))
             {
-                resetGuestNav();
+                setSelectedIndex();
+                guest.UserId = guestList[selectedIndex].UserId;
+                guest.GuestId = guestList[selectedIndex].GuestId;
 
-                Page.Response.Redirect(HttpContext.Current.Request.Url.ToString(), true);
-            }
-            else
-            {
-                Guest_Nav_Eror_Label.Text = "*Error while updating event";
-            }
+                if (bl.updateGuest(guest))
+                {
+                    resetGuestNav();
 
+                    Page.Response.Redirect(HttpContext.Current.Request.Url.ToString(), true);
+                }
+                else
+                {
+                    Guest_Nav_Eror_Label.Text = "*Error while updating event";
+                }
+
+            }
         }
         else if (Guest_Nav_CMD.Text.Equals("Add Event"))
         {
@@ -120,39 +114,47 @@ public partial class GuestList : System.Web.UI.Page
         Guest guest = new Guest();
 
         guest.FirstName = First_Name_TextBox.Text;
-        guest.LastName  = Last_Name_TextBox.Text;
-        guest.Phone     = Phone_TextBox.Text;
-        guest.GroupId   = Group_TextBox.Text;
-        guest.Side      = Side_TextBox.Text;
-        guest.Status    = Status_TextBox.Text;
-        guest.Arriving  = Arriving_TextBox.Text;
+        guest.LastName = Last_Name_TextBox.Text;
+        guest.Phone = Phone_TextBox.Text;
+        guest.GroupId = Group_TextBox.Text;
+        guest.Side = Side_TextBox.Text;
+        guest.Status = Status_TextBox.Text;
+        guest.Arriving = Arriving_TextBox.Text;
         return guest;
     }
 
     private void resetGuestNav()
     {
         First_Name_TextBox.Text = "";
-        Last_Name_TextBox.Text  = "";
-        Phone_TextBox.Text      = "";
-        Group_TextBox.Text      = "";
-        Side_TextBox.Text       = "";
-        Arriving_TextBox.Text   = "";
+        Last_Name_TextBox.Text = "";
+        Phone_TextBox.Text = "";
+        Group_TextBox.Text = "";
+        Side_TextBox.Text = "";
+        Arriving_TextBox.Text = "";
         Status_TextBox.Text = "Add Event";
     }
 
-    private Boolean setSelectedIndex()
+    private void setSelectedIndex()
     {
-        
-        try
-        {
-            selectedIndex = Convert.ToInt32(Guest_list_GridView.SelectedRow.Cells[1].Text) - 1;
-            return true;
-        }
-        catch (NullReferenceException e)
-        {
-            return false;
-        }
+        selectedIndex = Convert.ToInt32(Guest_list_GridView.SelectedRow.Cells[1].Text) - 1;
     }
 
+    private bool isValid()
+    {
+        return !isNumerical(First_Name_TextBox.Text) && !isNumerical(Last_Name_TextBox.Text) && isPhone(Phone_TextBox.Text);
+        //&& isNumerical(Group_TextBox.Text) && !isNumerical(Side_TextBox.Text) && isNumerical(Arriving_TextBox.Text);
+    }
 
+    private bool isNumerical(string input)
+    {
+        double num;
+        var success = double.TryParse(input, out num);
+        return success;
+    }
+
+    private bool isPhone(string phone)
+    {
+        bool success = Regex.IsMatch(phone, @"^(\(?(?:0(?:0|11)\)?[\s-]?\(?|\+)(353)\)?[\s-]?)?\(?0?(?:\)[\s-]?)?([1-9]\d{1,4}\)?[\d\s-]+)((?:x|ext\.?|\#)\d{3,4})?$");
+        return success;
+    }
 }
