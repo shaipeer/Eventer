@@ -15,9 +15,8 @@ public partial class GuestList : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        bl = new EventerBL();
-
         if (Session["UserName"] == null) Response.Redirect("MainPage.aspx");
+        bl = new EventerBL();
         
         guestList = bl.getGuestList(Session["UserName"].ToString());
 
@@ -57,17 +56,17 @@ public partial class GuestList : System.Web.UI.Page
     {
         resetGuestNav();
     }
-    protected void Choose_Guest_CMD_Click(object sender, EventArgs e)
-    {
 
-    }
+    //=========================================================================================================
+    //                                      Buttons
+    //=========================================================================================================
+
     protected void Edit_Guest_CMD_Click(object sender, EventArgs e)
     {
         setSelectedIndex();
 
         if (setSelectedIndex())
         {
-            Guest_Nav_Eror_Label.Text = "" + selectedIndex;
             First_Name_TextBox.Text = guestList[selectedIndex].FirstName;
             Last_Name_TextBox.Text = guestList[selectedIndex].LastName;
             Phone_TextBox.Text = guestList[selectedIndex].Phone;
@@ -91,37 +90,46 @@ public partial class GuestList : System.Web.UI.Page
     }
     protected void Guest_Nav_CMD_Click(object sender, EventArgs e)
     {
+        setSelectedIndex();
         Guest guest = navToGuest();
         
-
         if (isValid())
         {
             if (Guest_Nav_CMD.Text.Equals("Save"))
             {
-                setSelectedIndex();
-
                 guest.GuestId = guestList[selectedIndex].GuestId ;
 
                 if (bl.updateGuest(guest, Session["UserName"].ToString()))
                 {
                     resetGuestNav();
-
                     Page.Response.Redirect(HttpContext.Current.Request.Url.ToString(), true);
                 }
                 else
                 {
-                    Guest_Nav_Eror_Label.Text = "*Error while updating event";
+                    Guest_Nav_Eror_Label.Text = "*Error while updating guest";
                 }
 
             }
-            else if (Guest_Nav_CMD.Text.Equals("Add Event"))
+            else if (Guest_Nav_CMD.Text.Equals("Add Guest"))
             {
-                bl.addGuest(guest, Session["UserName"].ToString());
+                if (bl.addGuest(guest, Session["UserName"].ToString()))
+                {
+                    resetGuestNav();
+                    Page.Response.Redirect(HttpContext.Current.Request.Url.ToString(), true);
+                }
+                else
+                {
+                    Guest_Nav_Eror_Label.Text = "*Error while adding guest";
+                }
+
             }
         }
     }
-        
 
+
+    //=========================================================================================================
+    //                                      FUNCTIONS
+    //=========================================================================================================
 
     private Guest navToGuest()
     {
@@ -133,7 +141,7 @@ public partial class GuestList : System.Web.UI.Page
         guest.Status = Status_TextBox.Text;
         guest.Arriving = Arriving_TextBox.Text;
         guest.GroupName = Group_DropDownList.SelectedItem.Text;
-
+        
         return guest;
     }
 
@@ -157,13 +165,16 @@ public partial class GuestList : System.Web.UI.Page
         Last_Name_TextBox.Text = "";
         Phone_TextBox.Text = "";
         Arriving_TextBox.Text = "";
-        Status_TextBox.Text = "Add Event";
+        Status_TextBox.Text = "";
+        Guest_Nav_CMD.Text = "Add Guest";
     }
 
     private void refreshGroupDropDownList()
     {
         List<Group> groupList = bl.getGroupList(Session["UserName"].ToString());
         Group_DropDownList.Items.Clear();
+
+        Group_DropDownList.Items.Add("No Group");
 
         foreach (Group group in groupList)
             Group_DropDownList.Items.Add(group.Name);

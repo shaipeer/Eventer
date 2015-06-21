@@ -34,7 +34,8 @@
                 <tr>
                     <td>Group:</td>
                     <td>
-                        <asp:DropDownList ID="Group_DropDownList" runat="server" AutoPostBack="True"></asp:DropDownList>
+                        <asp:DropDownList ID="Group_DropDownList" runat="server" AutoPostBack="True" Width="172px">
+                        </asp:DropDownList>
                     </td>
                 </tr>
                 <tr>
@@ -106,8 +107,6 @@
                     <br />
                     <br />
                     
-                    <asp:Button ID="Choose_Guest_CMD"   runat="server" Text="Choose Guest" OnClick="Choose_Guest_CMD_Click" />
-
                     <asp:Button ID="Edit_Guest_CMD"     runat="server" Text="Edit Guest" OnClick="Edit_Guest_CMD_Click" />
 
                     <asp:Button ID="Delete_Guest_CMD"   runat="server" Text="Delete Guest" OnClick="Delete_Guest_CMD_Click" />

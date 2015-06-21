@@ -219,7 +219,7 @@ public class EventerDAL
 
     public Boolean addGuest(Guest newGuest, String userName)
     {
-        string commandString = "INSERT INTO Event (user_name, first_name, last_name, phone, group_name, status, arriving) " +
+        string commandString = "INSERT INTO Guest (user_name, first_name, last_name, phone, group_name, status, arriving) " +
                                  "VALUES ('" + userName             + "', '" +
                                                newGuest.FirstName   + "', '" + 
                                                newGuest.LastName    + "', '" + 
@@ -243,7 +243,7 @@ public class EventerDAL
 
     public Boolean deleteGuest(String userName, int guestId)
     {
-        String commandString = "DELETE FROM Guest WHERE user_name='" + userName + "' AND guest_id='" + guestId + "';";
+        String commandString = "DELETE FROM Guest WHERE user_name='" + userName + "' AND guest_id=" + guestId + ";";
 
         try
         {

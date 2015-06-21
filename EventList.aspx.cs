@@ -18,9 +18,6 @@ public partial class AddEvent : System.Web.UI.Page
         if (Session["UserName"] == null) Response.Redirect("MainPage.aspx");
         bl = new EventerBL();
         
-        selectedIndex = -1;
-        Type_DropDownList.Text = "";
-        
         eventList = bl.getEventList(Session["UserName"].ToString());
 
         if (!this.IsPostBack)
@@ -60,7 +57,13 @@ public partial class AddEvent : System.Web.UI.Page
     {
         resetFields();
         No_Events_LBL.Text = "";
+        
     }
+
+
+    //=========================================================================================================
+    //                                      BUTTONS
+    //=========================================================================================================
 
     protected void Choose_Event_CMD_Click(object sender, EventArgs e)
     {
@@ -72,8 +75,7 @@ public partial class AddEvent : System.Web.UI.Page
         if (setSelectedIndex())
         {
             Event_Name_TextBox.Text = eventList[selectedIndex].Name;
-            //Type_DropDownList.Items.FindByValue(eventList[selectedIndex].Type);
-            Type_DropDownList.SelectedIndex = Type_DropDownList.Items.IndexOf(Type_DropDownList.Items.FindByValue(eventList[selectedIndex].Type)); // If you want to find text by value field.
+            Type_DropDownList.SelectedIndex = Type_DropDownList.Items.IndexOf(Type_DropDownList.Items.FindByValue(eventList[selectedIndex].Type));
             Number_Of_Guests_TextBox.Text = eventList[selectedIndex].NumOfGuests;
             Date_TextBox.Text = eventList[selectedIndex].Date;
             Location_TextBox.Text = eventList[selectedIndex].Location;
@@ -95,7 +97,7 @@ public partial class AddEvent : System.Web.UI.Page
         
         if (isValid())
         {
-            if(Event_Nav_CMD.Text.Equals("Save"))
+            if (Event_Nav_CMD.Text.Equals("Save"))
             {
                 ev.EventId = eventList[selectedIndex].EventId;
 
@@ -126,6 +128,30 @@ public partial class AddEvent : System.Web.UI.Page
             }
         }
     }
+
+    protected void Delete_Guest_CMD_Click(object sender, EventArgs e)
+    {
+        if (setSelectedIndex())
+        {
+            if (bl.deleteEvent(Session["UserName"].ToString(), eventList[selectedIndex].EventId))
+            {
+                Page.Response.Redirect(HttpContext.Current.Request.Url.ToString(), true);
+            }
+            else
+            {
+                Event_Nav_Eror_Label.Text = "*Error while deleting event";
+            }
+        }
+        else
+        {
+            Event_Nav_Eror_Label.Text = "*You have to choose event";
+        }
+    }
+
+
+    //=========================================================================================================
+    //                                      FUNCTIONS
+    //=========================================================================================================
 
     private Event navToEvent()
     {
@@ -195,4 +221,5 @@ public partial class AddEvent : System.Web.UI.Page
 
 
 
+    
 }

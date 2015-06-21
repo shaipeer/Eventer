@@ -108,6 +108,8 @@
                     <asp:Button ID="Choose_Event_CMD" runat="server" Text="Choose Event" OnClick="Choose_Event_CMD_Click" />
 
                     <asp:Button ID="Edit_Event_CMD" runat="server" Text="Edit Event" OnClick="Edit_Event_CMD_Click" />
+
+                    <asp:Button ID="Delete_Guest_CMD"   runat="server" Text="Delete Event" OnClick="Delete_Guest_CMD_Click" />
                 </div>
             </div>
         </div>
