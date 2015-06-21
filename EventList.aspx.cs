@@ -151,7 +151,7 @@ public partial class AddEvent : System.Web.UI.Page
     private void resetFields()
     {
         Event_Name_TextBox.Text = "";
-        Type_DropDownList.Text = "";
+        Type_DropDownList.Text = "...";
         Number_Of_Guests_TextBox.Text = "";
         Date_TextBox.Text = "";
         Location_TextBox.Text = "";
@@ -160,8 +160,22 @@ public partial class AddEvent : System.Web.UI.Page
 
     private bool isValid()
     {
-        return !isNumerical(Event_Name_TextBox.Text) && isNumerical(Number_Of_Guests_TextBox.Text)
-                && !isNumerical(Type_DropDownList.Text) && isValidDate(Date_TextBox.Text) && !isNumerical(Location_TextBox.Text);
+        if (isNumerical(Event_Name_TextBox.Text))
+            Event_Nav_Eror_Label.Text = "Event's Name not valid!";
+        else if(!isNumerical(Number_Of_Guests_TextBox.Text))
+            Event_Nav_Eror_Label.Text = "Number of guests not valid!";
+        else if (Type_DropDownList.Text.Equals("..."))
+            Event_Nav_Eror_Label.Text = "Please pick event's type.";
+        else if (!isValidDate(Date_TextBox.Text))
+            Event_Nav_Eror_Label.Text = "Date not valid!";
+        else if (isNumerical(Location_TextBox.Text))
+            Event_Nav_Eror_Label.Text = "Location not valid!";
+         
+        return !isNumerical(Event_Name_TextBox.Text) &&
+                isNumerical(Number_Of_Guests_TextBox.Text) && 
+                !isNumerical(Type_DropDownList.Text) && 
+                isValidDate(Date_TextBox.Text) && 
+                !isNumerical(Location_TextBox.Text);
     }
 
     private bool isValidDate(String date)
