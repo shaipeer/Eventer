@@ -88,7 +88,6 @@ public partial class AddEvent : System.Web.UI.Page
     {
         setSelectedIndex();
         Event ev = navToEvent();
-        ev.UserId  = eventList[selectedIndex].UserId;
         ev.EventId = eventList[selectedIndex].EventId;
 
         if(Event_Nav_CMD.Text.Equals("Save"))

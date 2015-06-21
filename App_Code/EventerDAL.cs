@@ -110,7 +110,6 @@ public class EventerDAL
         {
             ev = new Event();
 
-            ev.UserId       = Convert.ToInt32(reader[0].ToString());
             ev.EventId      = Convert.ToInt32(reader[1].ToString());
             ev.Name         = reader[2].ToString();
             ev.Type         = reader[3].ToString();
@@ -202,7 +201,6 @@ public class EventerDAL
         {
             guest = new Guest();
 
-            guest.UserId    = Convert.ToInt32(reader[0].ToString());
             guest.GuestId   = Convert.ToInt32(reader[1].ToString());
             guest.FirstName = reader[2].ToString();
             guest.LastName  = reader[3].ToString();
@@ -224,8 +222,7 @@ public class EventerDAL
     public Boolean addGuest(Guest newGuest)
     {
         string commandString = "INSERT INTO Event (user_name, event_id, event_name, type, number_of_guests, date, location) " +
-                                 "VALUES ('" + newGuest.userName    + "', '" + 
-                                               newGuest.GuestId     + "', '" + 
+                                 "VALUES ('" + newGuest.GuestId     + "', '" + 
                                                newGuest.FirstName   + "', '" + 
                                                newGuest.LastName    + "', '" + 
                                                newGuest.Phone       + "', '" + 
@@ -247,9 +244,9 @@ public class EventerDAL
         return true;
     }
 
-    public Boolean deleteGuest(int userId, int guestId)
+    public Boolean deleteGuest(String userName, int guestId)
     {
-        String commandString = "DELETE FROM Guest WHERE user_id='" + userId + "' AND guest_id='" + guestId + "';";
+        String commandString = "DELETE FROM Guest WHERE user_name='" + userName + "' AND guest_id='" + guestId + "';";
 
         try
         {
@@ -273,8 +270,7 @@ public class EventerDAL
                                                 "side='"        + guestToUpdate.Side        + "', " +
                                                 "status='"      + guestToUpdate.Status      + "', " +
                                                 "arriving='"    + guestToUpdate.Arriving    + "' "  +
-                                                "WHERE user_id='" + guestToUpdate.UserId    + "' "  +
-                                                "AND guest_id='"  + guestToUpdate.GuestId   + "';"  ;
+                                                "WHERE guest_id='"  + guestToUpdate.GuestId   + "';"  ;
 
         try
         {
