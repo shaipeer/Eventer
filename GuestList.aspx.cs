@@ -54,7 +54,7 @@ public partial class GuestList : System.Web.UI.Page
     }
     protected void Guest_list_GridView_SelectedIndexChanged(object sender, EventArgs e)
     {
-
+        resetGuestNav();
     }
     protected void Choose_Guest_CMD_Click(object sender, EventArgs e)
     {

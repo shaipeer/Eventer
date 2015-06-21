@@ -18,11 +18,11 @@
                 <td></td>
             </tr>
             <tr>
-                <td>last name:</td>
-                <td>
+                <td style="height: 26px">last name:</td>
+                <td style="height: 26px">
                         <asp:TextBox ID="LastName_TextBox" runat="server"></asp:TextBox>
                     </td>
-                <td></td>
+                <td style="height: 26px"></td>
             </tr>
             <tr>
                 <td>mail:</td>

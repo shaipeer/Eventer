@@ -20,7 +20,7 @@ public partial class AddEvent : System.Web.UI.Page
         selectedIndex = -1;
         Type_DropDownList.Text = "";
 
-        if (Session["UserName"] == null) Response.Redirect("MainPage.aspx");
+        //if (Session["UserName"] == null) Response.Redirect("MainPage.aspx");
 
 
         if (!this.IsPostBack)
@@ -58,6 +58,7 @@ public partial class AddEvent : System.Web.UI.Page
     }
     protected void Event_list_GridView_SelectedIndexChanged(object sender, EventArgs e)
     {
+        resetFields();
         No_Events_LBL.Text = "";
     }
 
@@ -99,12 +100,9 @@ public partial class AddEvent : System.Web.UI.Page
             {
                 if (bl.updateEvent(ev))
                 {
-                    Event_Name_TextBox.Text       = "";
-                    Type_DropDownList.Text        = "";
-                    Number_Of_Guests_TextBox.Text = "";
-                    Date_TextBox.Text             = "";
-                    Location_TextBox.Text         = "";
-                    Event_Nav_CMD.Text            = "Add Event";
+                    resetFields();
+
+                    
 
 
                     Page.Response.Redirect(HttpContext.Current.Request.Url.ToString(), true);
@@ -150,6 +148,16 @@ public partial class AddEvent : System.Web.UI.Page
         
     }
 
+    private void resetFields()
+    {
+        Event_Name_TextBox.Text = "";
+        Type_DropDownList.Text = "";
+        Number_Of_Guests_TextBox.Text = "";
+        Date_TextBox.Text = "";
+        Location_TextBox.Text = "";
+        Event_Nav_CMD.Text = "Add Event";
+    }
+
     private bool isValid()
     {
         return !isNumerical(Event_Name_TextBox.Text) && isNumerical(Number_Of_Guests_TextBox.Text)
@@ -171,4 +179,8 @@ public partial class AddEvent : System.Web.UI.Page
         var success = double.TryParse(input, out num);
         return success;
     }
+
+
+
+
 }
