@@ -13,7 +13,10 @@
 	<form id="form1" runat="server">
 	<div id="page">
 		<div id="header">
-           
+            <div>
+                <asp:Label ID="Master_User_Name_Lable" runat="server" Text="user name " ForeColor="#ffffff"></asp:Label>
+                <asp:Label ID="Master_User_Name_Login_Status_Lable" runat="server" Text="Login" ForeColor="#3333ff"></asp:Label>
+            </div>
             <div>
 				<a href="MainPage.aspx" id="logo"><img src="images/logo.png" alt="LOGO"></a>
 				<ul id="navigation">

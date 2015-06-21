@@ -12,6 +12,7 @@ public partial class MainPage : System.Web.UI.Page
         Session["UserName"] = null;
         
         Session["UserName"] = "test";
+        Session["UserFullName"] = "test test";
     }
 
 }
