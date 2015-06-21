@@ -20,6 +20,9 @@ public partial class AddEvent : System.Web.UI.Page
         selectedIndex = -1;
         Type_DropDownList.Text = "";
 
+        if (Session["UserName"] == null) Response.Redirect("MainPage.aspx");
+
+
         if (!this.IsPostBack)
         {
             DataTable dt = new DataTable();

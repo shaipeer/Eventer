@@ -5,17 +5,11 @@
     <div id="registration_form">
         <br />
         <h2>Registration</h2>
+        <asp:Label ID="Registration_Label" runat="server"></asp:Label>
         <br />
         <div >
 
         <table id="registration_table" align="center" style="margin-top: 0px;">
-            <tr>
-                <td>id:</td>
-                <td>
-                        <asp:TextBox ID="Id_TextBox" runat="server"></asp:TextBox>
-                    </td>
-                <td></td>
-            </tr>
             <tr>
                 <td>first name:</td>
                 <td>
@@ -42,7 +36,9 @@
                 <td>
                         <asp:TextBox ID="User_Name_TextBox" runat="server"></asp:TextBox>
                     </td>
-                <td></td>
+                <td>
+                    <asp:Button ID="User_Name_Exists_CMD" runat="server" OnClick="User_Name_Exists_CMD_Click" Text="Check If Exists" />
+                </td>
             </tr>
             <tr>
                 <td style="height: 20px">Password:</td>
