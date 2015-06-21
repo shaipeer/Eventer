@@ -34,7 +34,7 @@
                 <tr>
                     <td>Group:</td>
                     <td>
-                        <asp:TextBox ID="Group_TextBox" runat="server"></asp:TextBox>
+                        <asp:DropDownList ID="Group_DropDownList" runat="server"></asp:DropDownList>
                     </td>
                 </tr>
                 <tr>

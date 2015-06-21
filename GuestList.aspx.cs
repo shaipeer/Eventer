@@ -43,7 +43,7 @@ public partial class GuestList : System.Web.UI.Page
                 int i = 1;
                 foreach (Guest guest in guestList)
                 {
-                    dt.Rows.Add(i++, guest.FirstName, guest.LastName, guest.Phone, guest.GroupId, guest.Side, guest.Status, guest.Arriving);
+                    dt.Rows.Add(i++, guest.FirstName, guest.LastName, guest.Phone, guest.GroupId, guest.Status, guest.Arriving);
                 }
             }
             else
@@ -69,8 +69,8 @@ public partial class GuestList : System.Web.UI.Page
         First_Name_TextBox.Text = guestList[selectedIndex].FirstName;
         Last_Name_TextBox.Text = guestList[selectedIndex].LastName;
         Phone_TextBox.Text = guestList[selectedIndex].Phone;
-        Group_TextBox.Text = guestList[selectedIndex].GroupId;
-        Side_TextBox.Text = guestList[selectedIndex].Side;
+        //Group_TextBox.Text = ;
+        Group_DropDownList.SelectedIndex = Group_DropDownList.Items.IndexOf(Group_DropDownList.Items.FindByValue(guestList[selectedIndex].GroupId)); // If you want to find text by value field.
         Status_TextBox.Text = guestList[selectedIndex].Status;
         Arriving_TextBox.Text = guestList[selectedIndex].Arriving;
 
@@ -106,7 +106,7 @@ public partial class GuestList : System.Web.UI.Page
         }
         else if (Guest_Nav_CMD.Text.Equals("Add Event"))
         {
-            bl.addGuest(guest);
+            bl.addGuest(guest, Session["UserName"].ToString());
         }
     }
 
@@ -118,8 +118,6 @@ public partial class GuestList : System.Web.UI.Page
         guest.FirstName = First_Name_TextBox.Text;
         guest.LastName = Last_Name_TextBox.Text;
         guest.Phone = Phone_TextBox.Text;
-        guest.GroupId = Group_TextBox.Text;
-        guest.Side = Side_TextBox.Text;
         guest.Status = Status_TextBox.Text;
         guest.Arriving = Arriving_TextBox.Text;
         return guest;
@@ -130,10 +128,14 @@ public partial class GuestList : System.Web.UI.Page
         First_Name_TextBox.Text = "";
         Last_Name_TextBox.Text = "";
         Phone_TextBox.Text = "";
-        Group_TextBox.Text = "";
         Side_TextBox.Text = "";
         Arriving_TextBox.Text = "";
         Status_TextBox.Text = "Add Event";
+    }
+
+    private void refreshGroupDropDownList()
+    {
+        bl.get
     }
 
     private void setSelectedIndex()

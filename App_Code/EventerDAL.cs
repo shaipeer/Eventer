@@ -291,6 +291,89 @@ public class EventerDAL
     //=====================================================================================================
 
 
+
+    public List<Group> getGroupList(String userName)
+    {
+        List<Group> groupList = new List<Group>();
+        Group group;
+
+        string commandString = "SELECT * FROM Group WHERE user_name='" + userName + "'";
+        SqlCommand command = new SqlCommand(commandString, sqlCon);
+        SqlDataReader reader = command.ExecuteReader();
+
+        while (reader.Read())
+        {
+            group = new Group();
+
+            group.Name = reader[1].ToString();
+            
+
+            groupList.Add(group);
+        }
+
+        reader.Close();
+
+
+        return groupList;
+    }
+
+    public Boolean addGroup(Group newGroup, String userName)
+    {
+        string commandString = "INSERT INTO Group (user_name, name) " +
+                               "VALUES ('" + userName + "', '" + newGroup.Name + "')";
+
+        try
+        {
+            SqlCommand cmd = new SqlCommand(commandString, sqlCon);
+            cmd.ExecuteNonQuery();
+        }
+        catch (System.Data.SqlClient.SqlException)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public Boolean deleteGroup(String userName, int groupId)
+    {
+
+        String commandString = "DELETE FROM Group WHERE user_name='" + userName + "' AND group_id='" + groupId + "';";
+
+        try
+        {
+            SqlCommand cmd = new SqlCommand(commandString, sqlCon);
+            cmd.ExecuteNonQuery();
+        }
+        catch (System.Data.SqlClient.SqlException)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public Boolean updateGroup(Group groupToUpdate)
+    {
+        String commandString = "UPDATE Group SET group_name='" + groupToUpdate.Name + "' " +
+                                                "WHERE event_id='" + groupToUpdate.Id + "';";
+
+        try
+        {
+            SqlCommand cmd = new SqlCommand(commandString, sqlCon);
+            cmd.ExecuteNonQuery();
+        }
+        catch (System.Data.SqlClient.SqlException)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+
+
+
     //=====================================================================================================
     //                                           GIFT 
     //=====================================================================================================
