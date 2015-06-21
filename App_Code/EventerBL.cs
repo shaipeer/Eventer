@@ -60,9 +60,9 @@ public class EventerBL
         return dal.getEventList();
     }
 
-    public Boolean addEvent(Event newEvent)
+    public Boolean addEvent(Event newEvent, String userName)
     {
-        return dal.addEvent(newEvent);
+        return dal.addEvent(newEvent, userName);
     }
 
     public Boolean deleteEvent(String userName, int eventId)
@@ -85,9 +85,9 @@ public class EventerBL
         return dal.getGuestList();
     }
 
-    public Boolean addGuest(Guest newGuest)
+    public Boolean addGuest(Guest newGuest, String userName)
     {
-        return dal.addGuest(newGuest);
+        return dal.addGuest(newGuest, userName);
     }
 
     public Boolean deleteGuest(String userName, int guestId)

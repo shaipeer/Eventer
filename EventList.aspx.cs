@@ -116,7 +116,7 @@ public partial class AddEvent : System.Web.UI.Page
         }
         else if (Event_Nav_CMD.Text.Equals("Add Event"))
         {
-            bl.addEvent(ev);
+            bl.addEvent(ev, Session["UserName"].ToString());
         }
     }
 

@@ -126,10 +126,10 @@ public class EventerDAL
         return eventList;
     }
 
-    public Boolean addEvent(Event newEvent)
+    public Boolean addEvent(Event newEvent, String userName)
     {
-        string commandString = "INSERT INTO Event (event_id, event_name, type, number_of_guests, date, location) " +
-                               "VALUES ('" + newEvent.EventId + "', '" + newEvent.Name + "', '" + newEvent.Type + "', '" + newEvent.NumOfGuests + "', '" + newEvent.Date + "', '" + newEvent.Location + "')";
+        string commandString = "INSERT INTO Event (user_name, event_id, event_name, type, number_of_guests, date, location) " +
+                               "VALUES ('" + userName + "', '" + newEvent.EventId + "', '" + newEvent.Name + "', '" + newEvent.Type + "', '" + newEvent.NumOfGuests + "', '" + newEvent.Date + "', '" + newEvent.Location + "')";
 
         try
         {
@@ -206,9 +206,8 @@ public class EventerDAL
             guest.LastName  = reader[3].ToString();
             guest.Phone     = reader[4].ToString();
             guest.GroupId   = reader[5].ToString();
-            guest.Side      = reader[6].ToString();
-            guest.Status    = reader[7].ToString();
-            guest.Arriving  = reader[8].ToString();
+            guest.Status    = reader[6].ToString();
+            guest.Arriving  = reader[7].ToString();
 
             guestList.Add(guest);
         }
@@ -219,15 +218,15 @@ public class EventerDAL
         return guestList;
     }
 
-    public Boolean addGuest(Guest newGuest)
+    public Boolean addGuest(Guest newGuest, String userName)
     {
-        string commandString = "INSERT INTO Event (user_name, event_id, event_name, type, number_of_guests, date, location) " +
-                                 "VALUES ('" + newGuest.GuestId     + "', '" + 
+        string commandString = "INSERT INTO Event (user_name, guest_id, first_name, last_name, phone, group_id, status, arriving) " +
+                                 "VALUES ('" + userName             + "', '" +
+                                               newGuest.GuestId     + "', '" + 
                                                newGuest.FirstName   + "', '" + 
                                                newGuest.LastName    + "', '" + 
                                                newGuest.Phone       + "', '" + 
                                                newGuest.GroupId     + "', '" +
-                                               newGuest.Side        + "', '" +
                                                newGuest.Status      + "', '" +
                                                newGuest.Arriving    + "')";
 
@@ -267,7 +266,6 @@ public class EventerDAL
                                                 "last_name='"   + guestToUpdate.LastName    + "', " +
                                                 "phone='"       + guestToUpdate.Phone       + "', " +
                                                 "group_id='"    + guestToUpdate.GroupId     + "', " +
-                                                "side='"        + guestToUpdate.Side        + "', " +
                                                 "status='"      + guestToUpdate.Status      + "', " +
                                                 "arriving='"    + guestToUpdate.Arriving    + "' "  +
                                                 "WHERE guest_id='"  + guestToUpdate.GuestId   + "';"  ;

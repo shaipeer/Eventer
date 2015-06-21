@@ -41,13 +41,7 @@ public class Guest
         get { return groupId; }
         set { groupId = value; }
     }
-    String side;
-
-    public String Side
-    {
-        get { return side; }
-        set { side = value; }
-    }
+    
     String status;
 
     public String Status
