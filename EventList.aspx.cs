@@ -18,7 +18,7 @@ public partial class AddEvent : System.Web.UI.Page
         bl = new EventerBL();
         eventList =  bl.getEventList();
         selectedIndex = -1;
-
+        Type_DropDownList.Text = "";
 
         if (!this.IsPostBack)
         {
@@ -96,17 +96,15 @@ public partial class AddEvent : System.Web.UI.Page
             {
                 if (bl.updateEvent(ev))
                 {
-                    Event_Name_TextBox.Text = "";
-                    Type_DropDownList.Text = "";
+                    Event_Name_TextBox.Text       = "";
+                    Type_DropDownList.Text        = "";
                     Number_Of_Guests_TextBox.Text = "";
-                    Date_TextBox.Text = "";
-                    Location_TextBox.Text = "";
-                    Event_Nav_CMD.Text = "Add Event";
+                    Date_TextBox.Text             = "";
+                    Location_TextBox.Text         = "";
+                    Event_Nav_CMD.Text            = "Add Event";
 
 
                     Page.Response.Redirect(HttpContext.Current.Request.Url.ToString(), true);
-
-
                 }
                 else
                 {
