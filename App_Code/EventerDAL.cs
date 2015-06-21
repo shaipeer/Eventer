@@ -335,10 +335,10 @@ public class EventerDAL
         return true;
     }
 
-    public Boolean deleteGroup(String userName, int groupId)
+    public Boolean deleteGroup(String userName, int groupName)
     {
 
-        String commandString = "DELETE FROM Group WHERE user_name='" + userName + "' AND group_id='" + groupId + "';";
+        String commandString = "DELETE FROM Group WHERE user_name='" + userName + "' AND group_name='" + groupName + "';";
 
         try
         {

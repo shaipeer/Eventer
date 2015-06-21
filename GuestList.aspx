@@ -9,7 +9,7 @@
             <table style="width: 100%">
            
                 <caption>
-                    <asp:Label ID="Guest_Nav_Eror_Label" runat="server" Text="" ForeColor="Red"></asp:Label>
+                    <asp:Label ID="Guest_Nav_Eror_Label" runat="server" Text="" ForeColor="Red" ></asp:Label>
                 </caption>
            
                 <tr>
@@ -34,7 +34,7 @@
                 <tr>
                     <td>Group:</td>
                     <td>
-                        <asp:DropDownList ID="Group_DropDownList" runat="server"></asp:DropDownList>
+                        <asp:DropDownList ID="Group_DropDownList" runat="server" AutoPostBack="True" OnSelectedIndexChanged="Group_DropDownList_SelectedIndexChanged" OnTextChanged="Group_DropDownList_TextChanged"></asp:DropDownList>
                     </td>
                 </tr>
                 <tr>

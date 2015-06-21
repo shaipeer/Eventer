@@ -9,8 +9,6 @@ using System.Text.RegularExpressions;
 
 public partial class GuestList : System.Web.UI.Page
 {
-
-    private int selectedRow;
     private EventerBL bl;
     private int selectedIndex;
     private List<Guest> guestList;
@@ -18,15 +16,15 @@ public partial class GuestList : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         bl = new EventerBL();
-        guestList = bl.getGuestList();
 
         if (Session["UserName"] == null) Response.Redirect("MainPage.aspx");
+        guestList = bl.getGuestList();
 
-
-        refreshGroupDropDownList();
+        
 
         if (!this.IsPostBack)
         {
+            refreshGroupDropDownList();
             DataTable dt = new DataTable();
             dt.Columns.AddRange(new DataColumn[7]
             { 
@@ -43,9 +41,9 @@ public partial class GuestList : System.Web.UI.Page
             if (guestList.Count > 0)
             {
                 int i = 1;
-                foreach (Guest guest in guestList)
+                foreach (Guest guestFromList in guestList)
                 {
-                    dt.Rows.Add(i++, guest.FirstName, guest.LastName, guest.Phone, guest.GroupName, guest.Status, guest.Arriving);
+                    dt.Rows.Add(i++, guestFromList.FirstName, guestFromList.LastName, guestFromList.Phone, guestFromList.GroupName, guestFromList.Status, guestFromList.Arriving);
                 }
             }
             else
@@ -95,13 +93,15 @@ public partial class GuestList : System.Web.UI.Page
     protected void Guest_Nav_CMD_Click(object sender, EventArgs e)
     {
         Guest guest = navToGuest();
+        
+
         if (isValid())
         {
             if (Guest_Nav_CMD.Text.Equals("Save"))
             {
                 setSelectedIndex();
-                guest.GroupName = guestList[selectedIndex].GroupName;
-                guest.GuestId   = guestList[selectedIndex].GuestId;
+
+                guest.GuestId = guestList[selectedIndex].GuestId ;
 
                 if (bl.updateGuest(guest))
                 {
@@ -133,7 +133,13 @@ public partial class GuestList : System.Web.UI.Page
         guest.Phone = Phone_TextBox.Text;
         guest.Status = Status_TextBox.Text;
         guest.Arriving = Arriving_TextBox.Text;
-        guest.GroupName = Group_DropDownList.SelectedValue;
+        /*
+        if (Session["GroupName"] != null)
+            guest.GroupName = Session["GroupName"].ToString();
+        else
+            guest.GroupName = guestList[selectedIndex].GroupName;*/
+        guest.GroupName = Group_DropDownList.SelectedItem.Text;
+
         return guest;
     }
 
@@ -149,6 +155,18 @@ public partial class GuestList : System.Web.UI.Page
             return false;
         }
 
+    }
+
+    protected void Group_DropDownList_SelectedIndexChanged(object sender, EventArgs e)
+    {
+       // Session["GroupName"] = Group_DropDownList.SelectedItem.Text;
+       // Guest_Nav_Eror_Label.Text = Session["GroupName"].ToString();//Group_DropDownList.SelectedItem.Text;
+    }
+
+    protected void Group_DropDownList_TextChanged(object sender, EventArgs e)
+    {
+        //Guest_Nav_Eror_Label.Text = Group_DropDownList.SelectedItem.Text;
+        //Session["GroupName"] = Group_DropDownList.SelectedItem.Text;
     }
 
     private void resetGuestNav()
@@ -193,4 +211,6 @@ public partial class GuestList : System.Web.UI.Page
         bool success = Regex.IsMatch(phone, @"^(\(?(?:0(?:0|11)\)?[\s-]?\(?|\+)(353)\)?[\s-]?)?\(?0?(?:\)[\s-]?)?([1-9]\d{1,4}\)?[\d\s-]+)((?:x|ext\.?|\#)\d{3,4})?$");
         return success;
     }
+
+    
 }
