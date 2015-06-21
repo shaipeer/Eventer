@@ -105,7 +105,25 @@ public class EventerBL
     //                                           GROUP 
     //=====================================================================================================
 
+    public List<Group> getGroupList(String userName)
+    {
+        return dal.getGroupList(userName);
+    }
 
+    public Boolean addGroup(Group newGroup, String userName)
+    {
+        return dal.addGroup(newGroup, userName);
+    }
+
+    public Boolean deleteEventGroup(String userName, int groupId)
+    {
+        return dal.deleteGroup(userName, groupId);
+    }
+
+    public Boolean updateGroup(Group groupToUpdate)
+    {
+        return dal.updateGroup(groupToUpdate);
+    }
 
 
     //=====================================================================================================

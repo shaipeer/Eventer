@@ -38,12 +38,6 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Side:</td>
-                    <td>
-                        <asp:TextBox ID="Side_TextBox" runat="server"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
                     <td>Status:</td>
                     <td>
                         <asp:TextBox ID="Status_TextBox" runat="server"></asp:TextBox>
@@ -91,9 +85,6 @@
                                     <ItemStyle Width="200px"></ItemStyle>
                                 </asp:BoundField>
                                 <asp:BoundField DataField="group"           HeaderText="Group"          ItemStyle-Width="150" >
-                                    <ItemStyle Width="150px"></ItemStyle>
-                                </asp:BoundField>
-                                <asp:BoundField DataField="side"            HeaderText="Side"           ItemStyle-Width="150" >
                                     <ItemStyle Width="150px"></ItemStyle>
                                 </asp:BoundField>
                                 <asp:BoundField DataField="status"          HeaderText="Status"         ItemStyle-Width="150" >

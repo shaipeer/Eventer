@@ -205,7 +205,7 @@ public class EventerDAL
             guest.FirstName = reader[2].ToString();
             guest.LastName  = reader[3].ToString();
             guest.Phone     = reader[4].ToString();
-            guest.GroupId   = reader[5].ToString();
+            guest.GroupName   = reader[5].ToString();
             guest.Status    = reader[6].ToString();
             guest.Arriving  = reader[7].ToString();
 
@@ -220,13 +220,13 @@ public class EventerDAL
 
     public Boolean addGuest(Guest newGuest, String userName)
     {
-        string commandString = "INSERT INTO Event (user_name, guest_id, first_name, last_name, phone, group_id, status, arriving) " +
+        string commandString = "INSERT INTO Event (user_name, guest_id, first_name, last_name, phone, group_name, status, arriving) " +
                                  "VALUES ('" + userName             + "', '" +
                                                newGuest.GuestId     + "', '" + 
                                                newGuest.FirstName   + "', '" + 
                                                newGuest.LastName    + "', '" + 
                                                newGuest.Phone       + "', '" + 
-                                               newGuest.GroupId     + "', '" +
+                                               newGuest.GroupName     + "', '" +
                                                newGuest.Status      + "', '" +
                                                newGuest.Arriving    + "')";
 
@@ -265,10 +265,10 @@ public class EventerDAL
         String commandString = "UPDATE Guest SET first_name='"  + guestToUpdate.FirstName   + "', " +
                                                 "last_name='"   + guestToUpdate.LastName    + "', " +
                                                 "phone='"       + guestToUpdate.Phone       + "', " +
-                                                "group_id='"    + guestToUpdate.GroupId     + "', " +
+                                                "group_name='"  + guestToUpdate.GroupName   + "', " +
                                                 "status='"      + guestToUpdate.Status      + "', " +
                                                 "arriving='"    + guestToUpdate.Arriving    + "' "  +
-                                                "WHERE guest_id='"  + guestToUpdate.GuestId   + "';"  ;
+                                                "WHERE guest_id='"  + guestToUpdate.GuestId + "';"  ;
 
         try
         {
@@ -297,7 +297,7 @@ public class EventerDAL
         List<Group> groupList = new List<Group>();
         Group group;
 
-        string commandString = "SELECT * FROM Group WHERE user_name='" + userName + "'";
+        string commandString = "SELECT * FROM [Group] WHERE user_name='" + userName + "'";
         SqlCommand command = new SqlCommand(commandString, sqlCon);
         SqlDataReader reader = command.ExecuteReader();
 
@@ -305,7 +305,7 @@ public class EventerDAL
         {
             group = new Group();
 
-            group.Name = reader[1].ToString();
+            group.Name = reader[2].ToString();
             
 
             groupList.Add(group);

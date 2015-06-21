@@ -34,12 +34,12 @@ public class Guest
         get { return phone; }
         set { phone = value; }
     }
-    String groupId;
+    String groupName;
 
-    public String GroupId
+    public String GroupName
     {
-        get { return groupId; }
-        set { groupId = value; }
+        get { return groupName; }
+        set { groupName = value; }
     }
     
     String status;

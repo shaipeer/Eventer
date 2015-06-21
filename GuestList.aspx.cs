@@ -22,17 +22,19 @@ public partial class GuestList : System.Web.UI.Page
 
         if (Session["UserName"] == null) Response.Redirect("MainPage.aspx");
 
+
+        refreshGroupDropDownList();
+
         if (!this.IsPostBack)
         {
             DataTable dt = new DataTable();
-            dt.Columns.AddRange(new DataColumn[8]
+            dt.Columns.AddRange(new DataColumn[7]
             { 
                 new DataColumn("id",            typeof(int)),
                 new DataColumn("first_name",    typeof(string)),
                 new DataColumn("last_name",     typeof(string)),
                 new DataColumn("phone",         typeof(string)),
                 new DataColumn("group",         typeof(string)),
-                new DataColumn("side",          typeof(string)),
                 new DataColumn("status",        typeof(string)),
                 new DataColumn("arriving",      typeof(string))
             });
@@ -43,7 +45,7 @@ public partial class GuestList : System.Web.UI.Page
                 int i = 1;
                 foreach (Guest guest in guestList)
                 {
-                    dt.Rows.Add(i++, guest.FirstName, guest.LastName, guest.Phone, guest.GroupId, guest.Status, guest.Arriving);
+                    dt.Rows.Add(i++, guest.FirstName, guest.LastName, guest.Phone, guest.GroupName, guest.Status, guest.Arriving);
                 }
             }
             else
@@ -70,7 +72,7 @@ public partial class GuestList : System.Web.UI.Page
         Last_Name_TextBox.Text = guestList[selectedIndex].LastName;
         Phone_TextBox.Text = guestList[selectedIndex].Phone;
         //Group_TextBox.Text = ;
-        Group_DropDownList.SelectedIndex = Group_DropDownList.Items.IndexOf(Group_DropDownList.Items.FindByValue(guestList[selectedIndex].GroupId)); // If you want to find text by value field.
+        Group_DropDownList.SelectedIndex = Group_DropDownList.Items.IndexOf(Group_DropDownList.Items.FindByValue(guestList[selectedIndex].GroupName));
         Status_TextBox.Text = guestList[selectedIndex].Status;
         Arriving_TextBox.Text = guestList[selectedIndex].Arriving;
 
@@ -88,8 +90,8 @@ public partial class GuestList : System.Web.UI.Page
             if (Guest_Nav_CMD.Text.Equals("Save"))
             {
                 setSelectedIndex();
-                guest.GroupId = guestList[selectedIndex].GroupId;
-                guest.GuestId = guestList[selectedIndex].GuestId;
+                guest.GroupName = guestList[selectedIndex].GroupName;
+                guest.GuestId   = guestList[selectedIndex].GuestId;
 
                 if (bl.updateGuest(guest))
                 {
@@ -103,12 +105,13 @@ public partial class GuestList : System.Web.UI.Page
                 }
 
             }
-        }
-        else if (Guest_Nav_CMD.Text.Equals("Add Event"))
-        {
-            bl.addGuest(guest, Session["UserName"].ToString());
+            else if (Guest_Nav_CMD.Text.Equals("Add Event"))
+            {
+                bl.addGuest(guest, Session["UserName"].ToString());
+            }
         }
     }
+        
 
 
     private Guest navToGuest()
@@ -120,6 +123,7 @@ public partial class GuestList : System.Web.UI.Page
         guest.Phone = Phone_TextBox.Text;
         guest.Status = Status_TextBox.Text;
         guest.Arriving = Arriving_TextBox.Text;
+        guest.GroupName = Group_DropDownList.SelectedValue;
         return guest;
     }
 
@@ -128,14 +132,18 @@ public partial class GuestList : System.Web.UI.Page
         First_Name_TextBox.Text = "";
         Last_Name_TextBox.Text = "";
         Phone_TextBox.Text = "";
-        Side_TextBox.Text = "";
         Arriving_TextBox.Text = "";
         Status_TextBox.Text = "Add Event";
     }
 
     private void refreshGroupDropDownList()
     {
-        bl.get
+        List<Group> groupList = bl.getGroupList(Session["UserName"].ToString());
+        Group_DropDownList.Items.Clear();
+
+        foreach (Group group in groupList)
+            Group_DropDownList.Items.Add(group.Name);
+
     }
 
     private void setSelectedIndex()
@@ -145,22 +153,13 @@ public partial class GuestList : System.Web.UI.Page
 
     private bool isValid()
     {
-        if(isNumerical(First_Name_TextBox.Text))
-            Guest_Nav_Eror_Label.Text = "First Name not valid!" ;
-        else if (isNumerical(Last_Name_TextBox.Text))
-            Guest_Nav_Eror_Label.Text = "Last Name not valid!";
-        else if (!isPhone(Phone_TextBox.Text))
-            Guest_Nav_Eror_Label.Text = "please insert a valid Phone number.";
-        else if (isNumerical(Status_TextBox.Text))
-            Guest_Nav_Eror_Label.Text = "Status not valid!";
-        else if (!isNumerical(Arriving_TextBox.Text))
-            Guest_Nav_Eror_Label.Text = "Arriving not valid!";
+        if (isNumerical(First_Name_TextBox.Text))       { Guest_Nav_Eror_Label.Text = "First Name not valid!"; return false; }
+        else if (isNumerical(Last_Name_TextBox.Text))   { Guest_Nav_Eror_Label.Text = "Last Name not valid!"; return false; }
+        else if (!isPhone(Phone_TextBox.Text))          { Guest_Nav_Eror_Label.Text = "please insert a valid Phone number."; return false; }
+        else if (isNumerical(Status_TextBox.Text))      { Guest_Nav_Eror_Label.Text = "Status not valid!"; return false; }
+        else if (!isNumerical(Arriving_TextBox.Text))   { Guest_Nav_Eror_Label.Text = "Arriving not valid!"; return false; }
         
-        return  !isNumerical(First_Name_TextBox.Text) && 
-                !isNumerical(Last_Name_TextBox.Text) && 
-                isPhone(Phone_TextBox.Text) && 
-                !isNumerical(Status_TextBox.Text) &&
-                isNumerical(Arriving_TextBox.Text);
+        return true;
     }
 
     private bool isNumerical(string input)
