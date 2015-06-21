@@ -67,16 +67,26 @@ public partial class GuestList : System.Web.UI.Page
     protected void Edit_Guest_CMD_Click(object sender, EventArgs e)
     {
         setSelectedIndex();
-        Guest_Nav_Eror_Label.Text = "" + selectedIndex;
-        First_Name_TextBox.Text = guestList[selectedIndex].FirstName;
-        Last_Name_TextBox.Text = guestList[selectedIndex].LastName;
-        Phone_TextBox.Text = guestList[selectedIndex].Phone;
-        //Group_TextBox.Text = ;
-        Group_DropDownList.SelectedIndex = Group_DropDownList.Items.IndexOf(Group_DropDownList.Items.FindByValue(guestList[selectedIndex].GroupName));
-        Status_TextBox.Text = guestList[selectedIndex].Status;
-        Arriving_TextBox.Text = guestList[selectedIndex].Arriving;
 
-        Guest_Nav_CMD.Text = "Save";
+        if (setSelectedIndex())
+        {
+            Guest_Nav_Eror_Label.Text = "" + selectedIndex;
+            First_Name_TextBox.Text = guestList[selectedIndex].FirstName;
+            Last_Name_TextBox.Text = guestList[selectedIndex].LastName;
+            Phone_TextBox.Text = guestList[selectedIndex].Phone;
+            Group_DropDownList.SelectedIndex = Group_DropDownList.Items.IndexOf(Group_DropDownList.Items.FindByValue(guestList[selectedIndex].GroupName));
+            Status_TextBox.Text = guestList[selectedIndex].Status;
+            Arriving_TextBox.Text = guestList[selectedIndex].Arriving;
+
+            Guest_Nav_CMD.Text = "Save";
+            No_Guest_LBL.Text = "";
+        }
+        else
+        {
+            No_Guest_LBL.Text = "You have to choose event!";
+        }
+
+
     }
     protected void Delete_Guest_CMD_Click(object sender, EventArgs e)
     {
@@ -127,6 +137,20 @@ public partial class GuestList : System.Web.UI.Page
         return guest;
     }
 
+    private Boolean setSelectedIndex()
+    {
+        try
+        {
+            selectedIndex = Convert.ToInt32(Guest_list_GridView.SelectedRow.Cells[1].Text) - 1;
+            return true;
+        }
+        catch (NullReferenceException e)
+        {
+            return false;
+        }
+
+    }
+
     private void resetGuestNav()
     {
         First_Name_TextBox.Text = "";
@@ -144,11 +168,6 @@ public partial class GuestList : System.Web.UI.Page
         foreach (Group group in groupList)
             Group_DropDownList.Items.Add(group.Name);
 
-    }
-
-    private void setSelectedIndex()
-    {
-        selectedIndex = Convert.ToInt32(Guest_list_GridView.SelectedRow.Cells[1].Text) - 1;
     }
 
     private bool isValid()
