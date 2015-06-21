@@ -160,22 +160,13 @@ public partial class AddEvent : System.Web.UI.Page
 
     private bool isValid()
     {
-        if (isNumerical(Event_Name_TextBox.Text))
-            Event_Nav_Eror_Label.Text = "Event's Name not valid!";
-        else if(!isNumerical(Number_Of_Guests_TextBox.Text))
-            Event_Nav_Eror_Label.Text = "Number of guests not valid!";
-        else if (Type_DropDownList.Text.Equals("..."))
-            Event_Nav_Eror_Label.Text = "Please pick event's type.";
-        else if (!isValidDate(Date_TextBox.Text))
-            Event_Nav_Eror_Label.Text = "Date not valid!";
-        else if (isNumerical(Location_TextBox.Text))
-            Event_Nav_Eror_Label.Text = "Location not valid!";
-         
-        return !isNumerical(Event_Name_TextBox.Text) &&
-                isNumerical(Number_Of_Guests_TextBox.Text) && 
-                !isNumerical(Type_DropDownList.Text) && 
-                isValidDate(Date_TextBox.Text) && 
-                !isNumerical(Location_TextBox.Text);
+        if (isNumerical(Event_Name_TextBox.Text))               { Event_Nav_Eror_Label.Text = "Event's Name not valid!";     return false; }
+        else if (!isNumerical(Number_Of_Guests_TextBox.Text))   { Event_Nav_Eror_Label.Text = "Number of guests not valid!"; return false; }
+        else if (Type_DropDownList.Text.Equals("..."))          { Event_Nav_Eror_Label.Text = "Please pick event's type.";   return false; }
+        else if (!isValidDate(Date_TextBox.Text))               { Event_Nav_Eror_Label.Text = "Date not valid!";             return false; }
+        else if (isNumerical(Location_TextBox.Text))            { Event_Nav_Eror_Label.Text = "Location not valid!";         return false; }
+
+        return true;
     }
 
     private bool isValidDate(String date)
