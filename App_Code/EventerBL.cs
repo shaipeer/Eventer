@@ -42,12 +42,8 @@ public class EventerBL
 
     public Boolean isUserExists(String userName)
     {
-        User userToValidate = getUser(userName);
-
-        if (userToValidate != null)
-            return true;
-
-        return false;
+        if (getUser(userName) != null)  return true;
+        else                            return false;
     }
 
 
@@ -70,9 +66,9 @@ public class EventerBL
         return dal.deleteEvent(userName, eventId);
     }
 
-    public Boolean updateEvent(Event eventToUpdate)
+    public Boolean updateEvent(Event eventToUpdate, String userName)
     {
-        return dal.updateEvent(eventToUpdate);
+        return dal.updateEvent(eventToUpdate, userName);
     }
 
 
@@ -80,9 +76,9 @@ public class EventerBL
     //                                           GUEST 
     //=====================================================================================================
 
-    public List<Guest> getGuestList()
+    public List<Guest> getGuestList(String userName)
     {
-        return dal.getGuestList();
+        return dal.getGuestList(userName);
     }
 
     public Boolean addGuest(Guest newGuest, String userName)
@@ -95,9 +91,9 @@ public class EventerBL
         return dal.deleteGuest(userName, guestId);
     }
 
-    public Boolean updateGuest(Guest guestToUpdate)
+    public Boolean updateGuest(Guest guestToUpdate, String userName)
     {
-        return dal.updateGuest(guestToUpdate);
+        return dal.updateGuest(guestToUpdate, userName);
     }
 
 

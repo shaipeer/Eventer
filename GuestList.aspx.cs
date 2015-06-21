@@ -18,9 +18,8 @@ public partial class GuestList : System.Web.UI.Page
         bl = new EventerBL();
 
         if (Session["UserName"] == null) Response.Redirect("MainPage.aspx");
-        guestList = bl.getGuestList();
-
         
+        guestList = bl.getGuestList(Session["UserName"].ToString());
 
         if (!this.IsPostBack)
         {
@@ -103,7 +102,7 @@ public partial class GuestList : System.Web.UI.Page
 
                 guest.GuestId = guestList[selectedIndex].GuestId ;
 
-                if (bl.updateGuest(guest))
+                if (bl.updateGuest(guest, Session["UserName"].ToString()))
                 {
                     resetGuestNav();
 
@@ -133,11 +132,6 @@ public partial class GuestList : System.Web.UI.Page
         guest.Phone = Phone_TextBox.Text;
         guest.Status = Status_TextBox.Text;
         guest.Arriving = Arriving_TextBox.Text;
-        /*
-        if (Session["GroupName"] != null)
-            guest.GroupName = Session["GroupName"].ToString();
-        else
-            guest.GroupName = guestList[selectedIndex].GroupName;*/
         guest.GroupName = Group_DropDownList.SelectedItem.Text;
 
         return guest;
@@ -156,19 +150,7 @@ public partial class GuestList : System.Web.UI.Page
         }
 
     }
-
-    protected void Group_DropDownList_SelectedIndexChanged(object sender, EventArgs e)
-    {
-       // Session["GroupName"] = Group_DropDownList.SelectedItem.Text;
-       // Guest_Nav_Eror_Label.Text = Session["GroupName"].ToString();//Group_DropDownList.SelectedItem.Text;
-    }
-
-    protected void Group_DropDownList_TextChanged(object sender, EventArgs e)
-    {
-        //Guest_Nav_Eror_Label.Text = Group_DropDownList.SelectedItem.Text;
-        //Session["GroupName"] = Group_DropDownList.SelectedItem.Text;
-    }
-
+    
     private void resetGuestNav()
     {
         First_Name_TextBox.Text = "";

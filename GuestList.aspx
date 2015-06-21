@@ -34,7 +34,7 @@
                 <tr>
                     <td>Group:</td>
                     <td>
-                        <asp:DropDownList ID="Group_DropDownList" runat="server" AutoPostBack="True" OnSelectedIndexChanged="Group_DropDownList_SelectedIndexChanged" OnTextChanged="Group_DropDownList_TextChanged"></asp:DropDownList>
+                        <asp:DropDownList ID="Group_DropDownList" runat="server" AutoPostBack="True"></asp:DropDownList>
                     </td>
                 </tr>
                 <tr>

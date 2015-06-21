@@ -40,7 +40,7 @@ public class EventerDAL
     {
         User user = new User();
 
-        string commandString = "SELECT * FROM User WHERE user_name=" + userName;
+        string commandString = "SELECT * FROM [User] WHERE user_name='" + userName + "'";
         SqlCommand command = new SqlCommand(commandString, sqlCon);
 
         try
@@ -48,9 +48,7 @@ public class EventerDAL
 
             SqlDataReader reader = command.ExecuteReader();
 
-            reader.Read();
-
-            if (reader != null)
+            if (reader.Read())
             {
                 user.FirstName  = reader[0].ToString();
                 user.LastName   = reader[1].ToString();
@@ -75,7 +73,7 @@ public class EventerDAL
 
     public Boolean addUser(User newUser)
     {
-        string commandString = "INSERT INTO User (first_name, last_name, mail, user_name, password) " +
+        string commandString = "INSERT INTO [User] (first_name, last_name, mail, user_name, password) " +
                                "VALUES ('" + newUser.FirstName + "', '" + newUser.LastName + "', '" + newUser.Mail + "', '" + newUser.UserName + "', '" + newUser.Password + "')";
 
         try
@@ -128,8 +126,8 @@ public class EventerDAL
 
     public Boolean addEvent(Event newEvent, String userName)
     {
-        string commandString = "INSERT INTO Event (user_name, event_id, event_name, type, number_of_guests, date, location) " +
-                               "VALUES ('" + userName + "', '" + newEvent.EventId + "', '" + newEvent.Name + "', '" + newEvent.Type + "', '" + newEvent.NumOfGuests + "', '" + newEvent.Date + "', '" + newEvent.Location + "')";
+        string commandString = "INSERT INTO Event (user_name, event_name, type, number_of_guests, date, location) " +
+                               "VALUES ('" + userName + "', '" + newEvent.Name + "', '" + newEvent.Type + "', '" + newEvent.NumOfGuests + "', '" + newEvent.Date + "', '" + newEvent.Location + "')";
 
         try
         {
@@ -162,14 +160,15 @@ public class EventerDAL
         return true;
     }
 
-    public Boolean updateEvent(Event eventToUpdate)
+    public Boolean updateEvent(Event eventToUpdate, String userName)
     {
         String commandString = "UPDATE Event SET event_name='"       + eventToUpdate.Name        + "', " +
                                                 "type='"             + eventToUpdate.Type        + "', " +
                                                 "number_of_guests='" + eventToUpdate.NumOfGuests + "', " +
                                                 "date='"             + eventToUpdate.Date        + "', " +
-                                                "location='"         + eventToUpdate.Location    + "' " +
-                                                "WHERE event_id='"   + eventToUpdate.EventId     + "';";
+                                                "location='"         + eventToUpdate.Location    + "' "  +
+                                                "WHERE user_name='"  + userName                  + "' "  +
+                                                "AND event_id='"     + eventToUpdate.EventId     + "';"  ;
 
         try
         {
@@ -188,12 +187,12 @@ public class EventerDAL
     //=====================================================================================================
     //                                         GUEST
     //=====================================================================================================
-    public List<Guest> getGuestList()
+    public List<Guest> getGuestList(String userName)
     {
         List<Guest> guestList = new List<Guest>();
         Guest guest;
 
-        string commandString = "SELECT * FROM Guest";
+        string commandString = "SELECT * FROM Guest WHERE user_name='" + userName + "'";
         SqlCommand command = new SqlCommand(commandString, sqlCon);
         SqlDataReader reader = command.ExecuteReader();
 
@@ -220,13 +219,12 @@ public class EventerDAL
 
     public Boolean addGuest(Guest newGuest, String userName)
     {
-        string commandString = "INSERT INTO Event (user_name, guest_id, first_name, last_name, phone, group_name, status, arriving) " +
+        string commandString = "INSERT INTO Event (user_name, first_name, last_name, phone, group_name, status, arriving) " +
                                  "VALUES ('" + userName             + "', '" +
-                                               newGuest.GuestId     + "', '" + 
                                                newGuest.FirstName   + "', '" + 
                                                newGuest.LastName    + "', '" + 
                                                newGuest.Phone       + "', '" + 
-                                               newGuest.GroupName     + "', '" +
+                                               newGuest.GroupName   + "', '" +
                                                newGuest.Status      + "', '" +
                                                newGuest.Arriving    + "')";
 
@@ -260,7 +258,7 @@ public class EventerDAL
         return true;
     }
 
-    public Boolean updateGuest(Guest guestToUpdate)
+    public Boolean updateGuest(Guest guestToUpdate, String userName)
     {
         String commandString = "UPDATE Guest SET first_name='"  + guestToUpdate.FirstName   + "', " +
                                                 "last_name='"   + guestToUpdate.LastName    + "', " +
@@ -268,7 +266,8 @@ public class EventerDAL
                                                 "group_name='"  + guestToUpdate.GroupName   + "', " +
                                                 "status='"      + guestToUpdate.Status      + "', " +
                                                 "arriving='"    + guestToUpdate.Arriving    + "' "  +
-                                                "WHERE guest_id='"  + guestToUpdate.GuestId + "';"  ;
+                                                "WHERE user_name='" + userName              + "' "  +
+                                                "AND guest_id='"  + guestToUpdate.GuestId   + "';"  ;
 
         try
         {

@@ -92,18 +92,16 @@ public partial class AddEvent : System.Web.UI.Page
     {
         setSelectedIndex();
         Event ev = navToEvent();
-        ev.EventId = eventList[selectedIndex].EventId;
+        
         if (isValid())
         {
-         if(Event_Nav_CMD.Text.Equals("Save"))
-         {
-                if (bl.updateEvent(ev))
+            if(Event_Nav_CMD.Text.Equals("Save"))
+            {
+                ev.EventId = eventList[selectedIndex].EventId;
+
+                if (bl.updateEvent(ev, Session["UserName"].ToString()))
                 {
                     resetFields();
-
-                    
-
-
                     Page.Response.Redirect(HttpContext.Current.Request.Url.ToString(), true);
                 }
                 else
@@ -112,11 +110,20 @@ public partial class AddEvent : System.Web.UI.Page
                 }
             
             
-             }
-             else if (Event_Nav_CMD.Text.Equals("Add Event"))
-             {
-                 bl.addEvent(ev, Session["UserName"].ToString());
-             }
+            }
+            else if (Event_Nav_CMD.Text.Equals("Add Event"))
+            {
+                if(bl.addEvent(ev, Session["UserName"].ToString()))
+                {
+                    resetFields();
+                    Page.Response.Redirect(HttpContext.Current.Request.Url.ToString(), true);
+                }
+                else
+                {
+                    Event_Nav_Eror_Label.Text = "*Error while adding event";
+                }
+
+            }
         }
     }
 
