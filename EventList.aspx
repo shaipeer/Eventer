@@ -23,6 +23,7 @@
                     <td>Type:</td>
                     <td>
                         <asp:DropDownList ID="Type_DropDownList" runat="server" Width="172px">
+                            <asp:ListItem>...</asp:ListItem>
                             <asp:ListItem>Wedding</asp:ListItem>
                             <asp:ListItem>Silver wedding</asp:ListItem>
                             <asp:ListItem>Golden wedding</asp:ListItem>

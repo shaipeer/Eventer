@@ -151,7 +151,7 @@ public partial class AddEvent : System.Web.UI.Page
     private void resetFields()
     {
         Event_Name_TextBox.Text = "";
-        Type_DropDownList.Text = "...";
+        Type_DropDownList.Text = "";
         Number_Of_Guests_TextBox.Text = "";
         Date_TextBox.Text = "";
         Location_TextBox.Text = "";
