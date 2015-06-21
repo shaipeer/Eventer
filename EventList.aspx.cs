@@ -15,13 +15,13 @@ public partial class AddEvent : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["UserName"] == null) Response.Redirect("MainPage.aspx");
         bl = new EventerBL();
-        eventList =  bl.getEventList();
+        
         selectedIndex = -1;
         Type_DropDownList.Text = "";
-
-        //if (Session["UserName"] == null) Response.Redirect("MainPage.aspx");
-
+        
+        eventList = bl.getEventList(Session["UserName"].ToString());
 
         if (!this.IsPostBack)
         {

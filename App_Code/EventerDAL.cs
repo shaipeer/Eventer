@@ -97,12 +97,12 @@ public class EventerDAL
     //                                           EVENT
     //=====================================================================================================
 
-    public List<Event> getEventList()
+    public List<Event> getEventList(String userName)
     {
         List<Event> eventList = new List<Event>();
         Event ev;
 
-        string commandString = "SELECT * FROM Event";
+        string commandString = "SELECT * FROM Event WHERE user_name='" + userName+"'";
         SqlCommand command = new SqlCommand(commandString, sqlCon);
         SqlDataReader reader = command.ExecuteReader();
 

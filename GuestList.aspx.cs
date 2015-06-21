@@ -20,6 +20,8 @@ public partial class GuestList : System.Web.UI.Page
         bl = new EventerBL();
         guestList = bl.getGuestList();
 
+        if (Session["UserName"] == null) Response.Redirect("MainPage.aspx");
+
         if (!this.IsPostBack)
         {
             DataTable dt = new DataTable();

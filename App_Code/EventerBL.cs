@@ -55,9 +55,9 @@ public class EventerBL
     //                                           EVENT 
     //=====================================================================================================
 
-    public List<Event> getEventList()
+    public List<Event> getEventList(String userName)
     {
-        return dal.getEventList();
+        return dal.getEventList(userName);
     }
 
     public Boolean addEvent(Event newEvent, String userName)
