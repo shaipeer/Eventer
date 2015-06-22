@@ -63,7 +63,9 @@ public class EventerBL
 
     public Boolean deleteEvent(String userName, int eventId)
     {
-        return dal.deleteEvent(userName, eventId);
+        if (dal.deleteEvent(userName, eventId))
+            return dal.deleteEventGuestEvent(userName, eventId);
+        return false;
     }
 
     public Boolean updateEvent(Event eventToUpdate, String userName)
@@ -87,9 +89,14 @@ public class EventerBL
         return dal.addEventGuest(userName, eventId, guestId);
     }
 
-    public Boolean deleteEventGuest(String userName, int eventId, int guestId)
+    public Boolean removeGuestFromEvent(String userName, int eventId, int guestId)
     {
-        return dal.deleteEventGuest(userName, eventId, guestId);
+        return dal.removeGuestFromEvent(userName, eventId, guestId);
+    }
+
+    public Boolean deleteEventGuest(String userName, int GuestId)
+    {
+        return dal.deleteEventGuest(userName, GuestId);
     }
 
     public Boolean deleteEventGuestEvent(String userName, int eventId)
@@ -109,14 +116,23 @@ public class EventerBL
         return dal.getGuestList(userName);
     }
 
-    public Boolean addGuest(Guest newGuest, String userName)
+    public Boolean addGuest(Guest newGuest, String userName, int eventId)
     {
-        return dal.addGuest(newGuest, userName);
+        if (dal.addGuest(newGuest, userName))
+            return addEventGuest(userName, eventId, getGuestId(newGuest));
+        return false;
+    }
+
+    public int getGuestId(Guest guest)
+    {
+        return getGuestId(guest);
     }
 
     public Boolean deleteGuest(String userName, int guestId)
     {
-        return dal.deleteGuest(userName, guestId);
+        if (dal.deleteGuest(userName, guestId))
+            return dal.deleteEventGuest(userName, guestId);
+        return false;
     }
 
     public Boolean updateGuest(Guest guestToUpdate, String userName)

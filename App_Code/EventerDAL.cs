@@ -327,6 +327,35 @@ public class EventerDAL
         return guestList;
     }
 
+    public int getGuestId(Guest guest, String userName)
+    {
+        int guestId = 0;
+
+        string commandString = "SELECT guest_id FROM Guest WHERE user_name='"  + userName        + "' AND " +
+                                                                "first_name='" + guest.FirstName + "' AND " +
+                                                                "last_name='"  + guest.LastName  + "' AND " +
+                                                                "phone='"      + guest.Phone     + "' AND " +
+                                                                "group_name='" + guest.GroupName + "' AND " +
+                                                                "status='"     + guest.Status    + "' AND " +
+                                                                "arriving='"   + guest.Arriving  + "'";
+
+        SqlCommand command = new SqlCommand(commandString, sqlCon);
+        SqlDataReader reader = command.ExecuteReader();
+
+        if(reader.Read())
+        {
+            guestId = Convert.ToInt32(reader[0].ToString());    
+        }
+
+        reader.Close();
+
+        return guestId;
+
+
+
+
+    }
+
     public Boolean addGuest(Guest newGuest, String userName)
     {
         string commandString = "INSERT INTO Guest (user_name, first_name, last_name, phone, group_name, status, arriving) " +

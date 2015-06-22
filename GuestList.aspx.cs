@@ -128,7 +128,7 @@ public partial class GuestList : System.Web.UI.Page
             }
             else if (Guest_Nav_CMD.Text.Equals("Add Guest"))
             {
-                if (bl.addGuest(guest, Session["UserName"].ToString()))
+                if (bl.addGuest(guest, Session["UserName"].ToString(), Convert.ToInt32(Session["EventId"].ToString())))
                 {
                     resetGuestNav();
                     Page.Response.Redirect(HttpContext.Current.Request.Url.ToString(), true);
@@ -198,11 +198,11 @@ public partial class GuestList : System.Web.UI.Page
 
     private bool isValid()
     {
-        if (isNumerical(First_Name_TextBox.Text))       { Guest_Nav_Eror_Label.Text = "First Name not valid!"; return false; }
-        else if (isNumerical(Last_Name_TextBox.Text))   { Guest_Nav_Eror_Label.Text = "Last Name not valid!"; return false; }
-        else if (!isPhone(Phone_TextBox.Text))          { Guest_Nav_Eror_Label.Text = "please insert a valid Phone number."; return false; }
-        else if (isNumerical(Status_TextBox.Text))      { Guest_Nav_Eror_Label.Text = "Status not valid!"; return false; }
-        else if (!isNumerical(Arriving_TextBox.Text))   { Guest_Nav_Eror_Label.Text = "Arriving not valid!"; return false; }
+        if (isNumerical(First_Name_TextBox.Text))       { Guest_Nav_Eror_Label.Text = "First Name not valid!";              return false; }
+        else if (isNumerical(Last_Name_TextBox.Text))   { Guest_Nav_Eror_Label.Text = "Last Name not valid!";               return false; }
+        else if (!isPhone(Phone_TextBox.Text))          { Guest_Nav_Eror_Label.Text = "please insert a valid Phone number.";return false; }
+        else if (isNumerical(Status_TextBox.Text))      { Guest_Nav_Eror_Label.Text = "Status not valid!";                  return false; }
+        else if (!isNumerical(Arriving_TextBox.Text))   { Guest_Nav_Eror_Label.Text = "Arriving not valid!";                return false; }
         
         return true;
     }
