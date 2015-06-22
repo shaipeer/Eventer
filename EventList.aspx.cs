@@ -65,6 +65,15 @@ public partial class AddEvent : System.Web.UI.Page
 
     protected void Choose_Event_CMD_Click(object sender, EventArgs e)
     {
+        if (setSelectedIndex())
+        {
+            Session["EventId"] = eventList[selectedIndex].EventId;
+            No_Events_LBL.Text = "Event '" + eventList[selectedIndex].Name + "' choosen succesfuly!";
+        }
+        else
+        {
+            No_Events_LBL.Text = "You have to choose event!";
+        }
        
     }
     
