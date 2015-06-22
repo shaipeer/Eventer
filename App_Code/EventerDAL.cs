@@ -234,7 +234,7 @@ public class EventerDAL
         return true;
     }
 
-    public Boolean deleteEventGuest(String userName, int eventId, int guestId)
+    public Boolean removeGuestFromEvent(String userName, int eventId, int guestId)
     {
 
         String commandString = "DELETE FROM EventGuests WHERE user_name='" + userName 
@@ -253,6 +253,26 @@ public class EventerDAL
 
         return true;
     }
+
+    public Boolean deleteEventGuest(String userName, int guestId)
+    {
+
+        String commandString = "DELETE FROM EventGuests WHERE user_name='" + userName
+                                                   + "' AND guest_id='" + guestId + "';";
+
+        try
+        {
+            SqlCommand cmd = new SqlCommand(commandString, sqlCon);
+            cmd.ExecuteNonQuery();
+        }
+        catch (System.Data.SqlClient.SqlException)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
 
     public Boolean deleteEventGuestEvent(String userName, int eventId)
     {
