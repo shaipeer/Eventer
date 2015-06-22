@@ -15,10 +15,12 @@ public partial class GuestList : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["UserName"] == null) Response.Redirect("MainPage.aspx");
+        //LOGIN and EVENT SELECT check
+        if (Session["UserName"] == null)     Response.Redirect("MainPage.aspx");
+        else if (Session["EventId"] == null) Response.Redirect("EventList.aspx");
+
         bl = new EventerBL();
-        
-        guestList = bl.getGuestList(Session["UserName"].ToString());
+        guestList = bl.generateEventGuestList(Session["UserName"].ToString(), Convert.ToInt32(Session["EventId"].ToString()));
 
         if (!this.IsPostBack)
         {

@@ -156,7 +156,29 @@ public class EventerBL
     //=====================================================================================================
 
 
+    public List<Guest> generateEventGuestList(String userName, int eventId)
+    {
+        List<Guest> guestList = new List<Guest>();
+        List<int> eventGuestIdList = getEventGuestsIdList(userName, eventId);
 
+        if (guestList != null)
+        {
+            foreach (Guest guest in getGuestList(userName))
+            {
+                if (isGuestInIdList(eventGuestIdList, guest))
+                    guestList.Add(guest);
+            }
+        }
+        return guestList;
+    }
+
+    private Boolean isGuestInIdList(List<int> eventGuestIdList, Guest guest)
+    {
+        foreach(int guestId in eventGuestIdList)
+            if (guest.GuestId == guestId)
+                return true;
+        return false;
+    }
 
 
 
