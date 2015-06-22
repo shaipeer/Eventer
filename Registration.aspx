@@ -11,28 +11,28 @@
 
         <table id="registration_table" align="center" style="margin-top: 0px;">
             <tr>
-                <td>first name:</td>
+                <td style="width: 127px">first name:</td>
                 <td>
                         <asp:TextBox ID="First_Name_TextBox" runat="server"></asp:TextBox>
                     </td>
                 <td></td>
             </tr>
             <tr>
-                <td style="height: 26px">last name:</td>
+                <td style="height: 26px; width: 127px;">last name:</td>
                 <td style="height: 26px">
                         <asp:TextBox ID="LastName_TextBox" runat="server"></asp:TextBox>
                     </td>
                 <td style="height: 26px"></td>
             </tr>
             <tr>
-                <td>mail:</td>
+                <td style="width: 127px">mail:</td>
                 <td>
                         <asp:TextBox ID="Mail_TextBox" runat="server"></asp:TextBox>
                     </td>
                 <td></td>
             </tr>
             <tr>
-                <td>user name:</td>
+                <td style="width: 127px">user name:</td>
                 <td>
                         <asp:TextBox ID="User_Name_TextBox" runat="server"></asp:TextBox>
                     </td>
@@ -41,26 +41,26 @@
                 </td>
             </tr>
             <tr>
-                <td style="height: 20px">Password:</td>
+                <td style="height: 20px; width: 127px;">Password:</td>
                 <td style="height: 20px">
                         <asp:TextBox ID="Password_TextBox" TextMode="password" runat="server"></asp:TextBox>
                     </td>
                 <td style="height: 20px"></td>
             </tr>
             <tr>
-                <td>Re-Enter Password:</td>
+                <td style="width: 127px">Re-Enter Password:</td>
                 <td>
                         <asp:TextBox ID="Re_Enter_Password_TextBox" TextMode="password" runat="server"></asp:TextBox>
                     </td>
                 <td></td>
             </tr>
             <tr>
-                <td></td>
+                <td style="width: 127px"></td>
                 <td></td>
                 <td></td>
             </tr>
             <tr>
-                <td></td>
+                <td style="width: 127px"></td>
                 <td>
                         <asp:Button ID="Register_CMD" runat="server" Text="Register" OnClick="Register_CMD_Click" />
                     </td>

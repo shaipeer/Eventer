@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Text.RegularExpressions;
 
 public partial class Registration : System.Web.UI.Page
 {
@@ -45,20 +46,41 @@ public partial class Registration : System.Web.UI.Page
 
 
     private Boolean isValid()
-    {
-
-        /*  FIELDS TO VALIDATE
-        
-        First_Name_TextBox
-        LastName_TextBox
-        Mail_TextBox
-        User_Name_TextBox
-        Password_TextBox
-        Re_Enter_Password_TextBox
+    {   
+        if (isNumerical(First_Name_TextBox.Text))                                   { Registration_Label.Text = "First Name not valid!";        return false; }
+        else if (isNumerical(LastName_TextBox.Text))                                { Registration_Label.Text = "Last Name not valid!";         return false; }
+        else if (!isEmail(Mail_TextBox.Text))                                       { Registration_Label.Text = "please insert a valid email."; return false; }
+        else if (isPassword(Password_TextBox.Text, Re_Enter_Password_TextBox.Text)) { Registration_Label.Text = "Password not valid!";          return false; }
          
-         */
         return true;
     }
+
+    private bool isNumerical(string input)
+    {
+        double num;
+        var success = double.TryParse(input, out num);
+        return success;
+    }
+
+    private bool isEmail(string email)
+    {
+        bool success = Regex.IsMatch(email, @"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)
+                                              |(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
+        return success;
+    }
+
+    private bool isPassword(string password, string Re_Enter_Password)
+    {
+        bool success = Regex.IsMatch(password, @"^(?![0-9]{6})[0-9a-zA-Z]{8}$");
+        
+        bool reEnter = password.Equals(Re_Enter_Password);
+        
+        return success&reEnter;
+    }
+
+
+
+
 
 
     private User fieldsToUser()
@@ -74,4 +96,6 @@ public partial class Registration : System.Web.UI.Page
 
         return newUser;
     }
+
+
 }
