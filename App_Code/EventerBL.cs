@@ -155,14 +155,14 @@ public class EventerBL
         return dal.addGroup(newGroup, userName);
     }
 
-    public Boolean deleteEventGroup(String userName, int groupId)
+    public Boolean deleteGroup(String userName, int groupId)
     {
         return dal.deleteGroup(userName, groupId);
     }
 
-    public Boolean updateGroup(Group groupToUpdate)
+    public Boolean updateGroup(Group groupToUpdate, String userName)
     {
-        return dal.updateGroup(groupToUpdate);
+        return dal.updateGroup(groupToUpdate, userName);
     }
 
 

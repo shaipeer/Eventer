@@ -449,7 +449,7 @@ public class EventerDAL
 
     public Boolean addGroup(Group newGroup, String userName)
     {
-        string commandString = "INSERT INTO Group (user_name, name) " +
+        string commandString = "INSERT INTO [Group] (user_name, name) " +
                                "VALUES ('" + userName + "', '" + newGroup.Name + "')";
 
         try
@@ -468,7 +468,7 @@ public class EventerDAL
     public Boolean deleteGroup(String userName, int groupName)
     {
 
-        String commandString = "DELETE FROM Group WHERE user_name='" + userName + "' AND group_name='" + groupName + "';";
+        String commandString = "DELETE FROM [Group] WHERE user_name='" + userName + "' AND group_name='" + groupName + "';";
 
         try
         {
@@ -483,10 +483,11 @@ public class EventerDAL
         return true;
     }
 
-    public Boolean updateGroup(Group groupToUpdate)
+    public Boolean updateGroup(Group groupToUpdate, String userName)
     {
-        String commandString = "UPDATE Group SET group_name='" + groupToUpdate.Name + "' " +
-                                                "WHERE event_id='" + groupToUpdate.Id + "';";
+        String commandString = "UPDATE [Group] SET group_name='" + groupToUpdate.Name   + "' " +
+                                              "WHERE user_name=" + userName             + "' " +
+                                              "AND event_id='"   + groupToUpdate.Id     + "';";
 
         try
         {

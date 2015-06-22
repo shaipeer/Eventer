@@ -259,21 +259,14 @@ img {
         padding-left: 20px;
 }
 #groups_list #groups {
-    width:30%;
-    float:none;
-    padding:10px; 
+    width:60%;
+    float:left;
+    padding:10px;
 }
 #groups_list #groups h2 {
     text-align: center;
 }
-#groups_list #groups {
-    width:30%;
-    float:none;
-    padding:10px; 
-}
-#groups_list #guests h2 {
-    text-align: center;
-}
+
 
 /**=======  RSVPs  ======== **/
 #rsvps_list #nav {

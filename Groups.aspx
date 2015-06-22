@@ -10,13 +10,25 @@
             <table style="width: 100%">
            
                 <tr>
+                    <td colspan="2">
+
+                        <asp:Label ID="Group_Nav_Massage_Label" runat="server"></asp:Label>
+
+                    </td>
+                </tr>
+                <tr>
                     <td>Group Name:<br />
                     </td>
                     <td>
                         <asp:TextBox ID="Group_Name_TextBox" runat="server"></asp:TextBox>
                     </td>
                 </tr>
-                
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>
+                        <asp:Button ID="Group_Nav_CMD" runat="server" Text="Add Group" OnClick="Group_Nav_CMD_Click" />
+                    </td>
+                </tr>
 
             </table>
         </div>
@@ -27,49 +39,61 @@
             <br />
             <div>
                 <div id="grid_div">
-                    <asp:GridView ID="Groups_GridView" HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White"
-                        runat="server" AutoGenerateColumns="false" ShowHeaderWhenEmpty="True" BackImageUrl="~/images/main_image.jpg">
-                        <Columns>
-                            <asp:BoundField DataField="Id" HeaderText="Id" ItemStyle-Width="30" />
-                            <asp:BoundField DataField="Name" HeaderText="Name" ItemStyle-Width="150" />
-                            <asp:BoundField DataField="Country" HeaderText="Country" ItemStyle-Width="150" />
-                        </Columns>
-                    </asp:GridView>                
-                </div>
-                <div>
-                    <asp:Label ID="Test_LBL" runat="server" Text="Label"></asp:Label>
-                    <br />
-                    <asp:Button ID="Choose_Event_CMD" runat="server" Text="Choose Event" />
-                </div>
-            </div>
-        </div>
+                    <table style="width: 100%">
+           
+                        <tr>
+                            <td>
+                                <asp:GridView ID="Groups_List_GridView" HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" 
+                                        runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True" AutoGenerateSelectButton="True" OnSelectedIndexChanged="Groups_List_GridView_SelectedIndexChanged">
+                                    <Columns>
+                                        <asp:BoundField DataField="Id" HeaderText="Id" ItemStyle-Width="30" >
+                                            <ItemStyle Width="40px"></ItemStyle>
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="Name" HeaderText="Name" ItemStyle-Width="150" >
+                                            <ItemStyle Width="200px"></ItemStyle>
+                                        </asp:BoundField>
+                                    </Columns>
 
-        <div id="guests">
-            <br />
-            <br />
-            <br />
-            <br />
-            <div>
-                <div id="grid_div">
-                    <asp:GridView ID="Groups_Guests_GridView" HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White"
-                        runat="server" AutoGenerateColumns="false" ShowHeaderWhenEmpty="True">
-                        <Columns>
-                            <asp:BoundField DataField="Id" HeaderText="Id" ItemStyle-Width="30" />
-                            <asp:BoundField DataField="Name" HeaderText="Name" ItemStyle-Width="150" />
-                            <asp:BoundField DataField="Country" HeaderText="Country" ItemStyle-Width="150" />
-                        </Columns>
-                    </asp:GridView>                
+                                    <HeaderStyle BackColor="#3AC0F2" ForeColor="White"></HeaderStyle>
+                                    <SelectedRowStyle BackColor="#CCFFFF" />
+                                </asp:GridView>
+                            </td>
+                            <td>
+                                <asp:GridView ID="GridView1" HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" 
+                                        runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True" OnSelectedIndexChanged="Groups_List_GridView_SelectedIndexChanged">
+                                    <Columns>
+                                        <asp:BoundField DataField="Id" HeaderText="Id" ItemStyle-Width="30" >
+                                            <ItemStyle Width="30px"></ItemStyle>
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="First_Name" HeaderText="First Name" ItemStyle-Width="30" >
+                                            <ItemStyle Width="200px"></ItemStyle>
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="Last_Name" HeaderText="Last Name" ItemStyle-Width="150" >
+                                            <ItemStyle Width="200px"></ItemStyle>
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="Last_Name" HeaderText="Last Name" ItemStyle-Width="150" >
+                                            <ItemStyle Width="200px"></ItemStyle>
+                                        </asp:BoundField>
+                                    </Columns>
+
+                                    <HeaderStyle BackColor="#3AC0F2" ForeColor="White"></HeaderStyle>
+                                </asp:GridView>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                                    
                 </div>
                 <div>
-                    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+                    <asp:Label ID="Group_List_Massage_LBL" runat="server"></asp:Label>
                     <br />
-                    <asp:Button ID="Button1" runat="server" Text="Choose Event" />
+                    <asp:Button ID="Edit_Group_CMD" runat="server" Text="Edit Group" OnClick="Edit_Group_CMD_Click" />
+                    <asp:Button ID="Delete_Group_CMD" runat="server" Text="Delete Group" OnClick="Delete_Group_CMD_Click" />
                 </div>
             </div>
         </div>
     </div>
-
-
+        
 
 
     
