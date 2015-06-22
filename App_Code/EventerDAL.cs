@@ -74,7 +74,11 @@ public class EventerDAL
     public Boolean addUser(User newUser)
     {
         string commandString = "INSERT INTO [User] (first_name, last_name, mail, user_name, password) " +
-                               "VALUES ('" + newUser.FirstName + "', '" + newUser.LastName + "', '" + newUser.Mail + "', '" + newUser.UserName + "', '" + newUser.Password + "')";
+                               "VALUES ('" + newUser.FirstName  + "', '" 
+                                           + newUser.LastName   + "', '" 
+                                           + newUser.Mail       + "', '" 
+                                           + newUser.UserName   + "', '" 
+                                           + newUser.Password   + "')";
 
         try
         {
@@ -127,7 +131,12 @@ public class EventerDAL
     public Boolean addEvent(Event newEvent, String userName)
     {
         string commandString = "INSERT INTO Event (user_name, event_name, type, number_of_guests, date, location) " +
-                               "VALUES ('" + userName + "', '" + newEvent.Name + "', '" + newEvent.Type + "', '" + newEvent.NumOfGuests + "', '" + newEvent.Date + "', '" + newEvent.Location + "')";
+                               "VALUES ('" + userName               + "', '" 
+                                           + newEvent.Name          + "', '" 
+                                           + newEvent.Type          + "', '" 
+                                           + newEvent.NumOfGuests   + "', '" 
+                                           + newEvent.Date          + "', '" 
+                                           + newEvent.Location      + "')";
 
         try
         {
@@ -185,6 +194,87 @@ public class EventerDAL
 
 
     //=====================================================================================================
+    //                                      EVENT GUEST
+    //=====================================================================================================
+
+    public List<int> getEventGuestsIdList(String userName, int eventId)
+    {
+        List<int> guestIdList = new List<int>();
+
+        string commandString = "SELECT guest_id FROM EventGuests WHERE user_name='" + userName + "' AND event_id=" + eventId;
+        SqlCommand command = new SqlCommand(commandString, sqlCon);
+        SqlDataReader reader = command.ExecuteReader();
+
+        while (reader.Read())
+        {
+            guestIdList.Add(Convert.ToInt32(reader[0].ToString()));
+        }
+
+        reader.Close();
+
+
+        return guestIdList;
+    }
+
+    public Boolean addEventGuest(String userName, int eventId, int guestId)
+    {
+        string commandString = "INSERT INTO EventGuests (user_name, event_id, guest_id) " +
+                               "VALUES ('" + userName + "', '" + eventId + "', '" + guestId + "')";
+
+        try
+        {
+            SqlCommand cmd = new SqlCommand(commandString, sqlCon);
+            cmd.ExecuteNonQuery();
+        }
+        catch (System.Data.SqlClient.SqlException)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public Boolean deleteEventGuest(String userName, int eventId, int guestId)
+    {
+
+        String commandString = "DELETE FROM EventGuests WHERE user_name='" + userName 
+                                                   + "' AND event_id='"    + eventId 
+                                                   + "' AND guest_id='"    + guestId + "';";
+
+        try
+        {
+            SqlCommand cmd = new SqlCommand(commandString, sqlCon);
+            cmd.ExecuteNonQuery();
+        }
+        catch (System.Data.SqlClient.SqlException)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public Boolean deleteEventGuestEvent(String userName, int eventId)
+    {
+
+        String commandString = "DELETE FROM EventGuests WHERE user_name='" + userName + "' AND event_id='" + eventId + "';";
+
+        try
+        {
+            SqlCommand cmd = new SqlCommand(commandString, sqlCon);
+            cmd.ExecuteNonQuery();
+        }
+        catch (System.Data.SqlClient.SqlException)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    
+
+    //=====================================================================================================
     //                                         GUEST
     //=====================================================================================================
     public List<Guest> getGuestList(String userName)
@@ -226,7 +316,7 @@ public class EventerDAL
                                                newGuest.Phone       + "', '" + 
                                                newGuest.GroupName   + "', '" +
                                                newGuest.Status      + "', '" +
-                                               newGuest.Arriving    + "')";
+                                               newGuest.Arriving    + "')"   ;
 
         try
         {
@@ -370,12 +460,6 @@ public class EventerDAL
         return true;
     }
 
-
-
-
-    //=====================================================================================================
-    //                                           GIFT 
-    //=====================================================================================================
 
 
 

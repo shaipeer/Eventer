@@ -72,6 +72,34 @@ public class EventerBL
     }
 
 
+
+    //=====================================================================================================
+    //                                      EVENT GUEST
+    //=====================================================================================================
+
+    public List<int> getEventGuestsIdList(String userName, int eventId)
+    {
+        return dal.getEventGuestsIdList(userName, eventId);
+    }
+
+    public Boolean addEventGuest(String userName, int eventId, int guestId)
+    {
+        return dal.addEventGuest(userName, eventId, guestId);
+    }
+
+    public Boolean deleteEventGuest(String userName, int eventId, int guestId)
+    {
+        return dal.deleteEventGuest(userName, eventId, guestId);
+    }
+
+    public Boolean deleteEventGuestEvent(String userName, int eventId)
+    {
+        return dal.deleteEventGuestEvent(userName, eventId);
+    }
+
+
+
+
     //=====================================================================================================
     //                                           GUEST 
     //=====================================================================================================
@@ -122,9 +150,14 @@ public class EventerBL
     }
 
 
+
     //=====================================================================================================
-    //                                           GIFT 
+    //                                           FUNCTIONS 
     //=====================================================================================================
+
+
+
+
 
 
 
