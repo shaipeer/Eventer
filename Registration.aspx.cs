@@ -47,7 +47,7 @@ public partial class Registration : System.Web.UI.Page
 
     private Boolean isValid()
     {   
-        if (isNumerical(First_Name_TextBox.Text))                                   { Registration_Label.Text = "First Name not valid!";        return false; }
+        if      (isNumerical(First_Name_TextBox.Text))                              { Registration_Label.Text = "First Name not valid!";        return false; }
         else if (isNumerical(LastName_TextBox.Text))                                { Registration_Label.Text = "Last Name not valid!";         return false; }
         else if (!isEmail(Mail_TextBox.Text))                                       { Registration_Label.Text = "please insert a valid email."; return false; }
         else if (isPassword(Password_TextBox.Text, Re_Enter_Password_TextBox.Text)) { Registration_Label.Text = "Password not valid!";          return false; }
