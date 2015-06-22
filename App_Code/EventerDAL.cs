@@ -258,7 +258,7 @@ public class EventerDAL
     {
 
         String commandString = "DELETE FROM EventGuests WHERE user_name='" + userName
-                                                   + "' AND guest_id='" + guestId + "';";
+                                                   + "' AND guest_id=" + guestId + ";";
 
         try
         {
@@ -315,8 +315,6 @@ public class EventerDAL
             guest.LastName  = reader[3].ToString();
             guest.Phone     = reader[4].ToString();
             guest.GroupName   = reader[5].ToString();
-            guest.Status    = reader[6].ToString();
-            guest.Arriving  = reader[7].ToString();
 
             guestList.Add(guest);
         }
@@ -335,9 +333,7 @@ public class EventerDAL
                                                                 "first_name='" + guest.FirstName + "' AND " +
                                                                 "last_name='"  + guest.LastName  + "' AND " +
                                                                 "phone='"      + guest.Phone     + "' AND " +
-                                                                "group_name='" + guest.GroupName + "' AND " +
-                                                                "status='"     + guest.Status    + "' AND " +
-                                                                "arriving='"   + guest.Arriving  + "'";
+                                                                "group_name='" + guest.GroupName + "'";
 
         SqlCommand command = new SqlCommand(commandString, sqlCon);
         SqlDataReader reader = command.ExecuteReader();
@@ -358,14 +354,12 @@ public class EventerDAL
 
     public Boolean addGuest(Guest newGuest, String userName)
     {
-        string commandString = "INSERT INTO Guest (user_name, first_name, last_name, phone, group_name, status, arriving) " +
+        string commandString = "INSERT INTO Guest (user_name, first_name, last_name, phone, group_name) " +
                                  "VALUES ('" + userName             + "', '" +
                                                newGuest.FirstName   + "', '" + 
                                                newGuest.LastName    + "', '" + 
                                                newGuest.Phone       + "', '" + 
-                                               newGuest.GroupName   + "', '" +
-                                               newGuest.Status      + "', '" +
-                                               newGuest.Arriving    + "')"   ;
+                                               newGuest.GroupName   + "')"   ;
 
         try
         {
@@ -402,9 +396,7 @@ public class EventerDAL
         String commandString = "UPDATE Guest SET first_name='"  + guestToUpdate.FirstName   + "', " +
                                                 "last_name='"   + guestToUpdate.LastName    + "', " +
                                                 "phone='"       + guestToUpdate.Phone       + "', " +
-                                                "group_name='"  + guestToUpdate.GroupName   + "', " +
-                                                "status='"      + guestToUpdate.Status      + "', " +
-                                                "arriving='"    + guestToUpdate.Arriving    + "' "  +
+                                                "group_name='"  + guestToUpdate.GroupName   + "' "  +
                                                 "WHERE user_name='" + userName              + "' "  +
                                                 "AND guest_id='"  + guestToUpdate.GuestId   + "';"  ;
 

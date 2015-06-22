@@ -44,18 +44,6 @@ public class Guest
     
     String status;
 
-    public String Status
-    {
-        get { return status; }
-        set { status = value; }
-    }
-    String arriving;
-
-    public String Arriving
-    {
-        get { return arriving; }
-        set { arriving = value; }
-    }
 
 	public Guest()
 	{

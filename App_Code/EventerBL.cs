@@ -119,13 +119,13 @@ public class EventerBL
     public Boolean addGuest(Guest newGuest, String userName, int eventId)
     {
         if (dal.addGuest(newGuest, userName))
-            return addEventGuest(userName, eventId, getGuestId(newGuest));
+            return addEventGuest(userName, eventId, getGuestId(newGuest, userName));
         return false;
     }
 
-    public int getGuestId(Guest guest)
+    public int getGuestId(Guest guest, String userName)
     {
-        return getGuestId(guest);
+        return dal.getGuestId(guest, userName);
     }
 
     public Boolean deleteGuest(String userName, int guestId)

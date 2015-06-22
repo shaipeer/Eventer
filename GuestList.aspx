@@ -39,18 +39,6 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Status:</td>
-                    <td>
-                        <asp:TextBox ID="Status_TextBox" runat="server"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Arriving:</td>
-                    <td>
-                        <asp:TextBox ID="Arriving_TextBox" runat="server"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
                     <td></td>
                     <td>
                         <asp:Button ID="Guest_Nav_CMD" runat="server" Text="Add Guest" OnClick="Guest_Nav_CMD_Click"/>    
@@ -67,7 +55,7 @@
             <div>
                 <div id="grid_div" >
                     <asp:GridView ID="Guest_list_GridView" HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White"
-                            runat="server" AutoGenerateColumns="false" ShowHeaderWhenEmpty="True" AutoGenerateSelectButton="True" OnSelectedIndexChanged="Guest_list_GridView_SelectedIndexChanged">
+                            runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True" AutoGenerateSelectButton="True" OnSelectedIndexChanged="Guest_list_GridView_SelectedIndexChanged">
 
                             <HeaderStyle BackColor="#3AC0F2" ForeColor="White"></HeaderStyle>
 
@@ -86,12 +74,6 @@
                                     <ItemStyle Width="200px"></ItemStyle>
                                 </asp:BoundField>
                                 <asp:BoundField DataField="group"           HeaderText="Group"          ItemStyle-Width="150" >
-                                    <ItemStyle Width="150px"></ItemStyle>
-                                </asp:BoundField>
-                                <asp:BoundField DataField="status"          HeaderText="Status"         ItemStyle-Width="150" >
-                                    <ItemStyle Width="150px"></ItemStyle>
-                                </asp:BoundField>
-                                <asp:BoundField DataField="arriving"        HeaderText="Arriving"       ItemStyle-Width="150" >
                                     <ItemStyle Width="150px"></ItemStyle>
                                 </asp:BoundField>
                             </Columns>
