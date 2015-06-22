@@ -32,12 +32,6 @@
 					<li>
 						<a href="Groups.aspx">Groups</a>
 					</li>
-					<li>
-						<a href="RSVPs.aspx">RSVPs</a>
-					</li>
-                    <li>
-						<a href="Gifts.aspx">Gifts</a>
-					</li>
 				</ul>
 			</div>
 			<span class="shadow"></span>

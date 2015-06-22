@@ -262,6 +262,10 @@ img {
     width:60%;
     float:left;
     padding:10px;
+    
+}
+#groups_list #grid_div {
+    text-align: center;
 }
 #groups_list #groups h2 {
     text-align: center;

@@ -58,8 +58,10 @@
                                     <SelectedRowStyle BackColor="#CCFFFF" />
                                 </asp:GridView>
                             </td>
+
+
                             <td>
-                                <asp:GridView ID="GridView1" HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" 
+                                <asp:GridView ID="Groups_To_Guest_GridView" HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" 
                                         runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True" OnSelectedIndexChanged="Groups_List_GridView_SelectedIndexChanged">
                                     <Columns>
                                         <asp:BoundField DataField="Id" HeaderText="Id" ItemStyle-Width="30" >
@@ -71,7 +73,7 @@
                                         <asp:BoundField DataField="Last_Name" HeaderText="Last Name" ItemStyle-Width="150" >
                                             <ItemStyle Width="200px"></ItemStyle>
                                         </asp:BoundField>
-                                        <asp:BoundField DataField="Last_Name" HeaderText="Last Name" ItemStyle-Width="150" >
+                                        <asp:BoundField DataField="Phone" HeaderText="Phone" ItemStyle-Width="150" >
                                             <ItemStyle Width="200px"></ItemStyle>
                                         </asp:BoundField>
                                     </Columns>
@@ -80,12 +82,23 @@
                                 </asp:GridView>
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+
+                    <asp:Label ID="Group_List_Massage_LBL" runat="server"></asp:Label>
+
+                            </td>
+                            <td>
+
+                                <asp:Label ID="Gruop_List_Guest_Massege_LBL" runat="server"></asp:Label>
+
+                            </td>
+                        </tr>
                     </table>
                     
                                     
                 </div>
                 <div>
-                    <asp:Label ID="Group_List_Massage_LBL" runat="server"></asp:Label>
                     <br />
                     <asp:Button ID="Edit_Group_CMD" runat="server" Text="Edit Group" OnClick="Edit_Group_CMD_Click" />
                     <asp:Button ID="Delete_Group_CMD" runat="server" Text="Delete Group" OnClick="Delete_Group_CMD_Click" />

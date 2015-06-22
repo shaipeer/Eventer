@@ -22,34 +22,85 @@ public partial class Groups : System.Web.UI.Page
 
         if (!this.IsPostBack)
         {
-            DataTable dt = new DataTable();
-            dt.Columns.AddRange(new DataColumn[2]
-            { 
-                new DataColumn("id",    typeof(int)),
-                new DataColumn("name",  typeof(string))
-            });
-
-
-            if (groupList.Count > 0)
-            {
-                int i = 1;
-                foreach (Group group in groupList)
-                {
-                    dt.Rows.Add(i++, group.Name);
-                }
-            }
-            else
-            {
-                Group_List_Massage_LBL.Text = "No Groups To Show!";
-            }
-            Groups_List_GridView.DataSource = dt;
-            Groups_List_GridView.DataBind();
+            createGroupTable();
         }
     }
 
+    //=========================================================================================================
+    //                                      TABLES
+    //=========================================================================================================
+
+    private void createGroupTable()
+    {
+        DataTable dt = new DataTable();
+        dt.Columns.AddRange(new DataColumn[2]
+        { 
+            new DataColumn("id",    typeof(int)),
+            new DataColumn("name",  typeof(string))
+        });
+
+
+        if (groupList.Count > 0)
+        {
+            int i = 1;
+            foreach (Group group in groupList)
+            {
+                dt.Rows.Add(i++, group.Name);
+            }
+        }
+        else
+        {
+            Group_List_Massage_LBL.Text = "No Groups To Show!";
+        }
+        Groups_List_GridView.DataSource = dt;
+        Groups_List_GridView.DataBind();
+    }
+
+
+    private void createGuestTable()
+    {
+        List<Guest> guestList = bl.getGuestList(Session["UserName"].ToString());
+        
+        DataTable dt = new DataTable();
+        dt.Columns.AddRange(new DataColumn[4]
+        { 
+            new DataColumn("id",         typeof(int)),
+            new DataColumn("First_Name", typeof(string)),
+            new DataColumn("Last_Name",  typeof(string)),
+            new DataColumn("Phone",      typeof(string))
+        });
+
+
+        if (guestList.Count > 0)
+        {
+            int i = 1;
+            
+            foreach(Guest guest in guestList)
+            {
+                if (guest.GroupName.Equals(groupList[selectedIndex].Name))
+                    dt.Rows.Add(i++, guest.FirstName, guest.LastName, guest.Phone);
+            }
+        }
+        else
+        {
+            Gruop_List_Guest_Massege_LBL.Text = "No Groups To Show!";
+        }
+        Groups_To_Guest_GridView.DataSource = dt;
+        Groups_To_Guest_GridView.DataBind();
+    }
+
+
+
     protected void Groups_List_GridView_SelectedIndexChanged(object sender, EventArgs e)
     {
-        resetGroupNav();
+        Group_Nav_Massage_Label.Text = "";
+        Group_List_Massage_LBL.Text  = "";
+        Gruop_List_Guest_Massege_LBL.Text = "";
+
+        setSelectedIndex();
+        Group_Name_TextBox.Text = selectedIndex + "";
+        createGuestTable();
+        //resetGroupNav();
     }
 
 
@@ -85,12 +136,12 @@ public partial class Groups : System.Web.UI.Page
             }
             else
             {
-                Group_Nav_Massage_Label.Text = "* Error while deleting group";
+                Group_List_Massage_LBL.Text = "Error while deleting group!";
             }
         }
         else
         {
-            Group_Nav_Massage_Label.Text = "* You have to choose group";
+            Group_List_Massage_LBL.Text = "You have to choose group!";
         }
     }
 

@@ -435,6 +435,7 @@ public class EventerDAL
         {
             group = new Group();
 
+            group.Id   = Convert.ToInt32(reader[1].ToString());
             group.Name = reader[2].ToString();
             
 
@@ -468,7 +469,7 @@ public class EventerDAL
     public Boolean deleteGroup(String userName, int groupName)
     {
 
-        String commandString = "DELETE FROM [Group] WHERE user_name='" + userName + "' AND group_name='" + groupName + "';";
+        String commandString = "DELETE FROM [Group] WHERE user_name='" + userName + "' AND group_id=" + groupName + ";";
 
         try
         {
@@ -485,9 +486,9 @@ public class EventerDAL
 
     public Boolean updateGroup(Group groupToUpdate, String userName)
     {
-        String commandString = "UPDATE [Group] SET group_name='" + groupToUpdate.Name   + "' " +
-                                              "WHERE user_name=" + userName             + "' " +
-                                              "AND event_id='"   + groupToUpdate.Id     + "';";
+        String commandString = "UPDATE [Group] SET name='" + groupToUpdate.Name + "' " +
+                                              "WHERE user_name='" + userName    + "' " +
+                                              "AND group_id="+ groupToUpdate.Id +";";
 
         try
         {

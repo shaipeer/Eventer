@@ -146,12 +146,12 @@ public partial class AddEvent : System.Web.UI.Page
             }
             else
             {
-                Event_Nav_Eror_Label.Text = "*Error while deleting event";
+                No_Events_LBL.Text = "Error while deleting event!";
             }
         }
         else
         {
-            Event_Nav_Eror_Label.Text = "*You have to choose event";
+            No_Events_LBL.Text = "You have to choose event!";
         }
     }
 
