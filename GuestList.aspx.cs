@@ -86,7 +86,21 @@ public partial class GuestList : System.Web.UI.Page
     }
     protected void Delete_Guest_CMD_Click(object sender, EventArgs e)
     {
-
+        if (setSelectedIndex())
+        {
+            if (bl.deleteGuest(Session["UserName"].ToString(), guestList[selectedIndex].GuestId))
+            {
+                Page.Response.Redirect(HttpContext.Current.Request.Url.ToString(), true);
+            }
+            else
+            {
+                Guest_Nav_Eror_Label.Text = "*Error while deleting Guest";
+            }
+        }
+        else
+        {
+            Guest_Nav_Eror_Label.Text = "*You have to choose Guest";
+        }
     }
     protected void Guest_Nav_CMD_Click(object sender, EventArgs e)
     {
@@ -136,15 +150,25 @@ public partial class GuestList : System.Web.UI.Page
         Guest guest = new Guest();
 
         guest.FirstName = First_Name_TextBox.Text;
-        guest.LastName = Last_Name_TextBox.Text;
-        guest.Phone = Phone_TextBox.Text;
-        guest.Status = Status_TextBox.Text;
-        guest.Arriving = Arriving_TextBox.Text;
+        guest.LastName  = Last_Name_TextBox.Text;
+        guest.Phone     = Phone_TextBox.Text;
+        guest.Status    = Status_TextBox.Text;
+        guest.Arriving  = Arriving_TextBox.Text;
         guest.GroupName = Group_DropDownList.SelectedItem.Text;
         
         return guest;
     }
 
+    private void resetGuestNav()
+    {
+        First_Name_TextBox.Text = "";
+        Last_Name_TextBox.Text  = "";
+        Phone_TextBox.Text      = "";
+        Arriving_TextBox.Text   = "";
+        Status_TextBox.Text     = "";
+        Guest_Nav_CMD.Text      = "Add Guest";
+    }
+    
     private Boolean setSelectedIndex()
     {
         try
@@ -159,16 +183,6 @@ public partial class GuestList : System.Web.UI.Page
 
     }
     
-    private void resetGuestNav()
-    {
-        First_Name_TextBox.Text = "";
-        Last_Name_TextBox.Text = "";
-        Phone_TextBox.Text = "";
-        Arriving_TextBox.Text = "";
-        Status_TextBox.Text = "";
-        Guest_Nav_CMD.Text = "Add Guest";
-    }
-
     private void refreshGroupDropDownList()
     {
         List<Group> groupList = bl.getGroupList(Session["UserName"].ToString());
@@ -178,7 +192,6 @@ public partial class GuestList : System.Web.UI.Page
 
         foreach (Group group in groupList)
             Group_DropDownList.Items.Add(group.Name);
-
     }
 
     private bool isValid()

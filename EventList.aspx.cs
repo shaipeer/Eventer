@@ -49,10 +49,8 @@ public partial class AddEvent : System.Web.UI.Page
             Event_list_GridView.DataSource = dt;
             Event_list_GridView.DataBind();
         }
-
-
-
     }
+
     protected void Event_list_GridView_SelectedIndexChanged(object sender, EventArgs e)
     {
         resetFields();
