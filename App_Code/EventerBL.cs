@@ -157,12 +157,18 @@ public class EventerBL
 
     public Boolean deleteGroup(String userName, int groupId)
     {
-        return dal.deleteGroup(userName, groupId);
+        if (updateAllUserGuestsGroup(userName, groupId, "No Group"))
+            return dal.deleteGroup(userName, groupId);
+
+        return false;
     }
 
     public Boolean updateGroup(Group groupToUpdate, String userName)
     {
-        return dal.updateGroup(groupToUpdate, userName);
+        if (updateAllUserGuestsGroup(userName, groupToUpdate.Id, groupToUpdate.Name))
+            return dal.updateGroup(groupToUpdate, userName);
+
+        return false;
     }
 
 
@@ -171,6 +177,8 @@ public class EventerBL
     //                                           FUNCTIONS 
     //=====================================================================================================
 
+
+    //================   Generate guest list of spesifide event  =============================
 
     public List<Guest> generateEventGuestList(String userName, int eventId)
     {
@@ -198,6 +206,32 @@ public class EventerBL
 
 
 
+    //================   Update All guest with new group  =================================
+
+    private Boolean updateAllUserGuestsGroup(String userName, int groupId, String newGroupName)
+    {
+        List<Group> groupList = getGroupList(userName);
+        foreach (Group group in groupList)
+        {
+            if(group.Id == groupId)
+                return updateGuestGroup(group.Name, newGroupName, userName);
+        }
+        return false;
+        
+    }
+
+    private Boolean updateGuestGroup(String oldGroupName, String newGroupName, String userName)
+    {
+        foreach (Guest guest in getGuestList(userName))
+        {
+            if(guest.GroupName.Equals(oldGroupName))
+            {
+                guest.GroupName = newGroupName;
+                updateGuest(guest, userName);
+            }
+        }
+        return true;
+    }
 
 
 

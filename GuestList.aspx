@@ -44,7 +44,25 @@
                         <asp:Button ID="Guest_Nav_CMD" runat="server" Text="Add Guest" OnClick="Guest_Nav_CMD_Click"/>    
                     </td>
                 </tr>
-
+                <tr>
+                    <td><br/></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="Exist_Guest_LABEL" runat="server" Text="Add Exist Guest:"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:DropDownList ID="Exist_Guest_DropDownList" runat="server" Width="172px"></asp:DropDownList>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        <asp:Button ID="Add_Exist_Guest_CMD" runat="server" Text="Add Exist Guest" OnClick="Add_Exist_Guest_CMD_Click"/>    
+                    </td>
+                </tr>
             </table>
         </div>
     
@@ -92,6 +110,7 @@
                     <asp:Button ID="Edit_Guest_CMD"     runat="server" Text="Edit Guest" OnClick="Edit_Guest_CMD_Click" />
 
                     <asp:Button ID="Delete_Guest_CMD"   runat="server" Text="Delete Guest" OnClick="Delete_Guest_CMD_Click" />
+                    <asp:Button ID="Remove_From_Evemt_CMD" runat="server" OnClick="Remove_From_Evemt_CMD_Click" Text="Remove From Event" />
                 </div>
             </div>
         </div>

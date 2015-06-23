@@ -196,6 +196,7 @@ public partial class AddEvent : System.Web.UI.Page
         Date_TextBox.Text = "";
         Location_TextBox.Text = "";
         Event_Nav_CMD.Text = "Add Event";
+
     }
 
     private bool isValid()
@@ -229,7 +230,7 @@ public partial class AddEvent : System.Web.UI.Page
         return success;
     }
 
-
+    
 
 
     
