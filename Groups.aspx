@@ -44,7 +44,7 @@
                         <tr>
                             <td>
                                 <asp:GridView ID="Groups_List_GridView" HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" 
-                                        runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True" AutoGenerateSelectButton="True" OnSelectedIndexChanged="Groups_List_GridView_SelectedIndexChanged">
+                                        runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True" AutoGenerateSelectButton="True" OnSelectedIndexChanged="Groups_List_GridView_SelectedIndexChanged" BackColor="#EEEEEE">
                                     <Columns>
                                         <asp:BoundField DataField="Id" HeaderText="Id" ItemStyle-Width="30" >
                                             <ItemStyle Width="40px"></ItemStyle>
@@ -62,7 +62,7 @@
 
                             <td>
                                 <asp:GridView ID="Groups_To_Guest_GridView" HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" 
-                                        runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True" OnSelectedIndexChanged="Groups_List_GridView_SelectedIndexChanged">
+                                        runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True" OnSelectedIndexChanged="Groups_List_GridView_SelectedIndexChanged" BackColor="#EEEEEE">
                                     <Columns>
                                         <asp:BoundField DataField="Id" HeaderText="Id" ItemStyle-Width="30" >
                                             <ItemStyle Width="30px"></ItemStyle>

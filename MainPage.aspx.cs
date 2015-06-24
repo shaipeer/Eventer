@@ -9,10 +9,7 @@ public partial class MainPage : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        //Session["UserName"] = null;
-        
-        //Session["UserName"] = "test";
-        //Session["UserFullName"] = "test test";
+        Session["ShowSelectedEvent"] = "false";
     }
 
 }

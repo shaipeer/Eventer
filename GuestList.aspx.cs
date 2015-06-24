@@ -20,6 +20,8 @@ public partial class GuestList : System.Web.UI.Page
         if (Session["UserName"] == null)     Response.Redirect("MainPage.aspx");
         else if (Session["EventId"] == null) Response.Redirect("EventList.aspx");
 
+        Session["ShowSelectedEvent"] = "true";
+
         bl = new EventerBL();
         guestList = bl.generateEventGuestList(Session["UserName"].ToString(), Convert.ToInt32(Session["EventId"].ToString()));
         allUserGuestList = bl.getGuestList(Session["UserName"].ToString());

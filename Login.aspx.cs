@@ -14,25 +14,22 @@ public partial class Login : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         bl = new EventerBL();
+        Session["ShowSelectedEvent"] = "false";
     }
-
-
-
 
     protected void LogIn_CMD_Click(object sender, EventArgs e)
     {
         User user;
-        if (bl.isUserValid(User_Name_TextBox.Text, Password_TextBox.Text) )
+        if (bl.isUserValid(User_Name_TextBox.Text, Password_TextBox.Text))
         {
-            user = bl.getUser(User_Name_TextBox.Text);
-            Session["UserName"] = user.UserName;
+            user                    = bl.getUser(User_Name_TextBox.Text);
+            Session["UserName"]     = user.UserName;
             Session["UserFullName"] = user.FirstName + " " + user.LastName;
             Response.Redirect("EventList.aspx");
         }
         else
         {
-            Login_Error_Lable.Text = "* Username or password are incorrect!";
-            //Response.Redirect("UserPage.aspx");
+            Login_Error_Lable.Text = "Username or password are incorrect!";
         }
     }
 

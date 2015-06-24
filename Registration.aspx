@@ -48,7 +48,7 @@
                 <td style="height: 20px"></td>
             </tr>
             <tr>
-                <td style="width: 127px">Re-Enter Password:</td>
+                <td style="width: 127px">Re-Enter:</td>
                 <td>
                         <asp:TextBox ID="Re_Enter_Password_TextBox" TextMode="password" runat="server"></asp:TextBox>
                     </td>

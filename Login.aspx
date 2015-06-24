@@ -9,7 +9,7 @@
         <br />
         <div >
 
-        <table id="registration_table" align="center" style="margin-top: 0px; width: 314px; height: 116px;">
+        <table id="registration_table" align="center" style="margin-top: 0px; width: 314px; height: 116px;" aria-dropeffect="none">
             <tr>
                 <td style="width: 161px">user name:</td>
                 <td>
@@ -25,8 +25,8 @@
                 <td style="height: 17px; width: 55px;"></td>
             </tr>
             <tr>
-                <td style="height: 18px; width: 161px">&nbsp;</td>
-                <td style="height: 18px">&nbsp;</td>
+                <td style="height: 18px; width: 161px"></td>
+                <td style="height: 18px"></td>
                 <td style="height: 18px; width: 55px"></td>
             </tr>
             <tr>

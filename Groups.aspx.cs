@@ -17,6 +17,8 @@ public partial class Groups : System.Web.UI.Page
         //LOGIN and GROUP SELECT check
         if (Session["UserName"] == null) Response.Redirect("MainPage.aspx");
 
+        Session["ShowSelectedEvent"] = "true";
+
         bl = new EventerBL();
         groupList = bl.getGroupList(Session["UserName"].ToString());
 

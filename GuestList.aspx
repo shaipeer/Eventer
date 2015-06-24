@@ -73,7 +73,7 @@
             <div>
                 <div id="grid_div" >
                     <asp:GridView ID="Guest_list_GridView" HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" HorizontalAlign="Center"
-                            runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True" AutoGenerateSelectButton="True" OnSelectedIndexChanged="Guest_list_GridView_SelectedIndexChanged">
+                            runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True" AutoGenerateSelectButton="True" OnSelectedIndexChanged="Guest_list_GridView_SelectedIndexChanged" BackColor="#EEEEEE">
 
                             <HeaderStyle BackColor="#3AC0F2" ForeColor="White"></HeaderStyle>
 

@@ -13,7 +13,7 @@ public partial class Registration : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         bl = new EventerBL();
-
+        Session["ShowSelectedEvent"] = "false";
 
     }
 
@@ -49,7 +49,8 @@ public partial class Registration : System.Web.UI.Page
     {   
         if      (isNumerical(First_Name_TextBox.Text))                              { Registration_Label.Text = "First Name not valid!";        return false; }
         else if (isNumerical(LastName_TextBox.Text))                                { Registration_Label.Text = "Last Name not valid!";         return false; }
-        else if (!isEmail(Mail_TextBox.Text))                                       { Registration_Label.Text = "please insert a valid email."; return false; }
+        else if (!isEmail(Mail_TextBox.Text))                                       { Registration_Label.Text = "Please insert a valid email."; return false; }
+        else if (bl.isUserExists(User_Name_TextBox.Text))                           { Registration_Label.Text = "User Name Already Exists!";    return false; }
         else if (isPassword(Password_TextBox.Text, Re_Enter_Password_TextBox.Text)) { Registration_Label.Text = "Password not valid!";          return false; }
          
         return true;
@@ -75,13 +76,8 @@ public partial class Registration : System.Web.UI.Page
         
         bool reEnter = password.Equals(Re_Enter_Password);
         
-        return success&reEnter;
+        return success & reEnter;
     }
-
-
-
-
-
 
     private User fieldsToUser()
     {

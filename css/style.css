@@ -385,12 +385,13 @@ img {
 	background-color: #303030;
 	color: #606060;
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 11px;
+	font-size: 25px;
 	line-height: 24px;
 	width: 100%;
 	left: 0;
     position: fixed; 
     bottom: 0;
+    text-align: center;
 }
 
 #footer h5 {
@@ -424,7 +425,7 @@ img {
 	float: left;
 	background-position: 0 -498px;
 	min-height: 70px;
-	width: 200px;
+	width: 500px;
 	margin-left: 20px;
 	padding: 16px 0 16px 26px;
 }
@@ -444,6 +445,6 @@ img {
 	margin: 0 0 6px;
 }
 #footer .navigation li, #footer .connect li {
-	float: left;
+	float: right;
 	width: 100px;
 }

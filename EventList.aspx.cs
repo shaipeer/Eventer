@@ -17,7 +17,7 @@ public partial class AddEvent : System.Web.UI.Page
     {
         if (Session["UserName"] == null) Response.Redirect("MainPage.aspx");
         bl = new EventerBL();
-        
+        Session["ShowSelectedEvent"] = "true";
         eventList = bl.getEventList(Session["UserName"].ToString());
 
         if (!this.IsPostBack)
@@ -67,7 +67,10 @@ public partial class AddEvent : System.Web.UI.Page
     {
         if (setSelectedIndex())
         {
-            Session["EventId"] = eventList[selectedIndex].EventId;
+            Session["EventId"]   = eventList[selectedIndex].EventId;
+            Session["EventName"] = eventList[selectedIndex].Name;
+
+            Page.Response.Redirect(HttpContext.Current.Request.Url.ToString(), true);
             No_Events_LBL.Text = "Event '" + eventList[selectedIndex].Name + "' choosen succesfuly!";
         }
         else

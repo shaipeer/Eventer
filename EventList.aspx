@@ -25,11 +25,10 @@
                         <asp:DropDownList ID="Type_DropDownList" runat="server" Width="172px">
                             <asp:ListItem>...</asp:ListItem>
                             <asp:ListItem>Wedding</asp:ListItem>
-                            <asp:ListItem>Silver wedding</asp:ListItem>
-                            <asp:ListItem>Golden wedding</asp:ListItem>
                             <asp:ListItem>Bar Mitzva</asp:ListItem>
                             <asp:ListItem>Brit</asp:ListItem>
                             <asp:ListItem>Hina</asp:ListItem>
+                            <asp:ListItem>Funeral</asp:ListItem>
                         </asp:DropDownList>
                     </td>
                 </tr>
@@ -68,7 +67,7 @@
             <div>
                 <div id="grid_div">
                     <asp:GridView ID="Event_list_GridView" HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" HorizontalAlign="Center"
-                            runat="server" AutoGenerateColumns="false" ShowHeaderWhenEmpty="True" AutoGenerateSelectButton="True" OnSelectedIndexChanged="Event_list_GridView_SelectedIndexChanged">
+                            runat="server" AutoGenerateColumns="false" ShowHeaderWhenEmpty="True" AutoGenerateSelectButton="True" OnSelectedIndexChanged="Event_list_GridView_SelectedIndexChanged" BackColor="#EEEEEE">
 
 <HeaderStyle BackColor="#3AC0F2" ForeColor="White"></HeaderStyle>
 
